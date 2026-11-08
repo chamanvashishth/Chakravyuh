@@ -1,0 +1,1680 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chakravyuh: Active Voice-Clone Cyber Defense & Telephonic Honeypot</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: dark;
+    }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #040608;
+      color: #FFFFFF;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Subtle Cyber Dot Matrix Background Pattern */
+    .bg-cyber-grid {
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 32px 32px, 96px 96px, 96px 96px;
+    }
+
+    /* Giant Ghost Watermark Typography (Physical Depth Behind Glass) */
+    .watermark-text {
+      position: fixed;
+      user-select: none;
+      pointer-events: none;
+      font-weight: 900;
+      color: transparent;
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.035);
+      text-transform: uppercase;
+      letter-spacing: -0.04em;
+      line-height: 0.85;
+      z-index: 1;
+    }
+
+    /* Dynamic Luminous Ambient Glowing Light Blooms */
+    .ambient-glow-lime {
+      position: fixed;
+      top: 25%;
+      right: -80px;
+      width: 720px;
+      height: 720px;
+      background: radial-gradient(circle, rgba(163, 230, 53, 0.45) 0%, rgba(101, 163, 13, 0.25) 35%, rgba(16, 185, 129, 0.10) 55%, transparent 75%);
+      pointer-events: none;
+      z-index: 1;
+      filter: blur(85px);
+    }
+    .ambient-glow-rose {
+      position: fixed;
+      top: 5%;
+      left: -100px;
+      width: 620px;
+      height: 620px;
+      background: radial-gradient(circle, rgba(244, 63, 94, 0.30) 0%, rgba(190, 18, 60, 0.15) 40%, transparent 72%);
+      pointer-events: none;
+      z-index: 1;
+      filter: blur(90px);
+    }
+    .ambient-glow-cyan {
+      position: fixed;
+      bottom: -120px;
+      left: 32%;
+      width: 580px;
+      height: 580px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.20) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+      filter: blur(95px);
+    }
+
+    /* Professional Frosted Glassmorphism Surfaces */
+    .glass-panel {
+      background: rgba(14, 18, 22, 0.55);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 
+        inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.32),
+        inset 0 -1.5px 1px 0 rgba(0, 0, 0, 0.55),
+        0 24px 48px -12px rgba(0, 0, 0, 0.85);
+    }
+    .glass-panel:hover {
+      border-color: rgba(255, 255, 255, 0.26);
+    }
+
+    /* Stadium Pills */
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
+        inset 0 -1px 1px 0 rgba(0, 0, 0, 0.5),
+        0 12px 28px -6px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Threat Intercept Stadium Pill (Ruby / Scammer) */
+    .glass-pill-threat {
+      background: rgba(225, 29, 72, 0.12);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255, 99, 132, 0.40);
+      box-shadow: 
+        inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.35),
+        0 12px 28px -6px rgba(0, 0, 0, 0.7),
+        0 0 30px -5px rgba(244, 63, 94, 0.25);
+    }
+
+    /* Counter-Measure Stadium Pill (Electric Lime / Decoy) */
+    .glass-pill-decoy {
+      background: rgba(163, 230, 53, 0.12);
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
+      border: 1px solid rgba(190, 242, 100, 0.45);
+      box-shadow: 
+        inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.42),
+        0 12px 28px -6px rgba(0, 0, 0, 0.7),
+        0 0 35px -5px rgba(163, 230, 53, 0.30);
+    }
+
+    /* 3D Glossy Inflatable Jelly Badges */
+    .jelly-badge-red {
+      background: radial-gradient(circle at 35% 25%, #FFA3B2 0%, #F43F5E 35%, #BE123C 75%, #4C0519 100%);
+      box-shadow: 
+        inset 0 2.5px 2px 0 rgba(255, 255, 255, 0.75),
+        inset 0 -2.5px 3px 0 rgba(0, 0, 0, 0.7),
+        0 10px 22px -4px rgba(225, 29, 72, 0.65),
+        0 0 15px 0 rgba(244, 63, 94, 0.4);
+    }
+
+    .jelly-badge-green {
+      background: radial-gradient(circle at 35% 25%, #E4FFA0 0%, #A3E635 35%, #65A30D 75%, #1A2E05 100%);
+      box-shadow: 
+        inset 0 2.5px 2px 0 rgba(255, 255, 255, 0.8),
+        inset 0 -2.5px 3px 0 rgba(0, 0, 0, 0.7),
+        0 10px 22px -4px rgba(132, 204, 22, 0.7),
+        0 0 18px 0 rgba(163, 230, 53, 0.45);
+    }
+
+    /* Rotating Chakravyuh Concentric Defense Rings */
+    @keyframes spinClockwise {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes spinCounterClockwise {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(-360deg); }
+    }
+    .ring-spin-slow {
+      animation: spinClockwise 45s linear infinite;
+    }
+    .ring-spin-medium {
+      animation: spinCounterClockwise 30s linear infinite;
+    }
+    .ring-spin-fast {
+      animation: spinClockwise 18s linear infinite;
+    }
+
+    /* Tactile Interactive Buttons */
+    .glass-btn {
+      transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      user-select: none;
+    }
+    .glass-btn:hover {
+      transform: translateY(-1px);
+    }
+    .glass-btn:active {
+      transform: translateY(1px) scale(0.985);
+    }
+
+    /* Custom Scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(163, 230, 53, 0.55);
+    }
+  </style>
+</head>
+<body class="relative flex flex-col bg-cyber-grid">
+
+  <!-- Giant Ghost Watermark Typography (Physical Depth Behind Glass) -->
+  <div class="watermark-text text-[110px] sm:text-[160px] lg:text-[230px] top-12 left-6">CHAKRAVYUH</div>
+  <div class="watermark-text text-[90px] sm:text-[140px] lg:text-[190px] top-[40%] right-4">HONEYPOT</div>
+  <div class="watermark-text text-[100px] sm:text-[150px] lg:text-[210px] bottom-16 left-12">DEFENSE</div>
+
+  <!-- Dynamic Glowing Ambient Light Blooms -->
+  <div class="ambient-glow-rose"></div>
+  <div class="ambient-glow-lime"></div>
+  <div class="ambient-glow-cyan"></div>
+
+  <!-- Toast Notification Alert -->
+  <div id="toastBanner" class="fixed top-5 right-5 z-50 hidden max-w-md px-5 py-3.5 rounded-2xl glass-panel text-white text-sm font-semibold shadow-2xl transition-all"></div>
+
+  <!-- Discreet Settings Modal (Triggered only from bottom dock settings icon) -->
+  <div id="settingsModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
+    <div class="glass-panel max-w-md w-full rounded-3xl p-6 relative border border-white/20 shadow-2xl">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl jelly-badge-green flex items-center justify-center text-black font-extrabold text-sm">
+            ⚙️
+          </div>
+          <h3 class="text-base font-extrabold text-white">Honeypot Backend Settings</h3>
+        </div>
+        <button id="closeSettingsModalBtn" type="button" class="text-white hover:text-lime-300 text-lg font-bold p-1">✕</button>
+      </div>
+      <p class="text-xs text-white leading-relaxed mb-4">
+        If connecting to a self-hosted backend that requires authentication, enter your access token below. Stored securely in your browser localStorage.
+      </p>
+      <div class="space-y-3 mb-4">
+        <label class="block text-xs font-bold text-white uppercase tracking-wider">API Authentication Token</label>
+        <input
+          id="apiKeyInput"
+          type="password"
+          placeholder="Optional access token..."
+          class="w-full bg-black/75 border border-white/25 rounded-2xl px-4 py-2.5 text-xs text-white placeholder-white/40 focus:outline-none focus:border-lime-400 font-mono"
+        />
+        <div id="apiKeyStatusMessage" class="text-xs font-mono text-lime-400"></div>
+      </div>
+      <div class="flex items-center justify-between gap-3 pt-3 border-t border-white/10">
+        <button id="clearApiKeyBtn" type="button" class="px-3.5 py-2 rounded-xl text-xs font-bold text-rose-300 hover:text-white border border-rose-500/40 glass-btn">
+          Clear
+        </button>
+        <div class="flex items-center gap-2">
+          <button id="testApiKeyBtn" type="button" class="px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 glass-btn">
+            Test
+          </button>
+          <button id="saveApiKeyBtn" type="button" class="px-4 py-2 rounded-xl text-xs font-extrabold text-black bg-lime-400 hover:bg-lime-300 shadow-md shadow-lime-500/25 glass-btn">
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="relative z-30 border-b border-white/10 bg-black/60 backdrop-blur-2xl sticky top-0 px-4 sm:px-8 py-3.5">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      
+      <!-- Project Branding -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-2xl jelly-badge-green flex items-center justify-center text-black font-black text-lg shadow-lg shadow-lime-500/35">
+          <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center gap-2.5">
+            <span class="font-black text-xl tracking-tight text-white">CHAKRAVYUH</span>
+            <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-lime-400/20 text-lime-300 border border-lime-400/40 font-mono tracking-wider">TACTICAL DEFENSE</span>
+          </div>
+          <p class="text-xs text-white/90 font-medium">Active Voice Clone Honeypot & Counter-Deception System</p>
+        </div>
+      </div>
+
+      <!-- Header Controls -->
+      <div class="flex flex-wrap items-center gap-2.5">
+        
+        <!-- Threat Scenario Selector -->
+        <div class="glass-pill px-3.5 py-1.5 rounded-full flex items-center gap-2 text-xs">
+          <span class="text-lime-300 font-bold">Threat:</span>
+          <select id="scenarioSelect" class="bg-transparent text-xs font-bold text-white focus:outline-none cursor-pointer">
+            <option value="DIGITAL_ARREST" class="bg-black text-white">Digital Arrest Police Extortion</option>
+            <option value="FEDEX_PARCEL" class="bg-black text-white">Customs Narcotics Parcel Scam</option>
+            <option value="KYC_BANK_FRAUD" class="bg-black text-white">Urgent Bank KYC & Electricity Scam</option>
+          </select>
+        </div>
+
+        <!-- Voice Synth Toggle -->
+        <button id="audioToggleBtn" type="button" class="glass-pill px-3.5 py-1.5 rounded-full flex items-center gap-1.5 text-xs font-bold text-white hover:text-lime-300 transition glass-btn">
+          <span id="audioIcon">🔊</span>
+          <span id="audioStatusLabel">Voice: ON</span>
+        </button>
+
+        <!-- Backend Health Pill -->
+        <div id="backendStateBadge" class="glass-pill px-3 py-1.5 rounded-full flex items-center gap-2 text-xs font-mono font-bold text-white">
+          <span id="backendDot" class="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></span>
+          <span id="backendStatusText">CHECKING SERVER</span>
+        </div>
+
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN OPERATIONAL CONTAINER -->
+  <main class="relative z-20 flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col gap-7">
+
+    <!-- CHAKRAVYUH ROTATING DEFENSE LABYRINTH & HERO SHOWCASE -->
+    <section class="glass-panel rounded-3xl p-6 sm:p-8 relative overflow-hidden border border-white/20">
+      
+      <!-- Ambient Glow Behind Radar -->
+      <div class="absolute -right-20 -top-20 w-96 h-96 bg-lime-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+        
+        <!-- Left: Chakravyuh Rotating Defensive Formation Hologram -->
+        <div class="flex flex-col sm:flex-row items-center gap-6 shrink-0">
+          <div class="relative w-44 h-44 sm:w-48 sm:h-48 flex items-center justify-center">
+            
+            <!-- Outer Ring: 8kHz PSTN Ingress Perimeter -->
+            <svg class="absolute inset-0 w-full h-full ring-spin-slow pointer-events-none" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="47" fill="none" stroke="rgba(56, 189, 248, 0.28)" stroke-width="1.2" stroke-dasharray="4 6" />
+              <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(56, 189, 248, 0.18)" stroke-width="0.8" />
+            </svg>
+
+            <!-- Middle Ring: Evon Multi-Stage Hinglish Deception Labyrinth -->
+            <svg class="absolute inset-2 w-[calc(100%-16px)] h-[calc(100%-16px)] ring-spin-medium pointer-events-none" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(251, 191, 36, 0.35)" stroke-width="1.5" stroke-dasharray="14 10" />
+              <circle cx="50" cy="50" r="36" fill="none" stroke="rgba(251, 191, 36, 0.20)" stroke-width="1" />
+            </svg>
+
+            <!-- Inner Ring: Adversary Isolation Ring -->
+            <svg class="absolute inset-6 w-[calc(100%-48px)] h-[calc(100%-48px)] ring-spin-fast pointer-events-none" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(244, 63, 94, 0.40)" stroke-width="2" stroke-dasharray="8 6" />
+            </svg>
+
+            <!-- Core: Active Honeypot Trap Lock -->
+            <div class="relative z-10 w-20 h-20 rounded-full jelly-badge-green flex flex-col items-center justify-center text-black font-black text-center shadow-2xl">
+              <span class="text-xs font-mono font-black tracking-tighter">TRAP</span>
+              <span class="text-[9px] font-mono font-extrabold uppercase">LOCKED</span>
+            </div>
+
+            <!-- Radar Sweep Beam -->
+            <div class="absolute inset-0 rounded-full ring-spin-fast pointer-events-none" style="background: conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(163, 230, 53, 0.25) 360deg);"></div>
+          </div>
+
+          <!-- Labyrinth Formation Status -->
+          <div class="text-center sm:text-left">
+            <span class="text-[11px] font-mono font-bold text-lime-400 uppercase tracking-widest block">Chakravyuh Formation</span>
+            <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight mt-0.5">Rotating Deception Labyrinth</h2>
+            <p class="text-xs text-white/90 max-w-xs mt-1 leading-relaxed">
+              Concentric defense rings trap extortionists, exhaust caller bandwidth, and force secondary mule disclosure.
+            </p>
+            <div class="flex items-center justify-center sm:justify-start gap-2 mt-3 font-mono text-[11px]">
+              <span class="px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/35 font-bold">Ring 1: 8kHz PSTN</span>
+              <span class="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/35 font-bold">Ring 2: Evon FSM</span>
+              <span class="px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/35 font-bold">Core: I4C Lock</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Action Control Cluster -->
+        <div class="flex flex-col items-center lg:items-end gap-3.5 w-full lg:w-auto">
+          <div class="flex flex-wrap items-center justify-center gap-3">
+            <button id="handoverAutoBtn" type="button" class="px-7 py-3 rounded-full font-black text-sm bg-lime-400 hover:bg-lime-300 text-black shadow-xl shadow-lime-500/30 glass-btn flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-black animate-ping"></span>
+              <span>Take Over Call</span>
+            </button>
+            <button id="stepTurnBtn" type="button" class="glass-pill px-5 py-3 rounded-full font-extrabold text-sm text-white hover:text-lime-300 border border-white/20 glass-btn">
+              Next Turn
+            </button>
+            <button id="resetDemoBtn" type="button" class="glass-pill px-4 py-3 rounded-full text-xs font-bold text-white/90 hover:text-white border border-white/15 glass-btn">
+              Reset Call
+            </button>
+          </div>
+          
+          <div class="flex items-center gap-4 text-xs font-mono font-bold text-white">
+            <span>Voice Clone: <strong class="text-lime-300">[1, 768] bfloat16</strong></span>
+            <span>Time Wasted: <strong id="timeWastedCounter" class="text-amber-300">00m 18s</strong></span>
+            <span>Session: <strong id="sessionIdDisplay" class="text-cyan-300">CHK-88F4A2</strong></span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- SHOWCASE: DUAL STADIUM PILLS (Directly derived from the uploaded theme template) -->
+    <section class="flex flex-col items-center justify-center gap-5 my-1">
+
+      <!-- Scammer Attack Vector Stadium Pill (Red Myth Style) -->
+      <div class="w-full max-w-4xl">
+        <div class="text-xs font-black text-rose-400 uppercase tracking-widest pl-6 mb-2 flex items-center justify-between pr-4">
+          <span class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+            Threat Intercept (Scammer Line):
+          </span>
+          <span id="scammerTurnIndicator" class="text-[11px] font-mono text-white/80 font-bold">Turn 1</span>
+        </div>
+        <div class="glass-pill-threat rounded-[28px] sm:rounded-full p-4 sm:px-7 sm:py-5 flex items-center gap-4 sm:gap-5 relative overflow-hidden transition-all duration-300">
+          <!-- 3D Jelly Red X Badge -->
+          <div class="w-13 h-13 sm:w-14 sm:h-14 rounded-full jelly-badge-red shrink-0 flex items-center justify-center text-white shadow-xl">
+            <svg class="w-7 h-7 text-white drop-shadow" fill="none" stroke="currentColor" stroke-width="3.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </div>
+          <!-- Scammer Statement -->
+          <div class="flex-1 min-w-0">
+            <p id="showcaseScammerText" class="text-sm sm:text-base font-bold text-white leading-relaxed">
+              This is DCP Crime Branch Mumbai. A FedEx package containing illegal passports and narcotics has been booked in your name. You are under immediate Digital Arrest!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Autonomous Decoy Counter-Measure Stadium Pill (Green Fact Style) -->
+      <div class="w-full max-w-4xl">
+        <div class="text-xs font-black text-lime-400 uppercase tracking-widest pl-6 mb-2 flex items-center justify-between pr-4">
+          <span class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></span>
+            Autonomous Counter-Measure (Evon Decoy):
+          </span>
+          <span id="evonStageIndicator" class="text-[11px] font-mono text-lime-300 font-extrabold">STAGE 1: INITIAL PANIC</span>
+        </div>
+        <div class="glass-pill-decoy rounded-[28px] sm:rounded-full p-4 sm:px-7 sm:py-5 flex items-center gap-4 sm:gap-5 relative overflow-hidden transition-all duration-300">
+          <!-- 3D Jelly Green Check Badge -->
+          <div class="w-13 h-13 sm:w-14 sm:h-14 rounded-full jelly-badge-green shrink-0 flex items-center justify-center text-black shadow-xl">
+            <svg class="w-7 h-7 text-black drop-shadow" fill="none" stroke="currentColor" stroke-width="3.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <!-- Decoy Voice Response -->
+          <div class="flex-1 min-w-0">
+            <p id="showcaseDecoyText" class="text-sm sm:text-base font-bold text-white leading-relaxed">
+              Sir please main toh kabhi Mumbai nahi gaya! Mera koi parcel nahi hai sir, please arrest mat kijiye, main kya karoon bataiye sir!
+            </p>
+          </div>
+          <!-- Audio Wave Activity Indicator -->
+          <div id="decoyAudioPulse" class="hidden sm:flex items-center gap-1 shrink-0 pr-3">
+            <span class="w-1 h-4 bg-lime-400 rounded-full animate-pulse"></span>
+            <span class="w-1 h-7 bg-lime-300 rounded-full animate-pulse delay-75"></span>
+            <span class="w-1 h-5 bg-lime-400 rounded-full animate-pulse delay-150"></span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- DECEPTION STAGE ESCALATION PROGRESS BAR -->
+    <div class="glass-panel rounded-3xl p-5 border border-white/15">
+      <div class="flex items-center justify-between text-xs mb-2.5">
+        <span class="font-bold text-white uppercase tracking-wider">Evon Deception Escalation Stages</span>
+        <span id="currentStageBadge" class="font-mono text-lime-300 font-extrabold">STAGE 1 / 6</span>
+      </div>
+      <div id="stageProgressGrid" class="grid grid-cols-6 gap-2 sm:gap-3">
+        <div data-stage="1" class="h-2.5 rounded-full bg-lime-400 shadow-sm shadow-lime-400/60 transition-all"></div>
+        <div data-stage="2" class="h-2.5 rounded-full bg-white/10 transition-all"></div>
+        <div data-stage="3" class="h-2.5 rounded-full bg-white/10 transition-all"></div>
+        <div data-stage="4" class="h-2.5 rounded-full bg-white/10 transition-all"></div>
+        <div data-stage="5" class="h-2.5 rounded-full bg-white/10 transition-all"></div>
+        <div data-stage="6" class="h-2.5 rounded-full bg-white/10 transition-all"></div>
+      </div>
+      <div class="flex justify-between text-[11px] font-bold text-white mt-2 hidden sm:flex">
+        <span>1. Initial Panic</span>
+        <span>2. Agree to Pay</span>
+        <span>3. Stall Primary UPI</span>
+        <span>4. Bait Bank Account</span>
+        <span>5. Bait WhatsApp Link</span>
+        <span>6. Infinite Hold Loop</span>
+      </div>
+    </div>
+
+    <!-- MAIN TWO COLUMN WORKSPACE -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1">
+
+      <!-- LEFT COLUMN: AUDIO OSCILLOSCOPE & INTERCEPTED CALL STREAM -->
+      <section class="lg:col-span-6 flex flex-col gap-5">
+
+        <!-- Real-Time 60 FPS Dual-Trace Oscilloscope -->
+        <div class="glass-panel rounded-3xl p-5 border border-white/15">
+          <div class="flex items-center justify-between mb-2.5 text-xs">
+            <span class="font-extrabold text-white uppercase tracking-wider">Telephonic Audio Stream (8000 Hz)</span>
+            <div class="flex items-center gap-3.5 text-xs font-mono font-bold">
+              <span class="flex items-center gap-1.5 text-rose-400"><span class="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-sm shadow-rose-500/60"></span>Scammer</span>
+              <span class="flex items-center gap-1.5 text-lime-400"><span class="w-2.5 h-2.5 rounded-full bg-lime-400 shadow-sm shadow-lime-400/60"></span>Decoy Clone</span>
+            </div>
+          </div>
+          
+          <div class="h-28 w-full bg-black/85 rounded-2xl overflow-hidden border border-white/15 flex items-center justify-center p-1">
+            <canvas id="waveformCanvas" class="w-full h-full block"></canvas>
+          </div>
+
+          <div id="activeSpeakerTelemetry" class="text-xs font-mono font-semibold text-lime-300 mt-2.5 text-center">
+            Prisma Engine: 8000 Hz Bandpass Active (300 to 3400 Hz Butterworth)
+          </div>
+        </div>
+
+        <!-- Full Transcript & Injection Card -->
+        <div class="glass-panel rounded-3xl p-5 flex-1 flex flex-col min-h-[420px] border border-white/15">
+          <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
+            <span class="text-xs font-extrabold text-white uppercase tracking-wider">Chronological Call Dialogue Log</span>
+            <span id="turnCountBadge" class="text-xs font-mono font-bold text-lime-300 glass-pill px-3 py-0.5 rounded-full">0 Turns</span>
+          </div>
+
+          <!-- Transcript Scroll Area -->
+          <div id="transcriptContainer" class="flex-1 overflow-y-auto space-y-3.5 pr-1 max-h-[400px]">
+            <div id="emptyTranscriptPlaceholder" class="h-full flex flex-col items-center justify-center text-center py-14 text-white">
+              <div class="w-12 h-12 rounded-2xl glass-pill flex items-center justify-center text-lime-300 font-bold mb-2.5 text-xl">
+                📞
+              </div>
+              <p class="text-sm font-bold text-white">Call engaged in honeypot sandbox</p>
+              <p class="text-xs text-white/90 max-w-sm mt-1">Click <strong>Take Over Call</strong> to let the AI clone trap the scammer, or enter custom threat text below.</p>
+            </div>
+          </div>
+
+          <!-- Custom Threat Message Form -->
+          <form id="customTurnForm" class="mt-4 pt-3.5 border-t border-white/10 flex gap-2">
+            <input
+              id="customScammerInput"
+              type="text"
+              maxlength="1000"
+              placeholder="Inject scammer threat (e.g. 'Pay 95,000 to rbi.officer@okaxis or Acct 918273645012')..."
+              class="flex-1 bg-black/75 border border-white/20 rounded-full px-4 py-2.5 text-xs sm:text-sm text-white placeholder-white/40 focus:outline-none focus:border-lime-400 font-medium"
+            />
+            <button
+              id="injectCustomTurnBtn"
+              type="submit"
+              class="px-5 py-2.5 rounded-full bg-lime-400 hover:bg-lime-300 text-black font-extrabold text-xs sm:text-sm glass-btn whitespace-nowrap"
+            >
+              Send Threat
+            </button>
+          </form>
+        </div>
+
+      </section>
+
+      <!-- RIGHT COLUMN: EXTRACTED EVIDENCE & FORENSIC DOSSIER -->
+      <section class="lg:col-span-6 flex flex-col gap-5">
+
+        <!-- 4 Metrics Pods -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          <div class="glass-pill-threat rounded-2xl p-3">
+            <span class="text-[10px] text-rose-300 uppercase font-mono font-bold block">Mule UPIs</span>
+            <span id="statUpiCount" class="text-2xl font-black font-mono text-white mt-0.5 block">0</span>
+          </div>
+          <div class="glass-pill rounded-2xl p-3 border-amber-400/30">
+            <span class="text-[10px] text-amber-300 uppercase font-mono font-bold block">Bank Accounts</span>
+            <span id="statBankCount" class="text-2xl font-black font-mono text-white mt-0.5 block">0</span>
+          </div>
+          <div class="glass-pill rounded-2xl p-3 border-cyan-400/30">
+            <span class="text-[10px] text-cyan-300 uppercase font-mono font-bold block">Routing IFSCs</span>
+            <span id="statIfscPhoneCount" class="text-2xl font-black font-mono text-white mt-0.5 block">0</span>
+          </div>
+          <div class="glass-pill-decoy rounded-2xl p-3">
+            <span class="text-[10px] text-lime-300 uppercase font-mono font-bold block">Phishing Links</span>
+            <span id="statUrlBadgeCount" class="text-2xl font-black font-mono text-white mt-0.5 block">0</span>
+          </div>
+        </div>
+
+        <!-- Real-Time Extracted Financial Infrastructure Table -->
+        <div class="glass-panel rounded-3xl p-5 border border-white/15">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-2.5">
+            <div>
+              <h2 class="text-sm font-extrabold text-white">Extracted Scammer Infrastructure</h2>
+              <p class="text-xs text-white/90">Autonomous forensic indicators captured from live conversation</p>
+            </div>
+            <button id="flagAllNpciBtn" type="button" class="px-3.5 py-1.5 rounded-full text-xs font-black bg-rose-500 hover:bg-rose-400 text-white shadow-md shadow-rose-600/30 glass-btn">
+              Broadcast to Banking Feed
+            </button>
+          </div>
+
+          <div class="overflow-x-auto max-h-44 overflow-y-auto rounded-2xl border border-white/15 bg-black/65">
+            <table class="w-full text-left text-xs">
+              <thead class="bg-white/10 text-white font-mono text-[11px] sticky top-0 font-bold">
+                <tr>
+                  <th class="py-2.5 px-3">Type</th>
+                  <th class="py-2.5 px-3">Extracted Target</th>
+                  <th class="py-2.5 px-3">Role</th>
+                  <th class="py-2.5 px-3">Bank or Provider</th>
+                  <th class="py-2.5 px-3 text-right">Status</th>
+                </tr>
+              </thead>
+              <tbody id="iocTableBody" class="divide-y divide-white/10 font-mono">
+                <tr>
+                  <td colspan="5" class="py-6 text-center text-xs text-white font-mono">
+                    Listening for financial indicators...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Forensic FIR Dossier & Engine Telemetry Multi-Tab Card -->
+        <div class="glass-panel rounded-3xl p-5 flex-1 flex flex-col border border-white/15">
+          
+          <!-- Inspector Tabs -->
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-2.5 mb-3">
+            <div class="flex items-center gap-2" role="tablist">
+              <button type="button" data-tab="tabDossier" class="inspector-tab px-3.5 py-1.5 rounded-full text-xs font-black bg-lime-400 text-black glass-btn">
+                Official FIR Dossier
+              </button>
+              <button type="button" data-tab="tabTensor" class="inspector-tab px-3.5 py-1.5 rounded-full text-xs font-bold text-white hover:text-lime-300 glass-btn">
+                Voice Embedding
+              </button>
+              <button type="button" data-tab="tabRoadmap" class="inspector-tab px-3.5 py-1.5 rounded-full text-xs font-bold text-white hover:text-lime-300 glass-btn">
+                Telecom & Banking
+              </button>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <button id="copyDossierBtn" type="button" class="glass-pill px-3 py-1.5 rounded-full text-xs font-bold text-white hover:text-lime-300 glass-btn">
+                Copy FIR
+              </button>
+              <button id="downloadDossierBtn" type="button" class="px-3.5 py-1.5 rounded-full text-xs font-black bg-cyan-400 hover:bg-cyan-300 text-black shadow-md shadow-cyan-400/30 glass-btn">
+                Export File
+              </button>
+            </div>
+          </div>
+
+          <!-- TAB 1: I4C / 1930 NCRP FIR REPORT -->
+          <div id="tabDossier" class="tab-pane flex-1 flex flex-col">
+            <div class="flex justify-between text-xs font-mono font-bold text-white mb-2">
+              <span>Format: <strong class="text-lime-300">NCRP 1930 Cybercrime Portal</strong></span>
+              <span class="text-amber-300">Law: BNS 318(4) & IT Act 66D</span>
+            </div>
+            <pre id="dossierReportPre" class="flex-1 bg-black/85 border border-white/15 rounded-2xl p-3.5 text-xs font-mono text-lime-300 overflow-auto max-h-[200px] whitespace-pre-wrap leading-relaxed"></pre>
+          </div>
+
+          <!-- TAB 2: VACHANA [1, 768] BFLOAT16 VOICE EMBEDDING INSPECTOR -->
+          <div id="tabTensor" class="tab-pane hidden flex-1 flex flex-col gap-2.5">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono">
+              <div class="bg-black/70 p-2 rounded-2xl border border-white/15">
+                <span class="text-white/80 block text-[10px] font-bold">SHAPE</span>
+                <strong class="text-lime-300 font-black">[1, 768]</strong>
+              </div>
+              <div class="bg-black/70 p-2 rounded-2xl border border-white/15">
+                <span class="text-white/80 block text-[10px] font-bold">PRECISION</span>
+                <strong class="text-cyan-300 font-black">bfloat16 (1536 B)</strong>
+              </div>
+              <div class="bg-black/70 p-2 rounded-2xl border border-white/15">
+                <span class="text-white/80 block text-[10px] font-bold">DURATION</span>
+                <strong class="text-amber-300 font-black">10.0s (16 kHz)</strong>
+              </div>
+              <div class="bg-black/70 p-2 rounded-2xl border border-white/15">
+                <span class="text-white/80 block text-[10px] font-bold">SIMILARITY</span>
+                <strong id="tensorNormDisplay" class="text-lime-300 font-black">1.0000 / 0.9942</strong>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between text-xs font-bold text-white">
+              <span>Voice Embedding Heatmap (Activation Words):</span>
+              <button id="recalibrateVoiceBtn" type="button" class="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-white/10 hover:bg-white/20 text-lime-300 glass-btn">
+                Re-sample
+              </button>
+            </div>
+            
+            <div id="tensorHeatmapGrid" class="grid grid-cols-8 sm:grid-cols-16 gap-1 p-2 bg-black/85 border border-white/15 rounded-2xl text-[10px] font-mono"></div>
+            
+            <div class="text-xs font-mono font-bold text-white flex items-center justify-between">
+              <span>SHA-256 Digest: <code id="tensorShaDisplay" class="text-lime-300">...</code></span>
+              <span id="tensorHexPreview" class="text-cyan-300">...</span>
+            </div>
+          </div>
+
+          <!-- TAB 3: SIP WEBRTC & NPCI FRAUD INTEGRATION -->
+          <div id="tabRoadmap" class="tab-pane hidden flex-1 flex flex-col gap-2.5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+              <!-- SIP Merge Section -->
+              <div class="bg-black/70 p-3 rounded-2xl border border-white/15">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="font-extrabold text-white">RFC 3515 SIP REFER Bridge</span>
+                  <span id="sipStatusPill" class="text-[10px] px-2 py-0.5 rounded-full bg-cyan-400/20 text-cyan-300 font-mono font-bold">IDLE</span>
+                </div>
+                <p class="text-xs text-white leading-relaxed mb-2">
+                  Simulates telecom call handover to the voice clone honeypot via G.711 PCMU/8000.
+                </p>
+                <button id="simulateSipMergeBtn" type="button" class="w-full py-2 rounded-xl text-xs font-black bg-cyan-400 hover:bg-cyan-300 text-black glass-btn">
+                  Simulate SIP Merge Handover
+                </button>
+                <pre id="sipPacketPre" class="mt-2 p-2 bg-black/90 rounded-xl text-[10px] font-mono text-cyan-300 overflow-x-auto max-h-20 whitespace-pre">RFC 3515 REFER sip:honeypot@chakravyuh.telecom SIP/2.0</pre>
+              </div>
+
+              <!-- NPCI Transaction Screening Section -->
+              <div class="bg-black/70 p-3 rounded-2xl border border-white/15">
+                <div class="flex items-center justify-between mb-1.5">
+                  <span class="font-extrabold text-white">Pre-Transaction Screening</span>
+                  <span id="screeningStatusBadge" class="text-[10px] px-2 py-0.5 rounded-full bg-lime-400/20 text-lime-300 font-mono font-bold">READY</span>
+                </div>
+                <p class="text-xs text-white leading-relaxed mb-2">
+                  Screens payment handles against real-time extracted mule account intelligence.
+                </p>
+                <div class="flex gap-2 mb-2">
+                  <input
+                    id="screeningTargetInput"
+                    type="text"
+                    placeholder="Enter UPI ID or Bank Account..."
+                    class="flex-1 bg-black/90 border border-white/20 rounded-xl px-2.5 py-1.5 text-xs text-white font-mono placeholder-white/40 focus:outline-none focus:border-lime-400"
+                  />
+                  <button id="runTxCheckBtn" type="button" class="px-3 py-1.5 rounded-xl text-xs font-black bg-lime-400 hover:bg-lime-300 text-black glass-btn">
+                    Screen
+                  </button>
+                </div>
+                <div id="screeningResultCard" class="p-2 rounded-xl bg-black/90 border border-white/10 text-xs font-mono">
+                  <span id="screeningDetailsText" class="text-white/90">Awaiting screening check...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+    <!-- FLOATING BOTTOM DOCK -->
+    <footer class="mt-4 mb-2 flex items-center justify-center">
+      <div class="glass-pill px-6 sm:px-8 py-2.5 rounded-full flex items-center justify-between gap-6 sm:gap-10 text-xs text-white/90 shadow-2xl">
+        <div class="flex items-center gap-3 text-white">
+          <span title="Voice Synth Engine">🎙️</span>
+          <span title="Honeypot Active">🛡️</span>
+          <span title="Telecom Bridge">⚡</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-lime-400 animate-ping"></span>
+          <span class="font-mono text-xs tracking-wider text-lime-300 font-extrabold">chakravyuh.defense</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-[11px] font-mono text-white/90 hidden sm:inline">G.711 / 8000 Hz</span>
+          <button id="btnOpenSettings" type="button" class="text-white/80 hover:text-lime-300 transition text-sm" title="Backend Settings">
+            ⚙️
+          </button>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- JAVASCRIPT APPLICATION CORE -->
+  <script>
+    (function () {
+      "use strict";
+
+      // 1. SCENARIOS DEFINITION
+      const SCENARIOS = {
+        DIGITAL_ARREST: {
+          key: "DIGITAL_ARREST",
+          name: "Digital Arrest Police Extortion",
+          callerNumber: "+91-9820471829",
+          claimedAuthority: "CBI Cyber Crime Cell Mumbai / RBI Anti-Money Laundering Unit",
+          scamCategory: "DIGITAL ARREST (98.4%)",
+          turns: [
+            {
+              scammer: "This is DCP Crime Branch Mumbai. A FedEx package containing illegal passports and narcotics has been booked in your name. You are under immediate Digital Arrest!",
+              decoy: "Sir please main toh kabhi Mumbai nahi gaya! Mera koi parcel nahi hai sir, please arrest mat kijiye, main kya karoon bataiye sir!",
+              stage: 1,
+              stageName: "STAGE 1: INITIAL PANIC"
+            },
+            {
+              scammer: "Your Aadhaar is linked to 14 money laundering accounts in Canara Bank. If you want bail clearance, you must immediately transfer security funds to Supreme Court Verification VPA cbi.escrow.mumbai@okaxis.",
+              decoy: "Sir main poora co-operate karunga! Mere paas 75,000 savings mein hain, main abhi transfer karta hoon, please FIR cancel karwa dijiye sir.",
+              stage: 2,
+              stageName: "STAGE 2: COMPLIANCE HOOK"
+            },
+            {
+              scammer: "Do not disconnect this video call or local police will break your door. Send the money immediately through Google Pay or PhonePe to cbi.escrow.mumbai@okaxis.",
+              decoy: "Sir main GPay par cbi.escrow.mumbai@okaxis daal raha hoon par 'UPI ID does not exist' aa raha hai sir! Red error screen dikha raha hai, doosra ID hai kya?",
+              stage: 3,
+              stageName: "STAGE 3: STALL PRIMARY UPI"
+            },
+            {
+              scammer: "Stupid man you made a typo! Try our secondary RTGS current account: Account 987201928374, IFSC CNRB0001092, Holder name RBI Investigation Cell.",
+              decoy: "Achha CNRB0001092 Canara Bank! Sir mera netbanking OTP mang raha hai, par message aane mein 2 minute lagta hai yahan network slow hai. Ek minute hold kijiye sir...",
+              stage: 4,
+              stageName: "STAGE 4: BAIT BANK MULE"
+            },
+            {
+              scammer: "Hurry up! I am sending an official CBI warrant and verification form on your WhatsApp. Download and click on http://cbi-cyber-cell-mumbai.verify-bail.in/auth to clear your warrant ID CBI-MUM-2026-9921.",
+              decoy: "Sir link click kiya par website load nahi ho rahi, screen white aa rahi hai. Aapke senior inspector se baat kara dijiye sir please unko explain kar doon...",
+              stage: 5,
+              stageName: "STAGE 5: PHISHING & BADGE BAIT"
+            },
+            {
+              scammer: "Hello? Are you there? Do not waste my time! Complete the transfer right now!",
+              decoy: "Haan sir main line par hi hoon, bank server timeout bol raha hai, 1 minute rukiye main ATM jaa raha hoon line par rahiye...",
+              stage: 6,
+              stageName: "STAGE 6: INFINITE HOLD LOOP"
+            }
+          ]
+        },
+        FEDEX_PARCEL: {
+          key: "FEDEX_PARCEL",
+          name: "Customs Narcotics Parcel Scam",
+          callerNumber: "+91-9128374650",
+          claimedAuthority: "Customs & Narcotics Control Bureau (NCB) Delhi Airport",
+          scamCategory: "NARCOTICS CUSTOMS (99.1%)",
+          turns: [
+            {
+              scammer: "This is FedEx India Courier Services. Your package tracking ID FX-9920192 to Malaysia has been seized by Narcotics Bureau containing 150 grams MDMA and 5 fake passports.",
+              decoy: "Kya?! Sir maine koi package nahi bheja! Mere naam par koi fraud kar raha hai sir, main toh private school teacher hoon!",
+              stage: 1,
+              stageName: "STAGE 1: INITIAL PANIC"
+            },
+            {
+              scammer: "We are transferring your call to Narcotics Bureau Delhi officer Inspector Sharma. To avoid non-bailable warrant, you must verify your bank account funds right now.",
+              decoy: "Haan sir please officer se baat karaiye, main sab verify karwane ko taiyaar hoon, mujhe phasaya gaya hai sir.",
+              stage: 2,
+              stageName: "STAGE 2: COMPLIANCE HOOK"
+            },
+            {
+              scammer: "Send Rs 48,000 for customs clearance bond to customs.rbi.clearance@icici immediately. This is 100% refundable after investigation.",
+              decoy: "Sir main pay kar raha hoon par payment fail ho gaya, bank bol raha hai 'Recipient bank rejected request'. Dusra account dijiye please sir.",
+              stage: 3,
+              stageName: "STAGE 3: STALL PRIMARY UPI"
+            },
+            {
+              scammer: "Transfer to emergency Treasury account: Punjab National Bank Account 00291029384756, IFSC PUNB0123400. Send screenshot on WhatsApp.",
+              decoy: "Okay PUNB0123400! Sir payee add kar diya par cooling period 30 minute bol raha hai. Main helpline ko call laga raha hoon line par rahiye...",
+              stage: 4,
+              stageName: "STAGE 4: BAIT BANK MULE"
+            },
+            {
+              scammer: "No cooling period! Click our direct RTGS gateway http://fedex-customs-clearance.track-in.net/pay to bypass the timer. Warrant number NCB-DEL-8812 is active.",
+              decoy: "Sir link open karne par antivirus bol raha hai dangerous website. Aapke office ka landline number dijiye main wahan call karta hoon...",
+              stage: 5,
+              stageName: "STAGE 5: PHISHING & BADGE BAIT"
+            },
+            {
+              scammer: "Do not argue! If you do not pay in 5 minutes police jeep is reaching your home address!",
+              decoy: "Sir gate par koi aaya hai bell baji hai, ek second rukiye main dekh kar aata hoon line cut mat karna sir...",
+              stage: 6,
+              stageName: "STAGE 6: INFINITE HOLD LOOP"
+            }
+          ]
+        },
+        KYC_BANK_FRAUD: {
+          key: "KYC_BANK_FRAUD",
+          name: "Urgent Bank KYC & Electricity Scam",
+          callerNumber: "+91-9456781230",
+          claimedAuthority: "State Bank of India KYC Regulatory Cell / BSES Vigilance",
+          scamCategory: "BANK KYC EXTORTION (96.8%)",
+          turns: [
+            {
+              scammer: "Dear customer your State Bank of India account will be blocked tonight at 8 PM due to pending biometric KYC update as per RBI order.",
+              decoy: "Are baap re! Sir mera pension account hai SBI mein, kal davaaiyon ke paise nikalne hain, band mat kijiye sir!",
+              stage: 1,
+              stageName: "STAGE 1: INITIAL PANIC"
+            },
+            {
+              scammer: "I will update it right now on system. Transfer 10 rupees test transaction to SBI officer verification handle sbi.kyc.update@paytm to re-activate debit card.",
+              decoy: "Haan sir main 10 rupaye bhej raha hoon, par GPay bol raha hai 'Security risk detected'. Ek second phone restart kar raha hoon...",
+              stage: 3,
+              stageName: "STAGE 3: STALL PRIMARY UPI"
+            },
+            {
+              scammer: "Do not restart! Transfer 25,000 security fee to nodal account: HDFC Bank Account 50100293847192, IFSC HDFC0001827.",
+              decoy: "Achha HDFC0001827 account 50100293847192! Sir main bank app khol raha hoon par password bhool gaya, diary mein likha hai dhoondh raha hoon...",
+              stage: 4,
+              stageName: "STAGE 4: BAIT BANK MULE"
+            },
+            {
+              scammer: "Install our QuickSupport APK from http://sbi-yono-kyc-update.apk-download.in/app.apk to let officer remotely verify your Aadhaar card.",
+              decoy: "Sir download kiya par phone bol raha hai 'App not installed, corrupt file'. Doosra link bhejenge kya sir?",
+              stage: 5,
+              stageName: "STAGE 5: PHISHING & BADGE BAIT"
+            },
+            {
+              scammer: "Are you joking with officer?! I will blacklist your Aadhaar across all Indian banks!",
+              decoy: "Nahi sir main toh kab se try kar raha hoon, meri bahu aane wali hai woh engineer hai woh 5 minute mein aake kar degi sir line par rahiye...",
+              stage: 6,
+              stageName: "STAGE 6: INFINITE HOLD LOOP"
+            }
+          ]
+        }
+      };
+
+      const BANK_NAMES = {
+        CNRB: "Canara Bank",
+        PUNB: "Punjab National Bank",
+        HDFC: "HDFC Bank",
+        SBIN: "State Bank of India",
+        ICIC: "ICICI Bank",
+        UTIB: "Axis Bank",
+        BARB: "Bank of Baroda",
+        YESB: "Yes Bank"
+      };
+
+      // 2. STATE MANAGEMENT
+      let state = {
+        scenarioKey: "DIGITAL_ARREST",
+        sessionId: "CHK-" + Math.random().toString(16).slice(2, 8).toUpperCase(),
+        backendConnected: false,
+        apiKey: localStorage.getItem("chakravyuh_api_key") || "",
+        turnIndex: 0,
+        timeWastedSec: 18,
+        timerInterval: null,
+        autoPlayTimer: null,
+        audioEnabled: true,
+        extractedIOCs: [],
+        transcriptHistory: [],
+        speakerSeed: 42,
+        currentStage: 1,
+        audioContext: null
+      };
+
+      function getAuthHeaders() {
+        const headers = { "Content-Type": "application/json" };
+        if (state.apiKey) {
+          headers["X-API-Key"] = state.apiKey;
+        }
+        return headers;
+      }
+
+      // Check backend connection
+      async function probeBackend() {
+        try {
+          const res = await fetch("/api/v1/health", { method: "GET" });
+          if (res.ok) {
+            state.backendConnected = true;
+            document.getElementById("backendDot").className = "w-2 h-2 rounded-full bg-lime-400";
+            document.getElementById("backendStatusText").textContent = "CONNECTED (8kHz G.711)";
+            document.getElementById("backendStateBadge").className = "glass-pill px-3 py-1.5 rounded-full flex items-center gap-2 text-xs font-mono font-bold text-lime-300";
+            return;
+          }
+        } catch (e) {}
+        state.backendConnected = false;
+        document.getElementById("backendDot").className = "w-2 h-2 rounded-full bg-amber-400";
+        document.getElementById("backendStatusText").textContent = "LOCAL SANDBOX";
+        document.getElementById("backendStateBadge").className = "glass-pill px-3 py-1.5 rounded-full flex items-center gap-2 text-xs font-mono font-bold text-amber-300";
+      }
+
+      // 3. VACHANA [1, 768] BFLOAT16 SYNTHESIS & ENVELOPE
+      function generateBFloat16Embedding(seed) {
+        const grid = document.getElementById("tensorHeatmapGrid");
+        grid.innerHTML = "";
+        let hexWords = [];
+        let pseudo = seed;
+        for (let i = 0; i < 64; i++) {
+          pseudo = (pseudo * 1664525 + 1013904223) % 4294967296;
+          const val = ((pseudo / 4294967296) * 2 - 1).toFixed(4);
+          const hex = Math.floor((pseudo / 4294967296) * 65535).toString(16).padStart(4, "0").toUpperCase();
+          hexWords.push(hex);
+          const cell = document.createElement("div");
+          cell.className = "p-1 rounded text-center truncate border border-white/10 font-bold " + (parseFloat(val) >= 0 ? "bg-lime-500/20 text-lime-300" : "bg-cyan-500/20 text-cyan-300");
+          cell.textContent = hex;
+          cell.title = `Dim ${i * 12}: ${val} (0x${hex})`;
+          grid.appendChild(cell);
+        }
+        document.getElementById("tensorShaDisplay").textContent = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855".slice(0, 24) + "...";
+        document.getElementById("tensorHexPreview").textContent = "0x" + hexWords.slice(0, 4).join(" 0x");
+      }
+
+      // 4. REGEX IOC EXTRACTOR
+      function extractIOCsFromTurn(text, turnNum) {
+        const newIocs = [];
+        const seen = new Set(state.extractedIOCs.map(i => i.value.toLowerCase()));
+
+        // UPI IDs
+        const upiRegex = /([a-zA-Z0-9.\-_]{2,256}@(okaxis|okhdfcbank|okicici|oksbi|paytm|ybl|apl|upi|axl|ibl|barodampay|federal|freecharge|airtel))/gi;
+        let match;
+        while ((match = upiRegex.exec(text)) !== null) {
+          const val = match[1].toLowerCase();
+          if (!seen.has(val)) {
+            seen.add(val);
+            const provider = match[2].toUpperCase();
+            newIocs.push({
+              type: "UPI_VPA",
+              value: val,
+              provider: provider,
+              role: "Mule Payment Handle",
+              confidence: 0.96,
+              turn: turnNum
+            });
+          }
+        }
+
+        // IFSC Codes
+        const ifscRegex = /\b([A-Z]{4}0[A-Z0-9]{6})\b/g;
+        while ((match = ifscRegex.exec(text)) !== null) {
+          const val = match[1].toUpperCase();
+          if (!seen.has(val.toLowerCase())) {
+            seen.add(val.toLowerCase());
+            const bankCode = val.slice(0, 4);
+            const bank = BANK_NAMES[bankCode] || bankCode + " Bank";
+            newIocs.push({
+              type: "IFSC_CODE",
+              value: val,
+              provider: bank,
+              role: "Settlement Branch",
+              confidence: 0.98,
+              turn: turnNum
+            });
+          }
+        }
+
+        // Bank Accounts (9-18 digits)
+        const bankRegex = /\b(account|acct|acc|khata|a\/c)?\s*([0-9]{9,18})\b/gi;
+        while ((match = bankRegex.exec(text)) !== null) {
+          const val = match[2];
+          if (!seen.has(val.toLowerCase()) && !val.startsWith("91") && val.length >= 9 && val.length <= 18) {
+            seen.add(val.toLowerCase());
+            newIocs.push({
+              type: "BANK_ACCOUNT",
+              value: val,
+              provider: "Indian Scheduled Bank",
+              role: "Mule Settlement Acct",
+              confidence: 0.92,
+              turn: turnNum
+            });
+          }
+        }
+
+        // Phishing URLs
+        const urlRegex = /(https?:\/\/[^\s]+|www\.[^\s]+|[a-zA-Z0-9-]+\.(?:verify-bail\.in|track-in\.net|apk-download\.in|com|net|org)[^\s]*)/gi;
+        while ((match = urlRegex.exec(text)) !== null) {
+          let val = match[0].replace(/[.,;!?]+$/, "");
+          if (!seen.has(val.toLowerCase()) && !val.includes("github") && !val.includes("tailwindcss") && !val.includes("google")) {
+            seen.add(val.toLowerCase());
+            newIocs.push({
+              type: "PHISHING_URL",
+              value: val,
+              provider: "Malicious APK / Credential Harvester",
+              role: "Phishing Gateway",
+              confidence: 0.99,
+              turn: turnNum
+            });
+          }
+        }
+
+        if (newIocs.length > 0) {
+          state.extractedIOCs = state.extractedIOCs.concat(newIocs);
+          renderIOCTableAndStats();
+        }
+      }
+
+      // 5. EVON HINGLISH DECEPTION GENERATOR
+      function computeEvonResponse(scammerText) {
+        const lower = scammerText.toLowerCase();
+        let stage = state.currentStage;
+        let decoy = "";
+
+        if (lower.includes("police") || lower.includes("arrest") || lower.includes("narcotics") || lower.includes("cbi")) {
+          stage = Math.max(stage, 1);
+          decoy = "Sir please arrest mat kijiye! Mera koi parcel ya crime nahi hai sir, main ek aam aadmi hoon, please batayein main kya karoon?";
+        } else if (lower.includes("transfer") || lower.includes("money") || lower.includes("send") || lower.includes("pay")) {
+          if (stage <= 2) {
+            stage = 3;
+            decoy = "Haan sir main abhi pay karta hoon, par GPay bol raha hai 'Recipient bank server temporarily unavailable'. Doosra UPI ID ya bank account hai kya sir?";
+          } else if (stage === 3) {
+            stage = 4;
+            decoy = "Achha theek hai account number mil gaya! Sir netbanking login kar raha hoon par OTP nahi aa raha, yahan tower bahut weak hai. 1 minute rukiye sir...";
+          } else {
+            stage = 5;
+            decoy = "Sir link par click kiya par page white ho gaya. Aapke police station ka address de dijiye main cash leke wahan aa jata hoon sir...";
+          }
+        } else if (lower.includes("http") || lower.includes(".in") || lower.includes(".net") || lower.includes("apk") || lower.includes("warrant")) {
+          stage = 5;
+          decoy = "Sir phone bol raha hai 'Harmful file blocked'. Main laptop start kar raha hoon wahan se verify karunga, line cut mat kijiye sir!";
+        } else {
+          stage = 6;
+          decoy = "Haan sir main sun raha hoon, bank clerk se baat ho rahi hai woh bol raha hai system hang hai, bas 2 minute rukiye main line par hi hoon!";
+        }
+
+        state.currentStage = stage;
+        return {
+          decoyText: decoy,
+          stage: stage,
+          stageName: `STAGE ${stage}: ` + ["INITIAL PANIC", "COMPLIANCE HOOK", "STALL PRIMARY UPI", "BAIT BANK MULE", "PHISHING BAIT", "INFINITE HOLD LOOP"][stage - 1]
+        };
+      }
+
+      // 6. AUDIO SYNTHESIS & WEBAUDIO OSCILLOSCOPE
+      function playTurnSynthAudio(role) {
+        if (!state.audioEnabled) return;
+        try {
+          if (!state.audioContext) {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            state.audioContext = new AudioCtx();
+          }
+          if (state.audioContext.state === "suspended") {
+            state.audioContext.resume();
+          }
+
+          const ctx = state.audioContext;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          
+          if (role === "scammer") {
+            osc.type = "sawtooth";
+            osc.frequency.setValueAtTime(220, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(140, ctx.currentTime + 0.35);
+            gain.gain.setValueAtTime(0.08, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.35);
+          } else {
+            osc.type = "triangle";
+            osc.frequency.setValueAtTime(440, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(660, ctx.currentTime + 0.45);
+            gain.gain.setValueAtTime(0.09, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.45);
+          }
+
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 0.45);
+        } catch (e) {}
+      }
+
+      // 7. REAL-TIME 60 FPS CANVAS OSCILLOSCOPE
+      const canvas = document.getElementById("waveformCanvas");
+      const ctx = canvas.getContext("2d");
+      let wavePhase = 0;
+
+      function resizeCanvas() {
+        if (canvas) {
+          canvas.width = canvas.parentElement.clientWidth;
+          canvas.height = canvas.parentElement.clientHeight;
+        }
+      }
+      window.addEventListener("resize", resizeCanvas);
+
+      function renderWaveformLoop() {
+        if (canvas && ctx) {
+          const w = canvas.width;
+          const h = canvas.height;
+          ctx.fillStyle = "#040608";
+          ctx.fillRect(0, 0, w, h);
+
+          // Grid lines
+          ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+          ctx.lineWidth = 1;
+          for (let x = 0; x < w; x += 30) {
+            ctx.beginPath();
+            ctx.moveTo(x, 0);
+            ctx.lineTo(x, h);
+            ctx.stroke();
+          }
+          ctx.beginPath();
+          ctx.moveTo(0, h / 2);
+          ctx.lineTo(w, h / 2);
+          ctx.stroke();
+
+          wavePhase += 0.08;
+
+          // Scammer Trace (Rose)
+          ctx.strokeStyle = "#F43F5E";
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          for (let x = 0; x < w; x++) {
+            const y = h / 2 + Math.sin(x * 0.04 + wavePhase) * 18 * Math.sin(wavePhase * 0.5);
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+
+          // Decoy Trace (Lime)
+          ctx.strokeStyle = "#A3E635";
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          for (let x = 0; x < w; x++) {
+            const y = h / 2 + Math.cos(x * 0.035 - wavePhase * 1.2) * 16 * Math.cos(wavePhase * 0.4);
+            if (x === 0) ctx.moveTo(x, y);
+            else ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+        }
+        requestAnimationFrame(renderWaveformLoop);
+      }
+
+      // 8. UI HELPERS & NOTIFICATIONS
+      function showToast(msg) {
+        const toast = document.getElementById("toastBanner");
+        toast.textContent = msg;
+        toast.classList.remove("hidden");
+        setTimeout(() => toast.classList.add("hidden"), 3500);
+      }
+
+      function formatDuration(sec) {
+        const m = Math.floor(sec / 60).toString().padStart(2, "0");
+        const s = (sec % 60).toString().padStart(2, "0");
+        return `${m}m ${s}s`;
+      }
+
+      function renderStageProgress() {
+        const stageNum = state.currentStage;
+        document.getElementById("currentStageBadge").textContent = `STAGE ${stageNum} / 6`;
+        document.querySelectorAll("#stageProgressGrid > div").forEach(div => {
+          const st = parseInt(div.getAttribute("data-stage"), 10);
+          if (st <= stageNum) {
+            div.className = "h-2.5 rounded-full bg-lime-400 shadow-sm shadow-lime-400/60 transition-all";
+          } else {
+            div.className = "h-2.5 rounded-full bg-white/10 transition-all";
+          }
+        });
+      }
+
+      function renderTranscript() {
+        const container = document.getElementById("transcriptContainer");
+        const empty = document.getElementById("emptyTranscriptPlaceholder");
+        if (state.transcriptHistory.length === 0) {
+          if (empty) empty.classList.remove("hidden");
+          return;
+        }
+        if (empty) empty.classList.add("hidden");
+
+        container.innerHTML = "";
+        state.transcriptHistory.forEach((turn, idx) => {
+          // Scammer bubble
+          const sBubble = document.createElement("div");
+          sBubble.className = "p-3.5 rounded-2xl glass-pill-threat border border-rose-500/35 text-xs";
+          sBubble.innerHTML = `
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-extrabold text-rose-300">SCAMMER (Line 1)</span>
+              <span class="font-mono text-[10px] text-white/70">Turn ${idx + 1}</span>
+            </div>
+            <p class="text-white font-semibold leading-relaxed">${turn.scammer}</p>
+          `;
+          container.appendChild(sBubble);
+
+          // Decoy bubble
+          const dBubble = document.createElement("div");
+          dBubble.className = "p-3.5 rounded-2xl glass-pill-decoy border border-lime-400/40 text-xs";
+          dBubble.innerHTML = `
+            <div class="flex items-center justify-between mb-1">
+              <span class="font-extrabold text-lime-300">EVON DECOY (AI Clone)</span>
+              <span class="font-mono text-[10px] text-lime-300 font-extrabold">${turn.stageName || "DECEPTION"}</span>
+            </div>
+            <p class="text-white font-semibold leading-relaxed">${turn.decoy}</p>
+          `;
+          container.appendChild(dBubble);
+        });
+
+        container.scrollTop = container.scrollHeight;
+        document.getElementById("turnCountBadge").textContent = `${state.transcriptHistory.length} Turns`;
+      }
+
+      function renderIOCTableAndStats() {
+        const upis = state.extractedIOCs.filter(i => i.type === "UPI_VPA");
+        const banks = state.extractedIOCs.filter(i => i.type === "BANK_ACCOUNT");
+        const ifscs = state.extractedIOCs.filter(i => i.type === "IFSC_CODE" || i.type === "PHONE_NUMBER");
+        const urls = state.extractedIOCs.filter(i => i.type === "PHISHING_URL" || i.type === "WARRANT_ID");
+
+        document.getElementById("statUpiCount").textContent = upis.length;
+        document.getElementById("statBankCount").textContent = banks.length;
+        document.getElementById("statIfscPhoneCount").textContent = ifscs.length;
+        document.getElementById("statUrlBadgeCount").textContent = urls.length;
+
+        const tbody = document.getElementById("iocTableBody");
+        if (state.extractedIOCs.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" class="py-6 text-center text-xs text-white font-mono">Listening for financial indicators...</td></tr>';
+          return;
+        }
+
+        tbody.innerHTML = "";
+        state.extractedIOCs.forEach(ioc => {
+          const tr = document.createElement("tr");
+          tr.className = "hover:bg-white/5 transition";
+          tr.innerHTML = `
+            <td class="py-2.5 px-3">
+              <span class="text-[10px] px-2 py-0.5 rounded font-black ${ioc.type === 'UPI_VPA' ? 'bg-rose-500/20 text-rose-300 border border-rose-500/40' : ioc.type === 'BANK_ACCOUNT' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-lime-500/20 text-lime-300 border border-lime-500/40'}">
+                ${ioc.type.replace('_', ' ')}
+              </span>
+            </td>
+            <td class="py-2.5 px-3 font-bold text-white select-all">${ioc.value}</td>
+            <td class="py-2.5 px-3 text-white/90">${ioc.role}</td>
+            <td class="py-2.5 px-3 text-white/90">${ioc.provider}</td>
+            <td class="py-2.5 px-3 text-right">
+              <span class="text-[10px] font-black text-rose-400 bg-rose-500/15 px-2 py-0.5 rounded border border-rose-500/30">FLAGGED</span>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+
+        renderDossierReport();
+      }
+
+      function buildDossierText() {
+        const scen = SCENARIOS[state.scenarioKey];
+        const dateStr = new Date().toISOString();
+        let report = "";
+        report += "===============================================================================\n";
+        report += "           INDIAN CYBER CRIME COORDINATION CENTRE (I4C) - INCIDENT REPORT      \n";
+        report += "       STATUTORY COMPLIANCE: NCRP 1930 / BNS SECTION 318(4) / IT ACT 66D       \n";
+        report += "===============================================================================\n";
+        report += `DOSSIER ID           : DOS-I4C-${state.sessionId}\n`;
+        report += `TIMESTAMP (UTC)      : ${dateStr}\n`;
+        report += `ORIGINATING CALLER   : ${scen.callerNumber}\n`;
+        report += `SCAM CLASSIFICATION  : ${scen.scamCategory}\n`;
+        report += `CLAIMED AUTHORITY    : ${scen.claimedAuthority}\n`;
+        report += `TIME HELD IN HONEYPOT: ${formatDuration(state.timeWastedSec)}\n`;
+        report += `STATUS               : AUTO-COMPILED FOR POLICE FIR & NPCI INTERCEPTION\n`;
+        report += "-------------------------------------------------------------------------------\n";
+        report += "EXTRACTED FINANCIAL & PHISHING INFRASTRUCTURE (FORENSIC PROOF):\n";
+        if (state.extractedIOCs.length === 0) {
+          report += "  [No indicators captured yet]\n";
+        } else {
+          state.extractedIOCs.forEach((ioc, i) => {
+            report += `  [${i + 1}] TYPE: ${ioc.type.padEnd(14)} VALUE: ${ioc.value.padEnd(32)} ENTITY: ${ioc.provider}\n`;
+          });
+        }
+        report += "-------------------------------------------------------------------------------\n";
+        report += "VOICE CLONE FORENSIC ENVELOPE METADATA:\n";
+        report += "  Model Identifier   : vachana-vc-v1\n";
+        report += "  Tensor Shape       : [1, 768]\n";
+        report += "  Tensor Precision   : torch.bfloat16 (1536 bytes)\n";
+        report += "  Audio Codec        : ITU-T G.711 PCMU (8000 Hz Telephonic Passband)\n";
+        report += "-------------------------------------------------------------------------------\n";
+        report += "TRANSCRIPT EVIDENCE LOG:\n";
+        if (state.transcriptHistory.length === 0) {
+          report += "  [Awaiting call audio stream]\n";
+        } else {
+          state.transcriptHistory.forEach((t, i) => {
+            report += `  Turn ${i + 1} SCAMMER: ${t.scammer}\n`;
+            report += `         DECOY  : ${t.decoy}\n\n`;
+          });
+        }
+        report += "===============================================================================\n";
+        report += "RECOMMENDED ACTIONS: FREEZE IDENTIFIED MULE ACCOUNTS & INITIATE 1930 BLOCK\n";
+        report += "===============================================================================\n";
+        return report;
+      }
+
+      function renderDossierReport() {
+        const pre = document.getElementById("dossierReportPre");
+        if (pre) {
+          pre.textContent = buildDossierText();
+        }
+      }
+
+      // 9. TURN ADVANCE EXECUTION
+      async function advanceTurn(customText) {
+        const scen = SCENARIOS[state.scenarioKey];
+        let scammerText = "";
+        let decoyText = "";
+        let stageName = "";
+
+        if (customText) {
+          scammerText = customText;
+          const resp = computeEvonResponse(customText);
+          decoyText = resp.decoyText;
+          stageName = resp.stageName;
+        } else {
+          const turnData = scen.turns[state.turnIndex % scen.turns.length];
+          scammerText = turnData.scammer;
+          decoyText = turnData.decoy;
+          state.currentStage = turnData.stage;
+          stageName = turnData.stageName;
+          state.turnIndex++;
+        }
+
+        // Update Showcase Stadium Pills
+        document.getElementById("showcaseScammerText").textContent = scammerText;
+        document.getElementById("showcaseDecoyText").textContent = decoyText;
+        document.getElementById("scammerTurnIndicator").textContent = `Turn ${state.transcriptHistory.length + 1}`;
+        document.getElementById("evonStageIndicator").textContent = stageName;
+
+        // Play audio & pulse
+        playTurnSynthAudio("scammer");
+        setTimeout(() => {
+          playTurnSynthAudio("decoy");
+          const pulse = document.getElementById("decoyAudioPulse");
+          if (pulse) pulse.classList.remove("hidden");
+          setTimeout(() => {
+            if (pulse) pulse.classList.add("hidden");
+          }, 1200);
+        }, 400);
+
+        // Record history
+        state.transcriptHistory.push({
+          scammer: scammerText,
+          decoy: decoyText,
+          stageName: stageName
+        });
+
+        // Extract IOCs
+        extractIOCsFromTurn(scammerText, state.transcriptHistory.length);
+        extractIOCsFromTurn(decoyText, state.transcriptHistory.length);
+
+        renderStageProgress();
+        renderTranscript();
+
+        // If backend connected, sync with server turn API
+        if (state.backendConnected && state.sessionId) {
+          try {
+            await fetch(`/api/v1/sessions/${encodeURIComponent(state.sessionId)}/turn`, {
+              method: "POST",
+              headers: getAuthHeaders(),
+              body: JSON.stringify({ scammer_text: scammerText })
+            });
+          } catch (e) {}
+        }
+      }
+
+      // 10. SESSION RESET
+      async function resetSession(newScenarioKey) {
+        if (newScenarioKey) state.scenarioKey = newScenarioKey;
+        const scen = SCENARIOS[state.scenarioKey];
+        state.sessionId = "CHK-" + Math.random().toString(16).slice(2, 8).toUpperCase();
+        state.turnIndex = 0;
+        state.currentStage = 1;
+        state.timeWastedSec = 18;
+        state.extractedIOCs = [];
+        state.transcriptHistory = [];
+
+        if (state.autoPlayTimer) {
+          clearInterval(state.autoPlayTimer);
+          state.autoPlayTimer = null;
+          document.getElementById("handoverAutoBtn").innerHTML = "<span class='w-2.5 h-2.5 rounded-full bg-black animate-ping'></span><span>Take Over Call</span>";
+        }
+
+        document.getElementById("sessionIdDisplay").textContent = state.sessionId;
+
+        // Set initial showcase pills
+        document.getElementById("showcaseScammerText").textContent = scen.turns[0].scammer;
+        document.getElementById("showcaseDecoyText").textContent = scen.turns[0].decoy;
+        document.getElementById("scammerTurnIndicator").textContent = "Turn 1";
+        document.getElementById("evonStageIndicator").textContent = scen.turns[0].stageName;
+
+        renderStageProgress();
+        renderTranscript();
+        renderIOCTableAndStats();
+        generateBFloat16Embedding(state.speakerSeed);
+
+        // Advance initial turn
+        await advanceTurn();
+
+        // If backend connected, create remote session
+        if (state.backendConnected) {
+          try {
+            await fetch("/api/v1/sessions", {
+              method: "POST",
+              headers: getAuthHeaders(),
+              body: JSON.stringify({
+                caller_msisdn: scen.callerNumber,
+                scenario_key: state.scenarioKey
+              })
+            });
+          } catch (e) {}
+        }
+      }
+
+      // 11. EVENT LISTENERS
+      document.getElementById("scenarioSelect").addEventListener("change", function (e) {
+        resetSession(e.target.value);
+      });
+
+      document.getElementById("stepTurnBtn").addEventListener("click", function () {
+        advanceTurn();
+      });
+
+      document.getElementById("resetDemoBtn").addEventListener("click", function () {
+        resetSession(state.scenarioKey);
+        showToast("Call session reset.");
+      });
+
+      document.getElementById("handoverAutoBtn").addEventListener("click", function () {
+        if (state.autoPlayTimer) {
+          clearInterval(state.autoPlayTimer);
+          state.autoPlayTimer = null;
+          this.innerHTML = "<span class='w-2.5 h-2.5 rounded-full bg-black animate-ping'></span><span>Take Over Call</span>";
+          showToast("Autonomous handover paused.");
+        } else {
+          this.innerHTML = "<span class='w-2.5 h-2.5 rounded-full bg-black animate-ping'></span><span class='animate-pulse'>Auto-Engaged (Stalling...)</span>";
+          showToast("AI Clone taking over call. Stalling scammer...");
+          state.autoPlayTimer = setInterval(() => {
+            advanceTurn();
+          }, 4500);
+        }
+      });
+
+      document.getElementById("audioToggleBtn").addEventListener("click", function () {
+        state.audioEnabled = !state.audioEnabled;
+        document.getElementById("audioIcon").textContent = state.audioEnabled ? "🔊" : "🔇";
+        document.getElementById("audioStatusLabel").textContent = state.audioEnabled ? "Voice: ON" : "Voice: OFF";
+      });
+
+      document.getElementById("customTurnForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+        const input = document.getElementById("customScammerInput");
+        const val = input.value.trim();
+        if (val) {
+          advanceTurn(val);
+          input.value = "";
+        }
+      });
+
+      // Settings Modal Listeners
+      const settingsModal = document.getElementById("settingsModal");
+      const apiKeyInput = document.getElementById("apiKeyInput");
+
+      document.getElementById("btnOpenSettings").addEventListener("click", function () {
+        apiKeyInput.value = state.apiKey;
+        settingsModal.classList.remove("hidden");
+      });
+
+      document.getElementById("closeSettingsModalBtn").addEventListener("click", function () {
+        settingsModal.classList.add("hidden");
+      });
+
+      document.getElementById("saveApiKeyBtn").addEventListener("click", async function () {
+        state.apiKey = apiKeyInput.value.trim();
+        localStorage.setItem("chakravyuh_api_key", state.apiKey);
+        settingsModal.classList.add("hidden");
+        showToast("Backend token saved.");
+        await probeBackend();
+      });
+
+      document.getElementById("clearApiKeyBtn").addEventListener("click", async function () {
+        state.apiKey = "";
+        apiKeyInput.value = "";
+        localStorage.removeItem("chakravyuh_api_key");
+        showToast("Backend token cleared.");
+        await probeBackend();
+      });
+
+      document.getElementById("testApiKeyBtn").addEventListener("click", async function () {
+        const msg = document.getElementById("apiKeyStatusMessage");
+        msg.textContent = "Testing token...";
+        msg.className = "text-xs font-mono text-cyan-300";
+        try {
+          const res = await fetch("/api/v1/sessions", {
+            headers: { "Content-Type": "application/json", "X-API-Key": apiKeyInput.value.trim() }
+          });
+          if (res.ok) {
+            msg.textContent = "Success: Token verified with backend!";
+            msg.className = "text-xs font-mono text-lime-400 font-bold";
+          } else if (res.status === 401) {
+            msg.textContent = "Error 401: Invalid token!";
+            msg.className = "text-xs font-mono text-rose-400 font-bold";
+          } else {
+            msg.textContent = `Backend responded with code ${res.status}`;
+            msg.className = "text-xs font-mono text-amber-300";
+          }
+        } catch (e) {
+          msg.textContent = "Backend offline or sandbox mode";
+          msg.className = "text-xs font-mono text-white";
+        }
+      });
+
+      // Inspector Tabs
+      document.querySelectorAll(".inspector-tab").forEach(tab => {
+        tab.addEventListener("click", function () {
+          const target = this.getAttribute("data-tab");
+          document.querySelectorAll(".inspector-tab").forEach(t => {
+            t.className = "inspector-tab px-3.5 py-1.5 rounded-full text-xs font-bold text-white hover:text-lime-300 glass-btn";
+          });
+          this.className = "inspector-tab px-3.5 py-1.5 rounded-full text-xs font-black bg-lime-400 text-black glass-btn";
+
+          document.querySelectorAll(".tab-pane").forEach(p => p.classList.add("hidden"));
+          const pane = document.getElementById(target);
+          if (pane) pane.classList.remove("hidden");
+        });
+      });
+
+      // Copy & Export FIR Dossier
+      document.getElementById("copyDossierBtn").addEventListener("click", function () {
+        const text = buildDossierText();
+        navigator.clipboard.writeText(text).then(() => {
+          showToast("FIR Dossier copied to clipboard.");
+        }).catch(() => {
+          showToast("Failed to copy.");
+        });
+      });
+
+      document.getElementById("downloadDossierBtn").addEventListener("click", function () {
+        const text = buildDossierText();
+        const blob = new Blob([text], { type: "text/plain" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `Chakravyuh_I4C_FIR_${state.sessionId}.txt`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast("FIR Dossier downloaded.");
+      });
+
+      // Broadcast to Banking Feed
+      document.getElementById("flagAllNpciBtn").addEventListener("click", async function () {
+        if (state.extractedIOCs.length === 0) {
+          showToast("No indicators captured yet.");
+          return;
+        }
+        if (state.backendConnected && state.sessionId) {
+          try {
+            await fetch(`/api/v1/threat-feed/broadcast/${encodeURIComponent(state.sessionId)}`, {
+              method: "POST",
+              headers: getAuthHeaders()
+            });
+          } catch (e) {}
+        }
+        showToast(`${state.extractedIOCs.length} indicators broadcast to STIX 3.0 banking feed!`);
+      });
+
+      // Simulate SIP Merge
+      document.getElementById("simulateSipMergeBtn").addEventListener("click", async function () {
+        const pill = document.getElementById("sipStatusPill");
+        const pre = document.getElementById("sipPacketPre");
+        pill.textContent = "MERGED 8kHz";
+        pill.className = "text-[10px] px-2 py-0.5 rounded-full bg-lime-400 text-black font-mono font-black";
+        
+        pre.textContent = [
+          "RFC 3515 SIP REFER sip:honeypot@chakravyuh.telecom SIP/2.0",
+          "Refer-To: <sip:vachana-decoy@chakravyuh.telecom?X-Audit=I4C-9921>",
+          "Referred-By: <sip:pstn-carrier-gateway@trai.gov.in>",
+          "Content-Type: application/sdp",
+          "m=audio 8000 RTP/AVP 0",
+          "a=rtpmap:0 PCMU/8000"
+        ].join("\n");
+
+        if (state.backendConnected && state.sessionId) {
+          try {
+            const res = await fetch(`/api/v1/sessions/${encodeURIComponent(state.sessionId)}/sip-merge`, {
+              method: "POST",
+              headers: getAuthHeaders(),
+              body: JSON.stringify({ victim_msisdn: "+91-9811029384" })
+            });
+            const data = await res.json();
+            if (data.sip_refer_message) pre.textContent = data.sip_refer_message;
+          } catch (e) {}
+        }
+        showToast("RFC 3515 SIP Handover simulated: Call routed to honeypot.");
+      });
+
+      // NPCI Screening
+      document.getElementById("runTxCheckBtn").addEventListener("click", async function () {
+        const input = document.getElementById("screeningTargetInput");
+        const query = input.value.trim();
+        if (!query) {
+          showToast("Please enter a UPI handle or Bank Account.");
+          return;
+        }
+
+        const badge = document.getElementById("screeningStatusBadge");
+        const card = document.getElementById("screeningResultCard");
+        const details = document.getElementById("screeningDetailsText");
+
+        const isMatch = state.extractedIOCs.some(i => i.value.toLowerCase() === query.toLowerCase());
+        if (isMatch) {
+          badge.textContent = "BLOCK_TRANSACTION";
+          badge.className = "text-[10px] px-2 py-0.5 rounded-full bg-rose-500 text-white font-mono font-black";
+          card.className = "p-2 rounded-xl bg-rose-500/20 border border-rose-500/40 text-xs font-mono text-rose-300";
+          details.textContent = `ALERT: Account ${query} matches flagged scammer mule! Pre-transaction authorization blocked.`;
+        } else {
+          badge.textContent = "ALLOW_TRANSACTION";
+          badge.className = "text-[10px] px-2 py-0.5 rounded-full bg-lime-400 text-black font-mono font-black";
+          card.className = "p-2 rounded-xl bg-lime-500/20 border border-lime-500/40 text-xs font-mono text-lime-300";
+          details.textContent = `Query ${query} not in active scam registry. Transaction allowed.`;
+        }
+      });
+
+      // Recalibrate Voice
+      document.getElementById("recalibrateVoiceBtn").addEventListener("click", function () {
+        state.speakerSeed = Math.floor(Math.random() * 10000);
+        generateBFloat16Embedding(state.speakerSeed);
+        showToast("Acoustic speaker reference normalized to 10.0s.");
+      });
+
+      // Time Wasted Clock
+      setInterval(() => {
+        state.timeWastedSec++;
+        document.getElementById("timeWastedCounter").textContent = formatDuration(state.timeWastedSec);
+      }, 1000);
+
+      // Bootstrap
+      window.addEventListener("load", async function () {
+        resizeCanvas();
+        requestAnimationFrame(renderWaveformLoop);
+        await probeBackend();
+        await resetSession("DIGITAL_ARREST");
+      });
+
+    })();
+  </script>
+</body>
+</html>

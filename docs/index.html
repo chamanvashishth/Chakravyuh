@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chakravyuh: Active Voice Clone Defense for Telephonic Fraud</title>
+  <title>Chakravyuh: Active Voice-Clone Cyber Defense & Telephonic Honeypot</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
       color-scheme: dark;
     }
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: #030404;
+      background-color: #040608;
       color: #FFFFFF;
       overflow-x: hidden;
       min-height: 100vh;
@@ -24,19 +24,22 @@
     }
 
     /* Subtle Cyber Dot Matrix Background Pattern */
-    .bg-cyber-dots {
-      background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
-      background-size: 28px 28px;
+    .bg-cyber-grid {
+      background-image: 
+        radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+        linear-gradient(to right, rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+      background-size: 32px 32px, 96px 96px, 96px 96px;
     }
 
-    /* Giant Ghost Watermark Typography (matches the reference template) */
+    /* Giant Ghost Watermark Typography (Physical Depth Behind Glass) */
     .watermark-text {
       position: fixed;
       user-select: none;
       pointer-events: none;
       font-weight: 900;
       color: transparent;
-      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.038);
+      -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.035);
       text-transform: uppercase;
       letter-spacing: -0.04em;
       line-height: 0.85;
@@ -46,41 +49,41 @@
     /* Dynamic Luminous Ambient Glowing Light Blooms */
     .ambient-glow-lime {
       position: fixed;
-      top: 28%;
-      right: -60px;
-      width: 680px;
-      height: 680px;
-      background: radial-gradient(circle, rgba(163, 230, 53, 0.42) 0%, rgba(101, 163, 13, 0.24) 38%, rgba(16, 185, 129, 0.08) 55%, transparent 75%);
-      pointer-events: none;
-      z-index: 1;
-      filter: blur(80px);
-    }
-    .ambient-glow-rose {
-      position: fixed;
-      top: 6%;
-      left: -80px;
-      width: 580px;
-      height: 580px;
-      background: radial-gradient(circle, rgba(244, 63, 94, 0.28) 0%, rgba(190, 18, 60, 0.14) 40%, transparent 72%);
+      top: 25%;
+      right: -80px;
+      width: 720px;
+      height: 720px;
+      background: radial-gradient(circle, rgba(163, 230, 53, 0.45) 0%, rgba(101, 163, 13, 0.25) 35%, rgba(16, 185, 129, 0.10) 55%, transparent 75%);
       pointer-events: none;
       z-index: 1;
       filter: blur(85px);
     }
-    .ambient-glow-cyan {
+    .ambient-glow-rose {
       position: fixed;
-      bottom: -100px;
-      left: 30%;
-      width: 520px;
-      height: 520px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.18) 0%, transparent 70%);
+      top: 5%;
+      left: -100px;
+      width: 620px;
+      height: 620px;
+      background: radial-gradient(circle, rgba(244, 63, 94, 0.30) 0%, rgba(190, 18, 60, 0.15) 40%, transparent 72%);
       pointer-events: none;
       z-index: 1;
       filter: blur(90px);
     }
+    .ambient-glow-cyan {
+      position: fixed;
+      bottom: -120px;
+      left: 32%;
+      width: 580px;
+      height: 580px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.20) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+      filter: blur(95px);
+    }
 
-    /* Premium Frosted Glassmorphism Surfaces */
+    /* Professional Frosted Glassmorphism Surfaces */
     .glass-panel {
-      background: rgba(14, 18, 16, 0.52);
+      background: rgba(14, 18, 22, 0.55);
       backdrop-filter: blur(28px) saturate(190%);
       -webkit-backdrop-filter: blur(28px) saturate(190%);
       border: 1px solid rgba(255, 255, 255, 0.18);
@@ -93,7 +96,7 @@
       border-color: rgba(255, 255, 255, 0.26);
     }
 
-    /* High-Impact Stadium Pills */
+    /* Stadium Pills */
     .glass-pill {
       background: rgba(255, 255, 255, 0.06);
       backdrop-filter: blur(24px) saturate(180%);
@@ -107,28 +110,29 @@
 
     /* Threat Intercept Stadium Pill (Ruby / Scammer) */
     .glass-pill-threat {
-      background: rgba(225, 29, 72, 0.10);
+      background: rgba(225, 29, 72, 0.12);
       backdrop-filter: blur(24px) saturate(180%);
       -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border: 1px solid rgba(255, 99, 132, 0.35);
+      border: 1px solid rgba(255, 99, 132, 0.40);
       box-shadow: 
         inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.35),
-        0 12px 28px -6px rgba(0, 0, 0, 0.7);
+        0 12px 28px -6px rgba(0, 0, 0, 0.7),
+        0 0 30px -5px rgba(244, 63, 94, 0.25);
     }
 
     /* Counter-Measure Stadium Pill (Electric Lime / Decoy) */
     .glass-pill-decoy {
-      background: rgba(163, 230, 53, 0.10);
+      background: rgba(163, 230, 53, 0.12);
       backdrop-filter: blur(24px) saturate(190%);
       -webkit-backdrop-filter: blur(24px) saturate(190%);
-      border: 1px solid rgba(190, 242, 100, 0.42);
+      border: 1px solid rgba(190, 242, 100, 0.45);
       box-shadow: 
-        inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.40),
+        inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.42),
         0 12px 28px -6px rgba(0, 0, 0, 0.7),
-        0 0 35px -5px rgba(163, 230, 53, 0.25);
+        0 0 35px -5px rgba(163, 230, 53, 0.30);
     }
 
-    /* 3D Glossy Inflatable Jelly Badges (matches the reference template) */
+    /* 3D Glossy Inflatable Jelly Badges */
     .jelly-badge-red {
       background: radial-gradient(circle at 35% 25%, #FFA3B2 0%, #F43F5E 35%, #BE123C 75%, #4C0519 100%);
       box-shadow: 
@@ -145,6 +149,25 @@
         inset 0 -2.5px 3px 0 rgba(0, 0, 0, 0.7),
         0 10px 22px -4px rgba(132, 204, 22, 0.7),
         0 0 18px 0 rgba(163, 230, 53, 0.45);
+    }
+
+    /* Rotating Chakravyuh Concentric Defense Rings */
+    @keyframes spinClockwise {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    @keyframes spinCounterClockwise {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(-360deg); }
+    }
+    .ring-spin-slow {
+      animation: spinClockwise 45s linear infinite;
+    }
+    .ring-spin-medium {
+      animation: spinCounterClockwise 30s linear infinite;
+    }
+    .ring-spin-fast {
+      animation: spinClockwise 18s linear infinite;
     }
 
     /* Tactile Interactive Buttons */
@@ -166,23 +189,23 @@
       height: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.6);
     }
     ::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.25);
       border-radius: 9999px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: rgba(163, 230, 53, 0.5);
+      background: rgba(163, 230, 53, 0.55);
     }
   </style>
 </head>
-<body class="relative flex flex-col bg-cyber-dots">
+<body class="relative flex flex-col bg-cyber-grid">
 
   <!-- Giant Ghost Watermark Typography (Physical Depth Behind Glass) -->
-  <div class="watermark-text text-[110px] sm:text-[160px] lg:text-[220px] top-12 left-6">CHAKRAVYUH</div>
+  <div class="watermark-text text-[110px] sm:text-[160px] lg:text-[230px] top-12 left-6">CHAKRAVYUH</div>
   <div class="watermark-text text-[90px] sm:text-[140px] lg:text-[190px] top-[40%] right-4">HONEYPOT</div>
-  <div class="watermark-text text-[100px] sm:text-[150px] lg:text-[200px] bottom-16 left-12">DEFENSE</div>
+  <div class="watermark-text text-[100px] sm:text-[150px] lg:text-[210px] bottom-16 left-12">DEFENSE</div>
 
   <!-- Dynamic Glowing Ambient Light Blooms -->
   <div class="ambient-glow-rose"></div>
@@ -192,7 +215,7 @@
   <!-- Toast Notification Alert -->
   <div id="toastBanner" class="fixed top-5 right-5 z-50 hidden max-w-md px-5 py-3.5 rounded-2xl glass-panel text-white text-sm font-semibold shadow-2xl transition-all"></div>
 
-  <!-- Discreet Settings Modal (Hidden by default, opened only via footer gear icon) -->
+  <!-- Discreet Settings Modal (Triggered only from bottom dock settings icon) -->
   <div id="settingsModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
     <div class="glass-panel max-w-md w-full rounded-3xl p-6 relative border border-white/20 shadow-2xl">
       <div class="flex items-center justify-between mb-4">
@@ -205,7 +228,7 @@
         <button id="closeSettingsModalBtn" type="button" class="text-white hover:text-lime-300 text-lg font-bold p-1">✕</button>
       </div>
       <p class="text-xs text-white leading-relaxed mb-4">
-        If your self-hosted backend requires authentication, specify your access token below. Stored securely in your browser.
+        If connecting to a self-hosted backend that requires authentication, enter your access token below. Stored securely in your browser localStorage.
       </p>
       <div class="space-y-3 mb-4">
         <label class="block text-xs font-bold text-white uppercase tracking-wider">API Authentication Token</label>
@@ -213,7 +236,7 @@
           id="apiKeyInput"
           type="password"
           placeholder="Optional access token..."
-          class="w-full bg-black/70 border border-white/25 rounded-2xl px-4 py-2.5 text-xs text-white placeholder-white/40 focus:outline-none focus:border-lime-400 font-mono"
+          class="w-full bg-black/75 border border-white/25 rounded-2xl px-4 py-2.5 text-xs text-white placeholder-white/40 focus:outline-none focus:border-lime-400 font-mono"
         />
         <div id="apiKeyStatusMessage" class="text-xs font-mono text-lime-400"></div>
       </div>
@@ -234,26 +257,26 @@
   </div>
 
   <!-- NAVIGATION HEADER -->
-  <header class="relative z-30 border-b border-white/10 bg-black/55 backdrop-blur-2xl sticky top-0 px-4 sm:px-8 py-3.5">
+  <header class="relative z-30 border-b border-white/10 bg-black/60 backdrop-blur-2xl sticky top-0 px-4 sm:px-8 py-3.5">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
       
       <!-- Project Branding -->
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-2xl jelly-badge-green flex items-center justify-center text-black font-black text-lg shadow-lg shadow-lime-500/30">
-          <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="flex items-center gap-3.5">
+        <div class="w-11 h-11 rounded-2xl jelly-badge-green flex items-center justify-center text-black font-black text-lg shadow-lg shadow-lime-500/35">
+          <svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
           </svg>
         </div>
         <div>
-          <div class="flex items-center gap-2">
-            <span class="font-black text-lg tracking-tight text-white">CHAKRAVYUH</span>
-            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-lime-400/20 text-lime-300 border border-lime-400/35">HONEYPOT</span>
+          <div class="flex items-center gap-2.5">
+            <span class="font-black text-xl tracking-tight text-white">CHAKRAVYUH</span>
+            <span class="text-[10px] font-extrabold px-2.5 py-0.5 rounded-full bg-lime-400/20 text-lime-300 border border-lime-400/40 font-mono tracking-wider">TACTICAL DEFENSE</span>
           </div>
-          <p class="text-xs text-white/90 font-medium">Active Voice Clone Defense for Telephonic Fraud</p>
+          <p class="text-xs text-white/90 font-medium">Active Voice Clone Honeypot & Counter-Deception System</p>
         </div>
       </div>
 
-      <!-- Header Controls: Clean, Non-Exposed -->
+      <!-- Header Controls -->
       <div class="flex flex-wrap items-center gap-2.5">
         
         <!-- Threat Scenario Selector -->
@@ -284,33 +307,110 @@
   </header>
 
   <!-- MAIN OPERATIONAL CONTAINER -->
-  <main class="relative z-20 flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col gap-6">
+  <main class="relative z-20 flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col gap-7">
 
-    <!-- HERO SHOWCASE: DUAL STADIUM PILLS (Directly derived from the uploaded template) -->
-    <section class="flex flex-col items-center justify-center gap-5 my-2">
+    <!-- CHAKRAVYUH ROTATING DEFENSE LABYRINTH & HERO SHOWCASE -->
+    <section class="glass-panel rounded-3xl p-6 sm:p-8 relative overflow-hidden border border-white/20">
       
-      <!-- Top Center Stadium Header Pill -->
-      <div class="glass-pill px-7 sm:px-10 py-3 rounded-full text-center max-w-xl mx-auto shadow-2xl">
-        <h1 class="text-base sm:text-xl font-black text-white tracking-tight">Active Scam Intercept & Autonomous Decoy</h1>
-        <p class="text-xs sm:text-sm font-extrabold text-lime-400 tracking-wide mt-0.5">Real-Time Voice Clone Honeypot Engine</p>
+      <!-- Ambient Glow Behind Radar -->
+      <div class="absolute -right-20 -top-20 w-96 h-96 bg-lime-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+        
+        <!-- Left: Chakravyuh Rotating Defensive Formation Hologram -->
+        <div class="flex flex-col sm:flex-row items-center gap-6 shrink-0">
+          <div class="relative w-44 h-44 sm:w-48 sm:h-48 flex items-center justify-center">
+            
+            <!-- Outer Ring: 8kHz PSTN Ingress Perimeter -->
+            <svg class="absolute inset-0 w-full h-full ring-spin-slow pointer-events-none" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="47" fill="none" stroke="rgba(56, 189, 248, 0.28)" stroke-width="1.2" stroke-dasharray="4 6" />
+              <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(56, 189, 248, 0.18)" stroke-width="0.8" />
+            </svg>
+
+            <!-- Middle Ring: Evon Multi-Stage Hinglish Deception Labyrinth -->
+            <svg class="absolute inset-2 w-[calc(100%-16px)] h-[calc(100%-16px)] ring-spin-medium pointer-events-none" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="44" fill="none" stroke="rgba(251, 191, 36, 0.35)" stroke-width="1.5" stroke-dasharray="14 10" />
+              <circle cx="50" cy="50" r="36" fill="none" stroke="rgba(251, 191, 36, 0.20)" stroke-width="1" />
+            </svg>
+
+            <!-- Inner Ring: Adversary Isolation Ring -->
+            <svg class="absolute inset-6 w-[calc(100%-48px)] h-[calc(100%-48px)] ring-spin-fast pointer-events-none" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(244, 63, 94, 0.40)" stroke-width="2" stroke-dasharray="8 6" />
+            </svg>
+
+            <!-- Core: Active Honeypot Trap Lock -->
+            <div class="relative z-10 w-20 h-20 rounded-full jelly-badge-green flex flex-col items-center justify-center text-black font-black text-center shadow-2xl">
+              <span class="text-xs font-mono font-black tracking-tighter">TRAP</span>
+              <span class="text-[9px] font-mono font-extrabold uppercase">LOCKED</span>
+            </div>
+
+            <!-- Radar Sweep Beam -->
+            <div class="absolute inset-0 rounded-full ring-spin-fast pointer-events-none" style="background: conic-gradient(from 0deg, transparent 0deg, transparent 270deg, rgba(163, 230, 53, 0.25) 360deg);"></div>
+          </div>
+
+          <!-- Labyrinth Formation Status -->
+          <div class="text-center sm:text-left">
+            <span class="text-[11px] font-mono font-bold text-lime-400 uppercase tracking-widest block">Chakravyuh Formation</span>
+            <h2 class="text-xl sm:text-2xl font-black text-white tracking-tight mt-0.5">Rotating Deception Labyrinth</h2>
+            <p class="text-xs text-white/90 max-w-xs mt-1 leading-relaxed">
+              Concentric defense rings trap extortionists, exhaust caller bandwidth, and force secondary mule disclosure.
+            </p>
+            <div class="flex items-center justify-center sm:justify-start gap-2 mt-3 font-mono text-[11px]">
+              <span class="px-2.5 py-1 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/35 font-bold">Ring 1: 8kHz PSTN</span>
+              <span class="px-2.5 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/35 font-bold">Ring 2: Evon FSM</span>
+              <span class="px-2.5 py-1 rounded-full bg-rose-500/20 text-rose-300 border border-rose-500/35 font-bold">Core: I4C Lock</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Action Control Cluster -->
+        <div class="flex flex-col items-center lg:items-end gap-3.5 w-full lg:w-auto">
+          <div class="flex flex-wrap items-center justify-center gap-3">
+            <button id="handoverAutoBtn" type="button" class="px-7 py-3 rounded-full font-black text-sm bg-lime-400 hover:bg-lime-300 text-black shadow-xl shadow-lime-500/30 glass-btn flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-black animate-ping"></span>
+              <span>Take Over Call</span>
+            </button>
+            <button id="stepTurnBtn" type="button" class="glass-pill px-5 py-3 rounded-full font-extrabold text-sm text-white hover:text-lime-300 border border-white/20 glass-btn">
+              Next Turn
+            </button>
+            <button id="resetDemoBtn" type="button" class="glass-pill px-4 py-3 rounded-full text-xs font-bold text-white/90 hover:text-white border border-white/15 glass-btn">
+              Reset Call
+            </button>
+          </div>
+          
+          <div class="flex items-center gap-4 text-xs font-mono font-bold text-white">
+            <span>Voice Clone: <strong class="text-lime-300">[1, 768] bfloat16</strong></span>
+            <span>Time Wasted: <strong id="timeWastedCounter" class="text-amber-300">00m 18s</strong></span>
+            <span>Session: <strong id="sessionIdDisplay" class="text-cyan-300">CHK-88F4A2</strong></span>
+          </div>
+        </div>
+
       </div>
 
+    </section>
+
+    <!-- SHOWCASE: DUAL STADIUM PILLS (Directly derived from the uploaded theme template) -->
+    <section class="flex flex-col items-center justify-center gap-5 my-1">
+
       <!-- Scammer Attack Vector Stadium Pill (Red Myth Style) -->
-      <div class="w-full max-w-3xl">
-        <div class="text-xs font-black text-rose-400 uppercase tracking-widest pl-5 mb-1.5 flex items-center gap-1.5">
-          <span>Threat Intercept:</span>
-          <span id="scammerTurnIndicator" class="text-[10px] font-mono text-white/80">(Turn 1)</span>
+      <div class="w-full max-w-4xl">
+        <div class="text-xs font-black text-rose-400 uppercase tracking-widest pl-6 mb-2 flex items-center justify-between pr-4">
+          <span class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
+            Threat Intercept (Scammer Line):
+          </span>
+          <span id="scammerTurnIndicator" class="text-[11px] font-mono text-white/80 font-bold">Turn 1</span>
         </div>
-        <div class="glass-pill-threat rounded-[28px] sm:rounded-full p-4 sm:px-6 sm:py-4 flex items-center gap-4 relative overflow-hidden transition-all duration-300">
+        <div class="glass-pill-threat rounded-[28px] sm:rounded-full p-4 sm:px-7 sm:py-5 flex items-center gap-4 sm:gap-5 relative overflow-hidden transition-all duration-300">
           <!-- 3D Jelly Red X Badge -->
-          <div class="w-12 h-12 rounded-full jelly-badge-red shrink-0 flex items-center justify-center text-white shadow-xl">
-            <svg class="w-6 h-6 text-white drop-shadow" fill="none" stroke="currentColor" stroke-width="3.5" viewBox="0 0 24 24">
+          <div class="w-13 h-13 sm:w-14 sm:h-14 rounded-full jelly-badge-red shrink-0 flex items-center justify-center text-white shadow-xl">
+            <svg class="w-7 h-7 text-white drop-shadow" fill="none" stroke="currentColor" stroke-width="3.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </div>
           <!-- Scammer Statement -->
           <div class="flex-1 min-w-0">
-            <p id="showcaseScammerText" class="text-sm sm:text-base font-bold text-white leading-snug">
+            <p id="showcaseScammerText" class="text-sm sm:text-base font-bold text-white leading-relaxed">
               This is DCP Crime Branch Mumbai. A FedEx package containing illegal passports and narcotics has been booked in your name. You are under immediate Digital Arrest!
             </p>
           </div>
@@ -318,26 +418,29 @@
       </div>
 
       <!-- Autonomous Decoy Counter-Measure Stadium Pill (Green Fact Style) -->
-      <div class="w-full max-w-3xl">
-        <div class="text-xs font-black text-lime-400 uppercase tracking-widest pl-5 mb-1.5 flex items-center justify-between pr-4">
-          <span>Autonomous Counter-Measure:</span>
-          <span id="evonStageIndicator" class="text-[10px] font-mono text-lime-300 font-extrabold">STAGE 1: INITIAL PANIC</span>
+      <div class="w-full max-w-4xl">
+        <div class="text-xs font-black text-lime-400 uppercase tracking-widest pl-6 mb-2 flex items-center justify-between pr-4">
+          <span class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></span>
+            Autonomous Counter-Measure (Evon Decoy):
+          </span>
+          <span id="evonStageIndicator" class="text-[11px] font-mono text-lime-300 font-extrabold">STAGE 1: INITIAL PANIC</span>
         </div>
-        <div class="glass-pill-decoy rounded-[28px] sm:rounded-full p-4 sm:px-6 sm:py-4 flex items-center gap-4 relative overflow-hidden transition-all duration-300">
+        <div class="glass-pill-decoy rounded-[28px] sm:rounded-full p-4 sm:px-7 sm:py-5 flex items-center gap-4 sm:gap-5 relative overflow-hidden transition-all duration-300">
           <!-- 3D Jelly Green Check Badge -->
-          <div class="w-12 h-12 rounded-full jelly-badge-green shrink-0 flex items-center justify-center text-black shadow-xl">
-            <svg class="w-6 h-6 text-black drop-shadow" fill="none" stroke="currentColor" stroke-width="3.5" viewBox="0 0 24 24">
+          <div class="w-13 h-13 sm:w-14 sm:h-14 rounded-full jelly-badge-green shrink-0 flex items-center justify-center text-black shadow-xl">
+            <svg class="w-7 h-7 text-black drop-shadow" fill="none" stroke="currentColor" stroke-width="3.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           </div>
           <!-- Decoy Voice Response -->
           <div class="flex-1 min-w-0">
-            <p id="showcaseDecoyText" class="text-sm sm:text-base font-bold text-white leading-snug">
+            <p id="showcaseDecoyText" class="text-sm sm:text-base font-bold text-white leading-relaxed">
               Sir please main toh kabhi Mumbai nahi gaya! Mera koi parcel nahi hai sir, please arrest mat kijiye, main kya karoon bataiye sir!
             </p>
           </div>
           <!-- Audio Wave Activity Indicator -->
-          <div id="decoyAudioPulse" class="hidden sm:flex items-center gap-1 shrink-0 pr-2">
+          <div id="decoyAudioPulse" class="hidden sm:flex items-center gap-1 shrink-0 pr-3">
             <span class="w-1 h-4 bg-lime-400 rounded-full animate-pulse"></span>
             <span class="w-1 h-7 bg-lime-300 rounded-full animate-pulse delay-75"></span>
             <span class="w-1 h-5 bg-lime-400 rounded-full animate-pulse delay-150"></span>
@@ -347,112 +450,66 @@
 
     </section>
 
-    <!-- CALL CONTROLS & DECEPTION STRATEGY CARD -->
-    <div class="glass-panel rounded-3xl p-5 sm:p-6 relative border border-white/20">
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
-        
-        <!-- Live Call Metadata -->
-        <div class="flex items-center gap-4">
-          <div class="w-12 h-12 rounded-2xl jelly-badge-red flex items-center justify-center text-white shrink-0 shadow-lg shadow-rose-600/30">
-            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-            </svg>
-          </div>
-          <div>
-            <div class="flex items-center gap-2.5 flex-wrap">
-              <span id="callerNumberDisplay" class="font-mono text-lg sm:text-xl font-black text-white">+91-9820471829</span>
-              <span id="scamCategoryBadge" class="px-3 py-0.5 rounded-full text-xs font-black bg-rose-500/25 text-rose-300 border border-rose-500/40">
-                DIGITAL ARREST (98.4%)
-              </span>
-              <div id="callStateBadge" class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-mono font-bold">
-                <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
-                <span id="callStateText">ENGAGED IN TRAP</span>
-              </div>
-            </div>
-            <div class="flex flex-wrap items-center gap-3 text-xs font-mono font-semibold text-white mt-1.5">
-              <span>Authority: <strong id="claimedAuthorityDisplay" class="text-lime-300">CBI Cyber Crime Cell Mumbai</strong></span>
-              <span>Time Wasted: <strong id="timeWastedCounter" class="text-amber-300">00m 14s</strong></span>
-              <span>Session: <strong id="sessionIdDisplay" class="text-cyan-300">CHK-88F4A2</strong></span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Action Controls -->
-        <div class="flex flex-wrap items-center gap-2.5">
-          <button id="handoverAutoBtn" type="button" class="px-5 py-2.5 rounded-full font-black text-xs sm:text-sm bg-lime-400 hover:bg-lime-300 text-black shadow-lg shadow-lime-500/30 glass-btn flex items-center gap-2">
-            <span>Take Over Call</span>
-          </button>
-          <button id="stepTurnBtn" type="button" class="glass-pill px-4 py-2.5 rounded-full font-extrabold text-xs sm:text-sm text-white hover:text-lime-300 border border-white/20 glass-btn">
-            Next Turn
-          </button>
-          <button id="resetDemoBtn" type="button" class="glass-pill px-3.5 py-2.5 rounded-full text-xs font-bold text-white/90 hover:text-white border border-white/15 glass-btn">
-            Reset
-          </button>
-        </div>
-
+    <!-- DECEPTION STAGE ESCALATION PROGRESS BAR -->
+    <div class="glass-panel rounded-3xl p-5 border border-white/15">
+      <div class="flex items-center justify-between text-xs mb-2.5">
+        <span class="font-bold text-white uppercase tracking-wider">Evon Deception Escalation Stages</span>
+        <span id="currentStageBadge" class="font-mono text-lime-300 font-extrabold">STAGE 1 / 6</span>
       </div>
-
-      <!-- 6-Stage Deception Machine Progression -->
-      <div class="mt-5 pt-4 border-t border-white/10">
-        <div class="flex items-center justify-between text-xs mb-2">
-          <span class="font-bold text-white uppercase tracking-wider">Evon Deception Escalation Stages</span>
-          <span id="currentStageBadge" class="font-mono text-lime-300 font-extrabold">STAGE 1 / 6</span>
-        </div>
-        <div id="stageProgressGrid" class="grid grid-cols-6 gap-2">
-          <div data-stage="1" class="h-2 rounded-full bg-lime-400 shadow-sm shadow-lime-400/50 transition-all"></div>
-          <div data-stage="2" class="h-2 rounded-full bg-white/10 transition-all"></div>
-          <div data-stage="3" class="h-2 rounded-full bg-white/10 transition-all"></div>
-          <div data-stage="4" class="h-2 rounded-full bg-white/10 transition-all"></div>
-          <div data-stage="5" class="h-2 rounded-full bg-white/10 transition-all"></div>
-          <div data-stage="6" class="h-2 rounded-full bg-white/10 transition-all"></div>
-        </div>
-        <div class="flex justify-between text-[10px] font-bold text-white mt-1.5 hidden sm:flex">
-          <span>1. Panic</span>
-          <span>2. Agree</span>
-          <span>3. Stall UPI</span>
-          <span>4. Mule Bait</span>
-          <span>5. Phishing Bait</span>
-          <span>6. Hold Loop</span>
-        </div>
+      <div id="stageProgressGrid" class="grid grid-cols-6 gap-2 sm:gap-3">
+        <div data-stage="1" class="h-2.5 rounded-full bg-lime-400 shadow-sm shadow-lime-400/60 transition-all"></div>
+        <div data-stage="2" class="h-2.5 rounded-full bg-white/10 transition-all"></div>
+        <div data-stage="3" class="h-2.5 rounded-full bg-white/10 transition-all"></div>
+        <div data-stage="4" class="h-2.5 rounded-full bg-white/10 transition-all"></div>
+        <div data-stage="5" class="h-2.5 rounded-full bg-white/10 transition-all"></div>
+        <div data-stage="6" class="h-2.5 rounded-full bg-white/10 transition-all"></div>
+      </div>
+      <div class="flex justify-between text-[11px] font-bold text-white mt-2 hidden sm:flex">
+        <span>1. Initial Panic</span>
+        <span>2. Agree to Pay</span>
+        <span>3. Stall Primary UPI</span>
+        <span>4. Bait Bank Account</span>
+        <span>5. Bait WhatsApp Link</span>
+        <span>6. Infinite Hold Loop</span>
       </div>
     </div>
 
     <!-- MAIN TWO COLUMN WORKSPACE -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1">
 
-      <!-- LEFT COLUMN: AUDIO OSCILLOSCOPE & INTERCEPTED DIALOGUE FEED -->
+      <!-- LEFT COLUMN: AUDIO OSCILLOSCOPE & INTERCEPTED CALL STREAM -->
       <section class="lg:col-span-6 flex flex-col gap-5">
 
         <!-- Real-Time 60 FPS Dual-Trace Oscilloscope -->
         <div class="glass-panel rounded-3xl p-5 border border-white/15">
           <div class="flex items-center justify-between mb-2.5 text-xs">
             <span class="font-extrabold text-white uppercase tracking-wider">Telephonic Audio Stream (8000 Hz)</span>
-            <div class="flex items-center gap-3 text-xs font-mono font-bold">
+            <div class="flex items-center gap-3.5 text-xs font-mono font-bold">
               <span class="flex items-center gap-1.5 text-rose-400"><span class="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-sm shadow-rose-500/60"></span>Scammer</span>
               <span class="flex items-center gap-1.5 text-lime-400"><span class="w-2.5 h-2.5 rounded-full bg-lime-400 shadow-sm shadow-lime-400/60"></span>Decoy Clone</span>
             </div>
           </div>
           
-          <div class="h-24 w-full bg-black/85 rounded-2xl overflow-hidden border border-white/15 flex items-center justify-center p-1">
+          <div class="h-28 w-full bg-black/85 rounded-2xl overflow-hidden border border-white/15 flex items-center justify-center p-1">
             <canvas id="waveformCanvas" class="w-full h-full block"></canvas>
           </div>
 
-          <div id="activeSpeakerTelemetry" class="text-xs font-mono font-semibold text-lime-300 mt-2 text-center">
+          <div id="activeSpeakerTelemetry" class="text-xs font-mono font-semibold text-lime-300 mt-2.5 text-center">
             Prisma Engine: 8000 Hz Bandpass Active (300 to 3400 Hz Butterworth)
           </div>
         </div>
 
         <!-- Full Transcript & Injection Card -->
-        <div class="glass-panel rounded-3xl p-5 flex-1 flex flex-col min-h-[400px] border border-white/15">
+        <div class="glass-panel rounded-3xl p-5 flex-1 flex flex-col min-h-[420px] border border-white/15">
           <div class="flex items-center justify-between border-b border-white/10 pb-3 mb-3">
-            <span class="text-xs font-extrabold text-white uppercase tracking-wider">Chronological Call Log</span>
+            <span class="text-xs font-extrabold text-white uppercase tracking-wider">Chronological Call Dialogue Log</span>
             <span id="turnCountBadge" class="text-xs font-mono font-bold text-lime-300 glass-pill px-3 py-0.5 rounded-full">0 Turns</span>
           </div>
 
           <!-- Transcript Scroll Area -->
-          <div id="transcriptContainer" class="flex-1 overflow-y-auto space-y-3 pr-1 max-h-[380px]">
-            <div id="emptyTranscriptPlaceholder" class="h-full flex flex-col items-center justify-center text-center py-12 text-white">
-              <div class="w-10 h-10 rounded-2xl glass-pill flex items-center justify-center text-lime-300 font-bold mb-2">
+          <div id="transcriptContainer" class="flex-1 overflow-y-auto space-y-3.5 pr-1 max-h-[400px]">
+            <div id="emptyTranscriptPlaceholder" class="h-full flex flex-col items-center justify-center text-center py-14 text-white">
+              <div class="w-12 h-12 rounded-2xl glass-pill flex items-center justify-center text-lime-300 font-bold mb-2.5 text-xl">
                 📞
               </div>
               <p class="text-sm font-bold text-white">Call engaged in honeypot sandbox</p>
@@ -461,7 +518,7 @@
           </div>
 
           <!-- Custom Threat Message Form -->
-          <form id="customTurnForm" class="mt-3.5 pt-3 border-t border-white/10 flex gap-2">
+          <form id="customTurnForm" class="mt-4 pt-3.5 border-t border-white/10 flex gap-2">
             <input
               id="customScammerInput"
               type="text"
@@ -509,27 +566,27 @@
           <div class="flex flex-wrap items-center justify-between gap-3 mb-2.5">
             <div>
               <h2 class="text-sm font-extrabold text-white">Extracted Scammer Infrastructure</h2>
-              <p class="text-xs text-white/90">Autonomous evidence extracted from conversation</p>
+              <p class="text-xs text-white/90">Autonomous forensic indicators captured from live conversation</p>
             </div>
-            <button id="flagAllNpciBtn" type="button" class="px-3 py-1.5 rounded-full text-xs font-black bg-rose-500 hover:bg-rose-400 text-white shadow-md shadow-rose-600/30 glass-btn">
+            <button id="flagAllNpciBtn" type="button" class="px-3.5 py-1.5 rounded-full text-xs font-black bg-rose-500 hover:bg-rose-400 text-white shadow-md shadow-rose-600/30 glass-btn">
               Broadcast to Banking Feed
             </button>
           </div>
 
-          <div class="overflow-x-auto max-h-40 overflow-y-auto rounded-2xl border border-white/15 bg-black/65">
+          <div class="overflow-x-auto max-h-44 overflow-y-auto rounded-2xl border border-white/15 bg-black/65">
             <table class="w-full text-left text-xs">
               <thead class="bg-white/10 text-white font-mono text-[11px] sticky top-0 font-bold">
                 <tr>
-                  <th class="py-2 px-3">Type</th>
-                  <th class="py-2 px-3">Extracted Target</th>
-                  <th class="py-2 px-3">Role</th>
-                  <th class="py-2 px-3">Bank or Provider</th>
-                  <th class="py-2 px-3 text-right">Status</th>
+                  <th class="py-2.5 px-3">Type</th>
+                  <th class="py-2.5 px-3">Extracted Target</th>
+                  <th class="py-2.5 px-3">Role</th>
+                  <th class="py-2.5 px-3">Bank or Provider</th>
+                  <th class="py-2.5 px-3 text-right">Status</th>
                 </tr>
               </thead>
               <tbody id="iocTableBody" class="divide-y divide-white/10 font-mono">
                 <tr>
-                  <td colspan="5" class="py-5 text-center text-xs text-white font-mono">
+                  <td colspan="5" class="py-6 text-center text-xs text-white font-mono">
                     Listening for financial indicators...
                   </td>
                 </tr>
@@ -559,7 +616,7 @@
               <button id="copyDossierBtn" type="button" class="glass-pill px-3 py-1.5 rounded-full text-xs font-bold text-white hover:text-lime-300 glass-btn">
                 Copy FIR
               </button>
-              <button id="downloadDossierBtn" type="button" class="px-3 py-1.5 rounded-full text-xs font-black bg-cyan-400 hover:bg-cyan-300 text-black shadow-md shadow-cyan-400/30 glass-btn">
+              <button id="downloadDossierBtn" type="button" class="px-3.5 py-1.5 rounded-full text-xs font-black bg-cyan-400 hover:bg-cyan-300 text-black shadow-md shadow-cyan-400/30 glass-btn">
                 Export File
               </button>
             </div>
@@ -661,7 +718,7 @@
 
     </div>
 
-    <!-- FLOATING BOTTOM DOCK (Directly derived from the reference template) -->
+    <!-- FLOATING BOTTOM DOCK -->
     <footer class="mt-4 mb-2 flex items-center justify-center">
       <div class="glass-pill px-6 sm:px-8 py-2.5 rounded-full flex items-center justify-between gap-6 sm:gap-10 text-xs text-white/90 shadow-2xl">
         <div class="flex items-center gap-3 text-white">
@@ -840,7 +897,7 @@
         backendConnected: false,
         apiKey: localStorage.getItem("chakravyuh_api_key") || "",
         turnIndex: 0,
-        timeWastedSec: 14,
+        timeWastedSec: 18,
         timerInterval: null,
         autoPlayTimer: null,
         audioEnabled: true,
@@ -889,7 +946,6 @@
           const hex = Math.floor((pseudo / 4294967296) * 65535).toString(16).padStart(4, "0").toUpperCase();
           hexWords.push(hex);
           const cell = document.createElement("div");
-          const intensity = Math.min(100, Math.floor(Math.abs(parseFloat(val)) * 100));
           cell.className = "p-1 rounded text-center truncate border border-white/10 font-bold " + (parseFloat(val) >= 0 ? "bg-lime-500/20 text-lime-300" : "bg-cyan-500/20 text-cyan-300");
           cell.textContent = hex;
           cell.title = `Dim ${i * 12}: ${val} (0x${hex})`;
@@ -971,23 +1027,6 @@
               provider: "Malicious APK / Credential Harvester",
               role: "Phishing Gateway",
               confidence: 0.99,
-              turn: turnNum
-            });
-          }
-        }
-
-        // Fake Warrant IDs
-        const warrantRegex = /\b((?:CBI|NCB|ED|POLICE|WARRANT|FIR)-[A-Z0-9-]{4,16})\b/gi;
-        while ((match = warrantRegex.exec(text)) !== null) {
-          const val = match[1].toUpperCase();
-          if (!seen.has(val.toLowerCase())) {
-            seen.add(val.toLowerCase());
-            newIocs.push({
-              type: "WARRANT_ID",
-              value: val,
-              provider: "Fabricated Police Badge",
-              role: "Impersonation Credential",
-              confidence: 0.95,
               turn: turnNum
             });
           }
@@ -1089,7 +1128,7 @@
         if (canvas && ctx) {
           const w = canvas.width;
           const h = canvas.height;
-          ctx.fillStyle = "#030404";
+          ctx.fillStyle = "#040608";
           ctx.fillRect(0, 0, w, h);
 
           // Grid lines
@@ -1113,7 +1152,7 @@
           ctx.lineWidth = 2;
           ctx.beginPath();
           for (let x = 0; x < w; x++) {
-            const y = h / 2 + Math.sin(x * 0.04 + wavePhase) * 16 * Math.sin(wavePhase * 0.5);
+            const y = h / 2 + Math.sin(x * 0.04 + wavePhase) * 18 * Math.sin(wavePhase * 0.5);
             if (x === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
           }
@@ -1124,7 +1163,7 @@
           ctx.lineWidth = 2;
           ctx.beginPath();
           for (let x = 0; x < w; x++) {
-            const y = h / 2 + Math.cos(x * 0.035 - wavePhase * 1.2) * 14 * Math.cos(wavePhase * 0.4);
+            const y = h / 2 + Math.cos(x * 0.035 - wavePhase * 1.2) * 16 * Math.cos(wavePhase * 0.4);
             if (x === 0) ctx.moveTo(x, y);
             else ctx.lineTo(x, y);
           }
@@ -1153,9 +1192,9 @@
         document.querySelectorAll("#stageProgressGrid > div").forEach(div => {
           const st = parseInt(div.getAttribute("data-stage"), 10);
           if (st <= stageNum) {
-            div.className = "h-2 rounded-full bg-lime-400 shadow-sm shadow-lime-400/60 transition-all";
+            div.className = "h-2.5 rounded-full bg-lime-400 shadow-sm shadow-lime-400/60 transition-all";
           } else {
-            div.className = "h-2 rounded-full bg-white/10 transition-all";
+            div.className = "h-2.5 rounded-full bg-white/10 transition-all";
           }
         });
       }
@@ -1173,7 +1212,7 @@
         state.transcriptHistory.forEach((turn, idx) => {
           // Scammer bubble
           const sBubble = document.createElement("div");
-          sBubble.className = "p-3.5 rounded-2xl glass-pill-threat border border-rose-500/30 text-xs";
+          sBubble.className = "p-3.5 rounded-2xl glass-pill-threat border border-rose-500/35 text-xs";
           sBubble.innerHTML = `
             <div class="flex items-center justify-between mb-1">
               <span class="font-extrabold text-rose-300">SCAMMER (Line 1)</span>
@@ -1189,7 +1228,7 @@
           dBubble.innerHTML = `
             <div class="flex items-center justify-between mb-1">
               <span class="font-extrabold text-lime-300">EVON DECOY (AI Clone)</span>
-              <span class="font-mono text-[10px] text-lime-300">${turn.stageName || "DECEPTION"}</span>
+              <span class="font-mono text-[10px] text-lime-300 font-extrabold">${turn.stageName || "DECEPTION"}</span>
             </div>
             <p class="text-white font-semibold leading-relaxed">${turn.decoy}</p>
           `;
@@ -1213,7 +1252,7 @@
 
         const tbody = document.getElementById("iocTableBody");
         if (state.extractedIOCs.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="5" class="py-5 text-center text-xs text-white font-mono">Listening for financial indicators...</td></tr>';
+          tbody.innerHTML = '<tr><td colspan="5" class="py-6 text-center text-xs text-white font-mono">Listening for financial indicators...</td></tr>';
           return;
         }
 
@@ -1317,7 +1356,7 @@
         // Update Showcase Stadium Pills
         document.getElementById("showcaseScammerText").textContent = scammerText;
         document.getElementById("showcaseDecoyText").textContent = decoyText;
-        document.getElementById("scammerTurnIndicator").textContent = `(Turn ${state.transcriptHistory.length + 1})`;
+        document.getElementById("scammerTurnIndicator").textContent = `Turn ${state.transcriptHistory.length + 1}`;
         document.getElementById("evonStageIndicator").textContent = stageName;
 
         // Play audio & pulse
@@ -1364,25 +1403,22 @@
         state.sessionId = "CHK-" + Math.random().toString(16).slice(2, 8).toUpperCase();
         state.turnIndex = 0;
         state.currentStage = 1;
-        state.timeWastedSec = 14;
+        state.timeWastedSec = 18;
         state.extractedIOCs = [];
         state.transcriptHistory = [];
 
         if (state.autoPlayTimer) {
           clearInterval(state.autoPlayTimer);
           state.autoPlayTimer = null;
-          document.getElementById("handoverAutoBtn").innerHTML = "<span>Take Over Call</span>";
+          document.getElementById("handoverAutoBtn").innerHTML = "<span class='w-2.5 h-2.5 rounded-full bg-black animate-ping'></span><span>Take Over Call</span>";
         }
 
         document.getElementById("sessionIdDisplay").textContent = state.sessionId;
-        document.getElementById("callerNumberDisplay").textContent = scen.callerNumber;
-        document.getElementById("scamCategoryBadge").textContent = scen.scamCategory;
-        document.getElementById("claimedAuthorityDisplay").textContent = scen.claimedAuthority;
 
         // Set initial showcase pills
         document.getElementById("showcaseScammerText").textContent = scen.turns[0].scammer;
         document.getElementById("showcaseDecoyText").textContent = scen.turns[0].decoy;
-        document.getElementById("scammerTurnIndicator").textContent = "(Turn 1)";
+        document.getElementById("scammerTurnIndicator").textContent = "Turn 1";
         document.getElementById("evonStageIndicator").textContent = scen.turns[0].stageName;
 
         renderStageProgress();
@@ -1426,10 +1462,10 @@
         if (state.autoPlayTimer) {
           clearInterval(state.autoPlayTimer);
           state.autoPlayTimer = null;
-          this.innerHTML = "<span>Take Over Call</span>";
+          this.innerHTML = "<span class='w-2.5 h-2.5 rounded-full bg-black animate-ping'></span><span>Take Over Call</span>";
           showToast("Autonomous handover paused.");
         } else {
-          this.innerHTML = "<span class='animate-pulse'>Auto-Engaged (Stalling...)</span>";
+          this.innerHTML = "<span class='w-2.5 h-2.5 rounded-full bg-black animate-ping'></span><span class='animate-pulse'>Auto-Engaged (Stalling...)</span>";
           showToast("AI Clone taking over call. Stalling scammer...");
           state.autoPlayTimer = setInterval(() => {
             advanceTurn();
