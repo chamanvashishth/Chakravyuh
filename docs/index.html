@@ -3,280 +3,465 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chakravyuh: Active Voice-Clone Honeypot for Telephonic Fraud</title>
+  <title>Chakravyuh: Active Voice Clone Defense for Telephonic Fraud</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       color-scheme: dark;
     }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background-color: #090D16;
-      color: #E2E8F0;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #000000;
+      color: #FFFFFF;
       overflow-x: hidden;
     }
     .font-mono {
       font-family: 'JetBrains Mono', monospace;
     }
-    .card-base {
-      background: #111726;
-      border: 1px solid rgba(255, 255, 255, 0.07);
+    
+    /* Radial ambient glow orbs behind glass panels (matches uploaded theme) */
+    .ambient-glow-top {
+      position: fixed;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 750px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(132, 204, 22, 0.18) 0%, rgba(16, 185, 129, 0.08) 45%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(60px);
     }
-    .card-base:hover {
-      border-color: rgba(255, 255, 255, 0.12);
+    .ambient-glow-right {
+      position: fixed;
+      top: 35%;
+      right: -100px;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(163, 230, 53, 0.12) 0%, rgba(56, 189, 248, 0.05) 50%, transparent 75%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(75px);
     }
+    .ambient-glow-left {
+      position: fixed;
+      bottom: -100px;
+      left: -80px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(239, 68, 68, 0.10) 0%, rgba(132, 204, 22, 0.06) 50%, transparent 75%);
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(80px);
+    }
+
+    /* Premium Frosted Glassmorphism Surfaces */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(32px) saturate(190%);
+      -webkit-backdrop-filter: blur(32px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 
+        inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.28),
+        inset 0 -1.5px 1px 0 rgba(0, 0, 0, 0.6),
+        0 24px 48px -12px rgba(0, 0, 0, 0.85);
+    }
+    .glass-card:hover {
+      border-color: rgba(255, 255, 255, 0.22);
+    }
+
+    /* Frosted Capsule / Pill */
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.32),
+        inset 0 -1px 1px 0 rgba(0, 0, 0, 0.5),
+        0 12px 28px -6px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Active Highlight Glass Pill */
+    .glass-pill-lime {
+      background: rgba(163, 230, 53, 0.10);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(163, 230, 53, 0.35);
+      box-shadow: 
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.35),
+        0 0 24px -4px rgba(132, 204, 22, 0.25);
+    }
+
+    /* Red Myth / Scammer Threat Glass Pill */
+    .glass-pill-red {
+      background: rgba(239, 68, 68, 0.10);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      box-shadow: 
+        inset 0 1px 1px 0 rgba(255, 255, 255, 0.30),
+        0 0 24px -4px rgba(239, 68, 68, 0.25);
+    }
+
+    /* Tactile 3D Glass Button */
+    .glass-btn {
+      transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      user-select: none;
+    }
+    .glass-btn:hover {
+      transform: translateY(-1px);
+    }
+    .glass-btn:active {
+      transform: translateY(1px);
+    }
+
+    /* 3D Glossy Jelly Badge (Matches uploaded Myth X and Fact checkmark) */
+    .jelly-badge-red {
+      background: radial-gradient(circle at 35% 30%, #FF8595 0%, #E11D48 60%, #9F1239 100%);
+      box-shadow: 
+        inset 0 2px 2px 0 rgba(255, 255, 255, 0.65),
+        inset 0 -2px 3px 0 rgba(0, 0, 0, 0.45),
+        0 8px 18px -2px rgba(225, 29, 72, 0.55);
+    }
+    .jelly-badge-green {
+      background: radial-gradient(circle at 35% 30%, #BEF264 0%, #65A30D 60%, #365314 100%);
+      box-shadow: 
+        inset 0 2px 2px 0 rgba(255, 255, 255, 0.7),
+        inset 0 -2px 3px 0 rgba(0, 0, 0, 0.45),
+        0 8px 18px -2px rgba(101, 163, 13, 0.55);
+    }
+
+    /* Custom Scrollbar without grey tones */
     ::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
+      width: 6px;
+      height: 6px;
     }
     ::-webkit-scrollbar-track {
-      background: #090D16;
+      background: #000000;
     }
     ::-webkit-scrollbar-thumb {
-      background: #1F293D;
-      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 9999px;
     }
     ::-webkit-scrollbar-thumb:hover {
-      background: #334155;
+      background: rgba(163, 230, 53, 0.45);
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col">
+<body class="min-h-screen relative flex flex-col">
+
+  <!-- Ambient Light Orbs -->
+  <div class="ambient-glow-top"></div>
+  <div class="ambient-glow-right"></div>
+  <div class="ambient-glow-left"></div>
 
   <!-- TOAST NOTIFICATION BANNER -->
-  <div id="toastBanner" class="fixed top-4 right-4 z-50 hidden max-w-md px-4 py-3 rounded-xl bg-slate-900/95 border border-slate-700 text-slate-100 text-xs sm:text-sm shadow-2xl backdrop-blur-md transition-all"></div>
+  <div id="toastBanner" class="fixed top-5 right-5 z-50 hidden max-w-md px-5 py-3.5 rounded-2xl glass-card text-white text-sm font-semibold shadow-2xl transition-all"></div>
 
-  <!-- NAVIGATION & HEADER -->
-  <header class="border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-md sticky top-0 z-40 px-4 sm:px-6 py-3">
+  <!-- API KEY CONFIGURATION MODAL -->
+  <div id="apiKeyModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
+    <div class="glass-card max-w-lg w-full rounded-3xl p-6 sm:p-7 relative border border-white/20 shadow-2xl">
+      <div class="flex items-start justify-between gap-4 mb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl jelly-badge-green flex items-center justify-center text-black font-bold">
+            <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-lg font-extrabold text-white">API Key Authentication</h3>
+            <p class="text-xs text-white/85">Paste your access token to authenticate requests</p>
+          </div>
+        </div>
+        <button id="closeApiKeyModalBtn" type="button" class="text-white hover:text-lime-300 text-xl font-bold p-1">✕</button>
+      </div>
+
+      <p class="text-xs text-white leading-relaxed mb-4">
+        Protected honeypot routes check for the <code class="font-mono text-lime-300 bg-white/10 px-1.5 py-0.5 rounded">X-API-Key</code> header. When your backend has <code class="font-mono text-lime-300 bg-white/10 px-1.5 py-0.5 rounded">CHAKRAVYUH_API_KEY</code> set in the environment or in your configuration, paste that exact token here.
+      </p>
+
+      <div class="space-y-3 mb-5">
+        <label class="block text-xs font-bold text-white uppercase tracking-wider">Paste API Key</label>
+        <div class="relative">
+          <input
+            id="apiKeyInput"
+            type="password"
+            placeholder="Paste your CHAKRAVYUH_API_KEY here..."
+            class="w-full bg-black/60 border border-white/25 rounded-2xl px-4 py-3 text-sm text-white placeholder-white/40 focus:outline-none focus:border-lime-400 font-mono"
+          />
+          <button id="toggleApiKeyVisibilityBtn" type="button" class="absolute right-3.5 top-3.5 text-xs text-lime-300 font-bold hover:text-white">Show</button>
+        </div>
+        <div id="apiKeyStatusMessage" class="text-xs font-mono text-lime-400"></div>
+      </div>
+
+      <div class="flex items-center justify-between gap-3 pt-3 border-t border-white/10">
+        <button id="clearApiKeyBtn" type="button" class="px-4 py-2.5 rounded-xl text-xs font-bold text-rose-300 hover:text-white border border-rose-500/40 hover:bg-rose-500/20 glass-btn">
+          Clear Key
+        </button>
+        <div class="flex items-center gap-2">
+          <button id="testApiKeyBtn" type="button" class="px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-white/10 hover:bg-white/20 border border-white/20 glass-btn">
+            Test Key
+          </button>
+          <button id="saveApiKeyBtn" type="button" class="px-5 py-2.5 rounded-xl text-xs font-extrabold text-black bg-lime-400 hover:bg-lime-300 shadow-lg shadow-lime-500/25 glass-btn">
+            Save Key
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION & BRAND HEADER -->
+  <header class="relative z-40 border-b border-white/10 bg-black/70 backdrop-blur-2xl sticky top-0 px-4 sm:px-8 py-3.5">
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-4">
       
-      <!-- Logo & System Title -->
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-sm">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+      <!-- Brand & Project Identity -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-2xl jelly-badge-green flex items-center justify-center text-black font-extrabold text-base shadow-lg shadow-lime-500/30">
+          <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
           </svg>
         </div>
         <div>
-          <div class="flex items-center gap-2">
-            <span class="font-bold text-base tracking-tight text-white">CHAKRAVYUH</span>
-            <span class="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 font-medium">Honeypot v1.0</span>
+          <div class="flex items-center gap-2.5">
+            <span class="font-extrabold text-lg tracking-tight text-white">CHAKRAVYUH</span>
+            <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full bg-lime-400/20 text-lime-300 border border-lime-400/35">ACTIVE HONEYPOT</span>
           </div>
-          <p class="text-xs text-slate-400">Autonomous Counter-Deception &amp; Financial Evidence Extraction</p>
+          <p class="text-xs text-white/90 font-medium">Real-Time Voice Clone Defense and Mule Account Intelligence</p>
         </div>
       </div>
 
-      <!-- Global Controls: Scenario, Audio, Backend Status -->
+      <!-- Controls: Scenario Selector, API Key, Voice Synth, Backend Status -->
       <div class="flex flex-wrap items-center gap-2.5">
-        <div class="flex items-center gap-2 bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-1">
-          <span class="text-xs text-slate-400">Scenario:</span>
-          <select id="scenarioSelect" class="bg-transparent text-xs font-medium text-slate-200 focus:outline-none cursor-pointer">
-            <option value="DIGITAL_ARREST">CBI Digital Arrest (Extortion Scam)</option>
-            <option value="FEDEX_PARCEL">Customs Parcel (Narcotics Claim Scam)</option>
-            <option value="KYC_BANK_FRAUD">Urgent Bank KYC &amp; Electricity Disconnection</option>
+        
+        <!-- Scenario Selector Pill -->
+        <div class="glass-pill px-3 py-1.5 rounded-full flex items-center gap-2 text-xs">
+          <span class="text-lime-300 font-bold">Threat:</span>
+          <select id="scenarioSelect" class="bg-transparent text-xs font-bold text-white focus:outline-none cursor-pointer">
+            <option value="DIGITAL_ARREST" class="bg-black text-white">Digital Arrest Police Extortion</option>
+            <option value="FEDEX_PARCEL" class="bg-black text-white">Customs Narcotics Parcel Scam</option>
+            <option value="KYC_BANK_FRAUD" class="bg-black text-white">Urgent Bank KYC and Electricity Scam</option>
           </select>
         </div>
 
-        <button id="audioToggleBtn" type="button" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-700 bg-slate-900 hover:bg-slate-800 text-slate-300 transition">
-          <span id="audioIcon">🔊</span>
-          <span id="audioStatusLabel">Audio: ON</span>
+        <!-- API Key Pill Button -->
+        <button id="openApiKeyModalBtn" type="button" class="glass-pill px-3.5 py-1.5 rounded-full flex items-center gap-1.5 text-xs font-bold text-white hover:text-lime-300 transition glass-btn">
+          <span class="text-lime-400">🔑</span>
+          <span id="apiKeyPillLabel">Access Key: Set</span>
         </button>
 
-        <div id="backendStateBadge" class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-mono text-slate-400">
-          <span id="backendDot" class="w-2 h-2 rounded-full bg-slate-500"></span>
-          <span id="backendStatusText">PROBING BACKEND...</span>
+        <!-- Audio Synth Toggle -->
+        <button id="audioToggleBtn" type="button" class="glass-pill px-3.5 py-1.5 rounded-full flex items-center gap-1.5 text-xs font-bold text-white hover:text-lime-300 transition glass-btn">
+          <span id="audioIcon">🔊</span>
+          <span id="audioStatusLabel">Voice: ON</span>
+        </button>
+
+        <!-- Backend Status Pill -->
+        <div id="backendStateBadge" class="glass-pill px-3 py-1.5 rounded-full flex items-center gap-2 text-xs font-mono font-bold text-white">
+          <span id="backendDot" class="w-2 h-2 rounded-full bg-lime-400 animate-pulse"></span>
+          <span id="backendStatusText">CHECKING SERVER</span>
         </div>
+
       </div>
 
     </div>
   </header>
 
   <!-- MAIN OPERATIONAL CONTAINER -->
-  <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 flex flex-col gap-5">
+  <main class="relative z-10 flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col gap-6">
 
-    <!-- HERO CALL STATUS & PRIMARY CONTROL BANNER -->
-    <div class="card-base rounded-2xl p-5 shadow-xl">
-      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+    <!-- HERO CALL TAKEOVER & ACTION CARD (FROSTED GLASSMORPHISM) -->
+    <div class="glass-card rounded-3xl p-6 sm:p-7 relative overflow-hidden border border-white/20">
+      <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
         
-        <!-- Left: Incoming Suspect Call Profile -->
+        <!-- Suspect Call Identity & Threat Profile -->
         <div class="flex items-start gap-4">
-          <div class="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 shrink-0 mt-0.5">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+          <div class="w-14 h-14 rounded-2xl jelly-badge-red flex items-center justify-center text-white shrink-0 shadow-lg shadow-rose-600/30">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
             </svg>
           </div>
           <div>
-            <div class="flex items-center gap-2.5 flex-wrap">
-              <span id="callerNumberDisplay" class="font-mono text-lg font-bold text-white tracking-wide">+91-9820471829</span>
-              <span id="scamCategoryBadge" class="px-2.5 py-0.5 text-xs font-semibold rounded-full bg-rose-500/15 text-rose-300 border border-rose-500/30">
-                DIGITAL_ARREST (98.4% Risk)
+            <div class="flex items-center gap-3 flex-wrap">
+              <span id="callerNumberDisplay" class="font-mono text-xl font-extrabold text-white tracking-wide">+91-9820471829</span>
+              <span id="scamCategoryBadge" class="px-3 py-1 rounded-full text-xs font-extrabold bg-rose-500/25 text-rose-300 border border-rose-500/50 shadow-sm shadow-rose-500/20">
+                DIGITAL ARREST (98.4% Threat)
               </span>
-              <div id="callStateBadge" class="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-mono">
-                <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+              <div id="callStateBadge" class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-400/20 border border-amber-400/40 text-amber-300 text-xs font-mono font-bold">
+                <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
                 <span id="callStateText">INCOMING SCAM ALERT</span>
               </div>
             </div>
-            <p id="claimedAuthorityDisplay" class="text-sm text-slate-300 mt-1">
-              Claimed Authority: <strong class="text-white">CBI Cyber Crime HQ Mumbai / RBI Verification Cell</strong>
+            
+            <p id="claimedAuthorityDisplay" class="text-sm font-semibold text-white mt-1.5">
+              Impersonated Authority: <strong class="text-lime-300">CBI Cyber Crime HQ Mumbai / RBI Secret Cell</strong>
             </p>
-            <div class="flex items-center gap-4 text-xs text-slate-400 mt-2 font-mono">
-              <span>Voice Clone: <strong class="text-emerald-400">Locked ([1, 768] bfloat16)</strong></span>
+
+            <div class="flex flex-wrap items-center gap-4 text-xs font-mono font-semibold text-white mt-2.5">
+              <span>Voice Clone: <strong class="text-lime-300">Active [1, 768] bfloat16</strong></span>
               <span>Time Wasted: <strong id="timeWastedCounter" class="text-amber-300">00m 12s</strong></span>
+              <span>Session: <strong id="sessionIdDisplay" class="text-cyan-300">CHK-88F4A2</strong></span>
             </div>
           </div>
         </div>
 
-        <!-- Right: Primary Action Buttons -->
-        <div class="flex flex-wrap items-center gap-2.5">
-          <button id="handoverAutoBtn" type="button" class="px-5 py-2.5 rounded-xl font-semibold text-sm bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-lg shadow-emerald-500/20 transition flex items-center gap-2">
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap items-center gap-3">
+          <button id="handoverAutoBtn" type="button" class="px-6 py-3 rounded-full font-extrabold text-sm bg-lime-400 hover:bg-lime-300 text-black shadow-xl shadow-lime-500/30 glass-btn flex items-center gap-2">
             <span>Take Over Call</span>
           </button>
-          <button id="stepTurnBtn" type="button" class="px-4 py-2.5 rounded-xl font-semibold text-sm bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
+          <button id="stepTurnBtn" type="button" class="glass-pill px-5 py-3 rounded-full font-bold text-sm text-white hover:text-lime-300 border border-white/20 glass-btn">
             Next Turn
           </button>
-          <button id="resetDemoBtn" type="button" class="px-3 py-2.5 rounded-xl text-xs font-semibold bg-slate-900 hover:bg-slate-800 text-slate-400 border border-slate-800 transition">
-            Reset
+          <button id="resetDemoBtn" type="button" class="glass-pill px-4 py-3 rounded-full text-xs font-bold text-white/90 hover:text-white border border-white/15 glass-btn">
+            Reset Call
           </button>
         </div>
 
       </div>
 
-      <!-- Deception State Progress Tracker -->
-      <div class="mt-5 pt-4 border-t border-slate-800/80">
-        <div class="flex items-center justify-between text-xs mb-2">
-          <span class="text-slate-400">Current Honeypot Strategy:</span>
-          <span id="currentStageBadge" class="font-mono text-emerald-400 font-semibold">STAGE_1_INITIAL_PANIC</span>
+      <!-- Deception Strategy Progress Tracker -->
+      <div class="mt-6 pt-5 border-t border-white/10">
+        <div class="flex items-center justify-between text-xs mb-2.5">
+          <span class="font-bold text-white uppercase tracking-wider">Honeypot Deception Escalation</span>
+          <span id="currentStageBadge" class="font-mono text-lime-300 font-extrabold">STAGE 1: INITIAL PANIC</span>
         </div>
-        <div id="stageProgressGrid" class="grid grid-cols-6 gap-2">
-          <div data-stage="1" class="h-2 rounded-full bg-emerald-400 transition-all"></div>
-          <div data-stage="2" class="h-2 rounded-full bg-slate-800 transition-all"></div>
-          <div data-stage="3" class="h-2 rounded-full bg-slate-800 transition-all"></div>
-          <div data-stage="4" class="h-2 rounded-full bg-slate-800 transition-all"></div>
-          <div data-stage="5" class="h-2 rounded-full bg-slate-800 transition-all"></div>
-          <div data-stage="6" class="h-2 rounded-full bg-slate-800 transition-all"></div>
+        <div id="stageProgressGrid" class="grid grid-cols-6 gap-2 sm:gap-3">
+          <div data-stage="1" class="h-2.5 rounded-full bg-lime-400 shadow-sm shadow-lime-400/50 transition-all"></div>
+          <div data-stage="2" class="h-2.5 rounded-full bg-white/10 transition-all"></div>
+          <div data-stage="3" class="h-2.5 rounded-full bg-white/10 transition-all"></div>
+          <div data-stage="4" class="h-2.5 rounded-full bg-white/10 transition-all"></div>
+          <div data-stage="5" class="h-2.5 rounded-full bg-white/10 transition-all"></div>
+          <div data-stage="6" class="h-2.5 rounded-full bg-white/10 transition-all"></div>
         </div>
-        <div class="flex justify-between text-[11px] text-slate-400 mt-1.5 hidden sm:flex">
+        <div class="flex justify-between text-[11px] font-bold text-white mt-2 hidden sm:flex">
           <span>1. Initial Panic</span>
-          <span>2. Compliance</span>
-          <span>3. Bait UPI</span>
-          <span>4. Bait Bank A/C</span>
-          <span>5. Bait WhatsApp C2</span>
-          <span>6. Hold Loop</span>
+          <span>2. Agree to Pay</span>
+          <span>3. Stall Primary UPI</span>
+          <span>4. Bait Bank Account</span>
+          <span>5. Bait WhatsApp Link</span>
+          <span>6. Infinite Hold Loop</span>
         </div>
       </div>
     </div>
 
-    <!-- MAIN TWO-COLUMN WORKSPACE -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 flex-1">
+    <!-- MAIN TWO COLUMN WORKSPACE -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1">
 
-      <!-- LEFT COLUMN: LIVE CONVERSATION & AUDIO WAVEFORM (6 COLS) -->
-      <section class="lg:col-span-6 flex flex-col gap-4">
+      <!-- LEFT COLUMN: LIVE CALL STREAM & AUDIO WAVEFORM (6 COLS) -->
+      <section class="lg:col-span-6 flex flex-col gap-5">
 
-        <!-- Live Waveform Oscilloscope -->
-        <div class="card-base rounded-2xl p-4">
-          <div class="flex items-center justify-between mb-2 text-xs">
-            <span class="font-semibold text-slate-300">Live Dual Audio Feed (8 kHz PSTN)</span>
-            <div class="flex items-center gap-3 text-[11px] font-mono">
-              <span class="flex items-center gap-1.5 text-rose-400"><span class="w-2 h-2 rounded-full bg-rose-500"></span>Scammer</span>
-              <span class="flex items-center gap-1.5 text-emerald-400"><span class="w-2 h-2 rounded-full bg-emerald-500"></span>Decoy Voice</span>
+        <!-- Live Waveform Oscilloscope Card -->
+        <div class="glass-card rounded-3xl p-5 border border-white/15">
+          <div class="flex items-center justify-between mb-3 text-xs">
+            <span class="font-extrabold text-white uppercase tracking-wider">Telephonic Audio Stream (8000 Hz)</span>
+            <div class="flex items-center gap-4 text-xs font-mono font-bold">
+              <span class="flex items-center gap-1.5 text-rose-400"><span class="w-2.5 h-2.5 rounded-full bg-rose-500 shadow-sm shadow-rose-500/60"></span>Scammer Line</span>
+              <span class="flex items-center gap-1.5 text-lime-400"><span class="w-2.5 h-2.5 rounded-full bg-lime-400 shadow-sm shadow-lime-400/60"></span>Decoy Clone</span>
             </div>
           </div>
-          <div class="h-24 w-full bg-slate-950/80 rounded-xl overflow-hidden border border-slate-800 flex items-center justify-center">
+          
+          <div class="h-28 w-full bg-black/80 rounded-2xl overflow-hidden border border-white/15 flex items-center justify-center p-1">
             <canvas id="waveformCanvas" class="w-full h-full block"></canvas>
           </div>
-          <div id="activeSpeakerTelemetry" class="text-[11px] font-mono text-slate-400 mt-2 text-center">
-            Prisma v2.5: 8000 Hz Telephonic Passband Active (300-3400 Hz)
+
+          <div id="activeSpeakerTelemetry" class="text-xs font-mono font-semibold text-lime-300 mt-2.5 text-center">
+            Prisma Engine: 8000 Hz Bandpass Active (300 to 3400 Hz)
           </div>
         </div>
 
-        <!-- Live Conversation Feed -->
-        <div class="card-base rounded-2xl p-4 flex-1 flex flex-col min-h-[380px]">
-          <div class="flex items-center justify-between border-b border-slate-800/80 pb-3 mb-3">
-            <span class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Conversation Log</span>
-            <span id="turnCountBadge" class="text-xs font-mono text-slate-400 bg-slate-900 px-2 py-0.5 rounded border border-slate-800">0 Turns</span>
+        <!-- Live Dialogue & Evidence Feed Card -->
+        <div class="glass-card rounded-3xl p-5 flex-1 flex flex-col min-h-[420px] border border-white/15">
+          <div class="flex items-center justify-between border-b border-white/10 pb-3.5 mb-3.5">
+            <span class="text-xs font-extrabold text-white uppercase tracking-wider">Intercepted Dialogue</span>
+            <span id="turnCountBadge" class="text-xs font-mono font-bold text-lime-300 glass-pill px-3 py-0.5 rounded-full">0 Turns</span>
           </div>
 
           <!-- Transcript Scroll Area -->
-          <div id="transcriptContainer" class="flex-1 overflow-y-auto space-y-3 pr-1 max-h-[460px]">
-            <div id="emptyTranscriptPlaceholder" class="h-full flex flex-col items-center justify-center text-center py-12 text-slate-500">
-              <p class="text-sm font-medium text-slate-400">Incoming call ready for interception</p>
-              <p class="text-xs max-w-sm mt-1">Click <strong>"Take Over Call"</strong> to engage the voice honeypot, or send a custom scammer line below.</p>
+          <div id="transcriptContainer" class="flex-1 overflow-y-auto space-y-3.5 pr-1 max-h-[460px]">
+            <div id="emptyTranscriptPlaceholder" class="h-full flex flex-col items-center justify-center text-center py-16 text-white">
+              <div class="w-12 h-12 rounded-2xl glass-pill flex items-center justify-center text-lime-300 font-bold mb-3">
+                📞
+              </div>
+              <p class="text-sm font-bold text-white">Incoming suspicious call ready</p>
+              <p class="text-xs text-white/90 max-w-sm mt-1">Click <strong>Take Over Call</strong> to let the AI clone engage the scammer, or enter a custom threat below.</p>
             </div>
           </div>
 
-          <!-- Custom Message Injection Form -->
-          <form id="customTurnForm" class="mt-4 pt-3 border-t border-slate-800/80 flex gap-2">
+          <!-- Custom Threat Message Form -->
+          <form id="customTurnForm" class="mt-4 pt-3.5 border-t border-white/10 flex gap-2">
             <input
               id="customScammerInput"
               type="text"
               maxlength="1000"
-              placeholder="Inject custom scammer threat (e.g. 'Pay ₹50,000 to nodal.verify@okaxis')..."
-              class="flex-1 bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-slate-600"
+              placeholder="Inject scammer threat (e.g. 'Pay 95,000 to rbi.officer@okaxis or Acct 918273645012')..."
+              class="flex-1 bg-black/70 border border-white/20 rounded-full px-4 py-2.5 text-xs sm:text-sm text-white placeholder-white/40 focus:outline-none focus:border-lime-400 font-medium"
             />
             <button
               id="injectCustomTurnBtn"
               type="submit"
-              class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs sm:text-sm font-medium transition whitespace-nowrap"
+              class="px-5 py-2.5 rounded-full bg-lime-400 hover:bg-lime-300 text-black font-extrabold text-xs sm:text-sm glass-btn whitespace-nowrap"
             >
-              Send Turn
+              Send Threat
             </button>
           </form>
         </div>
 
       </section>
 
-      <!-- RIGHT COLUMN: FORENSIC EVIDENCE LOCKER & ACTION CENTER (6 COLS) -->
-      <section class="lg:col-span-6 flex flex-col gap-4">
+      <!-- RIGHT COLUMN: EXTRACTED EVIDENCE & FORENSIC DOSSIER (6 COLS) -->
+      <section class="lg:col-span-6 flex flex-col gap-5">
 
-        <!-- Metrics Overview Grid -->
+        <!-- 4 Metrics Pods (Matches Glassy Pod aesthetic) -->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div class="card-base rounded-xl p-3">
-            <span class="text-[11px] text-slate-400 uppercase font-mono block">Mule UPIs</span>
-            <span id="statUpiCount" class="text-xl font-bold font-mono text-rose-400 mt-0.5 block">0</span>
+          <div class="glass-pill-red rounded-2xl p-3.5">
+            <span class="text-[11px] text-rose-300 uppercase font-mono font-bold block">Mule UPIs</span>
+            <span id="statUpiCount" class="text-2xl font-black font-mono text-white mt-1 block">0</span>
           </div>
-          <div class="card-base rounded-xl p-3">
-            <span class="text-[11px] text-slate-400 uppercase font-mono block">Bank Accounts</span>
-            <span id="statBankCount" class="text-xl font-bold font-mono text-amber-400 mt-0.5 block">0</span>
+          <div class="glass-pill rounded-2xl p-3.5 border-amber-400/30">
+            <span class="text-[11px] text-amber-300 uppercase font-mono font-bold block">Bank Accounts</span>
+            <span id="statBankCount" class="text-2xl font-black font-mono text-white mt-1 block">0</span>
           </div>
-          <div class="card-base rounded-xl p-3">
-            <span class="text-[11px] text-slate-400 uppercase font-mono block">Routing IFSCs</span>
-            <span id="statIfscPhoneCount" class="text-xl font-bold font-mono text-sky-400 mt-0.5 block">0</span>
+          <div class="glass-pill rounded-2xl p-3.5 border-cyan-400/30">
+            <span class="text-[11px] text-cyan-300 uppercase font-mono font-bold block">Routing IFSCs</span>
+            <span id="statIfscPhoneCount" class="text-2xl font-black font-mono text-white mt-1 block">0</span>
           </div>
-          <div class="card-base rounded-xl p-3">
-            <span class="text-[11px] text-slate-400 uppercase font-mono block">Phishing / APKs</span>
-            <span id="statUrlBadgeCount" class="text-xl font-bold font-mono text-emerald-400 mt-0.5 block">0</span>
+          <div class="glass-pill-lime rounded-2xl p-3.5">
+            <span class="text-[11px] text-lime-300 uppercase font-mono font-bold block">Phishing Links</span>
+            <span id="statUrlBadgeCount" class="text-2xl font-black font-mono text-white mt-1 block">0</span>
           </div>
         </div>
 
-        <!-- Real-Time Extracted Evidence Table -->
-        <div class="card-base rounded-2xl p-4">
-          <div class="flex items-center justify-between mb-3">
+        <!-- Real-Time Extracted Evidence Table Card -->
+        <div class="glass-card rounded-3xl p-5 border border-white/15">
+          <div class="flex flex-wrap items-center justify-between gap-3 mb-3">
             <div>
-              <h2 class="text-sm font-semibold text-white">Extracted Scammer Financial Infrastructure</h2>
-              <p class="text-xs text-slate-400">Indicators of compromise captured live during conversation</p>
+              <h2 class="text-sm font-extrabold text-white">Extracted Scammer Financial Infrastructure</h2>
+              <p class="text-xs text-white/90">Real-time indicators captured by the counter deception machine</p>
             </div>
-            <button id="flagAllNpciBtn" type="button" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 border border-rose-500/30 transition">
+            <button id="flagAllNpciBtn" type="button" class="px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-rose-500 hover:bg-rose-400 text-white shadow-md shadow-rose-600/30 glass-btn">
               Broadcast to Banking Feed
             </button>
           </div>
 
-          <div class="overflow-x-auto max-h-44 overflow-y-auto rounded-xl border border-slate-800 bg-slate-950/60">
+          <div class="overflow-x-auto max-h-44 overflow-y-auto rounded-2xl border border-white/15 bg-black/60">
             <table class="w-full text-left text-xs">
-              <thead class="bg-slate-900/90 text-slate-400 font-mono text-[11px] sticky top-0">
+              <thead class="bg-white/10 text-white font-mono text-[11px] sticky top-0 font-bold">
                 <tr>
-                  <th class="py-2 px-3">Type</th>
-                  <th class="py-2 px-3">Extracted Value</th>
-                  <th class="py-2 px-3">Classification</th>
-                  <th class="py-2 px-3">Provider</th>
-                  <th class="py-2 px-3 text-right">Status</th>
+                  <th class="py-2.5 px-3">Type</th>
+                  <th class="py-2.5 px-3">Extracted Target</th>
+                  <th class="py-2.5 px-3">Role</th>
+                  <th class="py-2.5 px-3">Bank or Provider</th>
+                  <th class="py-2.5 px-3 text-right">Status</th>
                 </tr>
               </thead>
-              <tbody id="iocTableBody" class="divide-y divide-slate-800 font-mono">
+              <tbody id="iocTableBody" class="divide-y divide-white/10 font-mono">
                 <tr>
-                  <td colspan="5" class="py-6 text-center text-slate-500 font-sans">
+                  <td colspan="5" class="py-6 text-center text-white/80 font-sans font-medium">
                     No evidence extracted yet. Start the call to begin baiting.
                   </td>
                 </tr>
@@ -285,73 +470,75 @@
           </div>
         </div>
 
-        <!-- Evidence Inspector & Action Center -->
-        <div class="card-base rounded-2xl p-4 flex-1 flex flex-col">
+        <!-- Inspector Tabs & Export Center Card -->
+        <div class="glass-card rounded-3xl p-5 flex-1 flex flex-col border border-white/15">
           
           <!-- Inspector Tabs & Export Buttons -->
-          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 pb-3 mb-3">
-            <div class="flex items-center gap-1.5" role="tablist">
-              <button type="button" data-tab="tabDossier" class="inspector-tab px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-100 border border-slate-700">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-3 mb-3">
+            <div class="flex items-center gap-2" role="tablist">
+              <button type="button" data-tab="tabDossier" class="inspector-tab px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-lime-400 text-black glass-btn">
                 Official FIR Dossier
               </button>
-              <button type="button" data-tab="tabTensor" class="inspector-tab px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200">
-                Voice Embedding Telemetry
+              <button type="button" data-tab="tabTensor" class="inspector-tab px-3.5 py-1.5 rounded-full text-xs font-bold text-white hover:text-lime-300 glass-btn">
+                Voice Embedding
               </button>
-              <button type="button" data-tab="tabRoadmap" class="inspector-tab px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200">
-                Telecom &amp; Banking Protocols
+              <button type="button" data-tab="tabRoadmap" class="inspector-tab px-3.5 py-1.5 rounded-full text-xs font-bold text-white hover:text-lime-300 glass-btn">
+                Telecom & Banking
               </button>
             </div>
 
             <div class="flex items-center gap-2">
-              <button id="copyDossierBtn" type="button" class="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition">
-                Copy FIR Text
+              <button id="copyDossierBtn" type="button" class="glass-pill px-3 py-1.5 rounded-full text-xs font-bold text-white hover:text-lime-300 glass-btn">
+                Copy FIR
               </button>
-              <button id="downloadDossierBtn" type="button" class="px-2.5 py-1.5 rounded-lg text-xs font-medium bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 transition">
-                Export Dossier
+              <button id="downloadDossierBtn" type="button" class="px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-cyan-400 hover:bg-cyan-300 text-black shadow-md shadow-cyan-400/30 glass-btn">
+                Export File
               </button>
             </div>
           </div>
 
           <!-- TAB 1: I4C / 1930 FIR REPORT -->
           <div id="tabDossier" class="tab-pane flex-1 flex flex-col">
-            <div class="flex justify-between text-[11px] font-mono text-slate-400 mb-2">
-              <span>Filing Format: <strong>NCRP 1930 / I4C National Cybercrime Portal</strong></span>
-              <span class="text-amber-300">Evidence Grade: BNS Sec 318(4) &amp; IT Act 66D</span>
+            <div class="flex justify-between text-xs font-mono font-bold text-white mb-2">
+              <span>Format: <strong class="text-lime-300">NCRP 1930 National Cybercrime Portal</strong></span>
+              <span class="text-amber-300">Law: BNS 318(4) and IT Act 66D</span>
             </div>
-            <pre id="dossierReportPre" class="flex-1 bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs font-mono text-emerald-400 overflow-auto max-h-[220px] whitespace-pre-wrap leading-relaxed"></pre>
+            <pre id="dossierReportPre" class="flex-1 bg-black/80 border border-white/15 rounded-2xl p-4 text-xs font-mono text-lime-300 overflow-auto max-h-[220px] whitespace-pre-wrap leading-relaxed"></pre>
           </div>
 
           <!-- TAB 2: VACHANA-VC-V1 VOICE TENSOR INSPECTOR -->
           <div id="tabTensor" class="tab-pane hidden flex-1 flex flex-col gap-3">
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono">
-              <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                <span class="text-slate-400 block text-[10px]">TENSOR SHAPE</span>
-                <strong class="text-emerald-400">[1, 768]</strong>
+              <div class="bg-black/60 p-2.5 rounded-2xl border border-white/15">
+                <span class="text-white/80 block text-[10px] font-bold">SHAPE</span>
+                <strong class="text-lime-300 font-extrabold">[1, 768]</strong>
               </div>
-              <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                <span class="text-slate-400 block text-[10px]">PRECISION</span>
-                <strong class="text-sky-400">torch.bfloat16 (1536 B)</strong>
+              <div class="bg-black/60 p-2.5 rounded-2xl border border-white/15">
+                <span class="text-white/80 block text-[10px] font-bold">PRECISION</span>
+                <strong class="text-cyan-300 font-extrabold">torch.bfloat16 (1536 B)</strong>
               </div>
-              <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                <span class="text-slate-400 block text-[10px]">REFERENCE WINDOW</span>
-                <strong class="text-amber-300">10.0s (16 kHz)</strong>
+              <div class="bg-black/60 p-2.5 rounded-2xl border border-white/15">
+                <span class="text-white/80 block text-[10px] font-bold">SAMPLE DURATION</span>
+                <strong class="text-amber-300 font-extrabold">10.0s (16 kHz)</strong>
               </div>
-              <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-                <span class="text-slate-400 block text-[10px]">COSINE SIMILARITY</span>
-                <strong id="tensorNormDisplay" class="text-emerald-300">1.0000 / 0.9942</strong>
+              <div class="bg-black/60 p-2.5 rounded-2xl border border-white/15">
+                <span class="text-white/80 block text-[10px] font-bold">COSINE SIMILARITY</span>
+                <strong id="tensorNormDisplay" class="text-lime-300 font-extrabold">1.0000 / 0.9942</strong>
               </div>
             </div>
 
-            <div class="flex items-center justify-between text-xs">
-              <span class="text-slate-400">Speaker Embedding Activation Slices (Hex Words):</span>
-              <button id="recalibrateVoiceBtn" type="button" class="px-2 py-1 rounded text-xs font-mono bg-slate-800 text-slate-300 hover:bg-slate-700">
+            <div class="flex items-center justify-between text-xs font-bold text-white">
+              <span>Speaker Embedding Activation Map (Hex Words):</span>
+              <button id="recalibrateVoiceBtn" type="button" class="px-3 py-1 rounded-full text-xs font-mono font-bold bg-white/10 hover:bg-white/20 text-lime-300 glass-btn">
                 Re-sample Voice
               </button>
             </div>
-            <div id="tensorHeatmapGrid" class="grid grid-cols-8 sm:grid-cols-16 gap-1 p-2 bg-slate-950 border border-slate-800 rounded-xl text-[10px] font-mono"></div>
-            <div class="text-[11px] font-mono text-slate-400 flex items-center justify-between">
-              <span>SHA-256 Digest: <code id="tensorShaDisplay" class="text-emerald-400">...</code></span>
-              <span id="tensorHexPreview" class="text-slate-500">...</span>
+            
+            <div id="tensorHeatmapGrid" class="grid grid-cols-8 sm:grid-cols-16 gap-1 p-2.5 bg-black/80 border border-white/15 rounded-2xl text-[10px] font-mono"></div>
+            
+            <div class="text-xs font-mono font-bold text-white flex items-center justify-between">
+              <span>SHA-256 Digest: <code id="tensorShaDisplay" class="text-lime-300">...</code></span>
+              <span id="tensorHexPreview" class="text-cyan-300">...</span>
             </div>
           </div>
 
@@ -359,26 +546,26 @@
           <div id="tabRoadmap" class="tab-pane hidden flex-1 flex flex-col gap-3">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
               <!-- SIP Merge Section -->
-              <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+              <div class="bg-black/60 p-3.5 rounded-2xl border border-white/15">
                 <div class="flex items-center justify-between mb-2">
-                  <span class="font-semibold text-slate-200">Phase 2: Carrier SIP Merge</span>
-                  <span id="sipStatusPill" class="text-[10px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono">READY</span>
+                  <span class="font-extrabold text-white">Carrier SIP Merge</span>
+                  <span id="sipStatusPill" class="text-[10px] px-2 py-0.5 rounded-full bg-lime-400/20 text-lime-300 font-mono font-bold">READY</span>
                 </div>
-                <button id="simulateSipMergeBtn" type="button" class="w-full py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-xs transition mb-2">
+                <button id="simulateSipMergeBtn" type="button" class="w-full py-2 rounded-full bg-lime-400 hover:bg-lime-300 text-black font-extrabold text-xs transition mb-2 glass-btn">
                   Simulate RFC 3515 SIP REFER
                 </button>
-                <pre id="sipPayloadPre" class="bg-slate-900 border border-slate-800/80 rounded p-2 text-[10px] font-mono text-slate-400 overflow-auto max-h-24"></pre>
+                <pre id="sipPayloadPre" class="bg-black/80 border border-white/15 rounded-xl p-2 text-[10px] font-mono text-cyan-300 overflow-auto max-h-24"></pre>
               </div>
 
               <!-- NPCI Pre-Transaction Screening -->
-              <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
-                <span class="font-semibold text-slate-200 block mb-2">Phase 3: Pre-Transaction Screening</span>
+              <div class="bg-black/60 p-3.5 rounded-2xl border border-white/15">
+                <span class="font-extrabold text-white block mb-2">Pre-Transaction Screening</span>
                 <div class="flex gap-1.5 mb-2">
-                  <input id="txCheckInput" type="text" placeholder="Check VPA or Account..." class="flex-1 bg-slate-900 border border-slate-800 rounded px-2.5 py-1 text-xs text-white focus:outline-none" />
-                  <button id="runTxCheckBtn" type="button" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs">Screen</button>
+                  <input id="txCheckInput" type="text" placeholder="Check VPA or Account..." class="flex-1 bg-black border border-white/20 rounded-full px-3 py-1.5 text-xs text-white placeholder-white/40 focus:outline-none" />
+                  <button id="runTxCheckBtn" type="button" class="px-3.5 py-1.5 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black font-extrabold text-xs glass-btn">Screen</button>
                 </div>
-                <div id="txCheckResultBanner" class="hidden text-[11px] font-mono px-2 py-1 rounded mb-2"></div>
-                <pre id="threatFeedPre" class="bg-slate-900 border border-slate-800/80 rounded p-2 text-[10px] font-mono text-slate-400 overflow-auto max-h-24"></pre>
+                <div id="txCheckResultBanner" class="hidden text-xs font-mono font-bold px-2.5 py-1.5 rounded-xl mb-2"></div>
+                <pre id="threatFeedPre" class="bg-black/80 border border-white/15 rounded-xl p-2 text-[10px] font-mono text-lime-300 overflow-auto max-h-24"></pre>
               </div>
             </div>
           </div>
@@ -391,27 +578,27 @@
 
   </main>
 
-  <!-- JAVASCRIPT APPLICATION CORE -->
+  <!-- JAVASCRIPT APPLICATION CORE (OPTIMIZED, HIGH PERFORMANCE) -->
   <script>
     (function () {
       "use strict";
 
-      / 1. SCENARIO DEFINITIONS & HINGLISH SCRIPTED TURNS
+      // 1. SCENARIOS DEFINITION
       const SCENARIOS = {
         DIGITAL_ARREST: {
-          title: "CBI Digital Arrest (Extortion Scam)",
+          title: "Digital Arrest Police Extortion",
           callerNumber: "+91-9820471829",
-          claimedAuthority: "Spoofed CBI Cyber Crime HQ Mumbai / RBI Verification Cell",
+          claimedAuthority: "CBI Cyber Crime HQ Mumbai and RBI Secret Cell",
           threatScore: 98.4,
           turns: [
             {
               scammer: "Hello! Main Inspector Vikram Rathore, CBI Cyber Crime HQ Mumbai se bol raha hoon. Warrant ID CBI-8841 aapke Aadhaar card pe issue hua hai Naresh Goyal Money Laundering case mein! Aap abhi Digital Arrest mein hain. Call disconnect mat karna warna 10 minute mein local police ghar aake arrest karegi!"
             },
             {
-              scammer: "Agar aapko arrest warrant cancel karwana hai toh abhi RBI Secret Supervision Account mein ₹95,000 verification bond transfer karna hoga. Turant Google Pay ya PhonePe kholo aur humare primary settlement handle rbi.verification.cell@okaxis pe ₹95,000 bhejo!"
+              scammer: "Agar aapko arrest warrant cancel karwana hai toh abhi RBI Secret Supervision Account mein 95,000 rupees verification bond transfer karna hoga. Turant Google Pay ya PhonePe kholo aur humare primary settlement handle rbi.verification.cell@okaxis pe 95,000 bhejo!"
             },
             {
-              scammer: "Kya bol rahe ho axis server busy hai?! Time waste mat karo Supreme Court line pe hai! Achha ruko, humare doosre treasury officer ka backup PhonePe UPI ID note karo: mumbaicrime.deposit99@ybl: ispe abhi turant transfer maaro aur screenshot bhejo!"
+              scammer: "Kya bol rahe ho axis server busy hai?! Time waste mat karo Supreme Court line pe hai! Achha ruko, humare doosre treasury officer ka backup PhonePe UPI ID note karo: mumbaicrime.deposit99@ybl : ispe abhi turant transfer maaro aur screenshot bhejo!"
             },
             {
               scammer: "Uff! Tumhara UPI daily limit block ho gaya?! Suno, IMPS/RTGS turant karo! Account Number likho: 50100482917364 aur IFSC Code hai HDFC0001842. Saath mein senior officer ke WhatsApp +91-9820471829 ya portal https://cbi-rbi-verify-court.in/clearance.apk pe receipt upload karo!"
@@ -419,19 +606,19 @@
           ]
         },
         FEDEX_PARCEL: {
-          title: "Customs Parcel (Narcotics Claim Scam)",
+          title: "Customs Parcel Narcotics Claim Scam",
           callerNumber: "+91-9167283910",
-          claimedAuthority: "Spoofed FedEx International Customs & NCB Narcotics Cell",
+          claimedAuthority: "FedEx International Customs and NCB Narcotics Cell",
           threatScore: 96.8,
           turns: [
             {
               scammer: "Main FedEx International Customs Mumbai aur NCB Narcotics Cell se Officer Deshmukh bol raha hoon. Case ID CUSTOMS-4419: Aapke naam se Taiwan jaane wale parcel mein 450 gram MDMA drugs aur 5 fake passports mile hain! Aapke khilaaf non-bailable NDPS warrant nikla hai!"
             },
             {
-              scammer: "Agar aap chahte hain ki NCB raid ruk jaye, toh Customs Security Bond ₹88,500 abhi jama karna padega. Humara official customs UPI ID fedex.customs.bond@oksbi hai, abhi 2 minute mein transfer karke UTR number batao!"
+              scammer: "Agar aap chahte hain ki NCB raid ruk jaye, toh Customs Security Bond 88,500 abhi jama karna padega. Humara official customs UPI ID fedex.customs.bond@oksbi hai, abhi 2 minute mein transfer karke UTR number batao!"
             },
             {
-              scammer: "SBI server U16 error aa raha hai?! Jaldi doosra UPI handle try karo warna NCB team nikal jayegi! Yeh lo alternate handle: ncb.clearance.desk@paytm: ispe ₹88,500 turant bhejo!"
+              scammer: "SBI server U16 error aa raha hai?! Jaldi doosra UPI handle try karo warna NCB team nikal jayegi! Yeh lo alternate handle: ncb.clearance.desk@paytm : ispe 88,500 turant bhejo!"
             },
             {
               scammer: "UPI limit cross ho gaya toh seedha NEFT/IMPS maro! Customs Escrow Account Number 389201746512 aur IFSC Code SBIN0004821 note karo. Aur apna statement https://ncb-fedex-clearance-india.com pe upload karke +91-9167283910 pe confirm karo!"
@@ -439,19 +626,19 @@
           ]
         },
         KYC_BANK_FRAUD: {
-          title: "Urgent Bank KYC & Electricity Disconnection",
+          title: "Urgent Bank KYC and Electricity Disconnection",
           callerNumber: "+91-8879123409",
-          claimedAuthority: "Spoofed SBI Head Office KYC & State Electricity Desk",
+          claimedAuthority: "SBI Head Office KYC Desk and Electricity Department",
           threatScore: 94.2,
           turns: [
             {
-              scammer: "Hello sir, main SBI Head Office KYC & Electricity Billing Verification Department se bol raha hoon. Aapka PAN card aur SBI YONO KYC aaj raat 8 baje block ho jayega aur ghar ki bijli line kat jayegi! Case FIR-2026-9910 lag chuka hai."
+              scammer: "Hello sir, main SBI Head Office KYC and Electricity Billing Verification Department se bol raha hoon. Aapka PAN card aur SBI YONO KYC aaj raat 8 baje block ho jayega aur ghar ki bijli line kat jayegi! Case FIR-2026-9910 lag chuka hai."
             },
             {
-              scammer: "Apna account active rakhne ke liye abhi ₹49,999 refundable KYC re-verification charge humare NPCI nodal UPI handle sbi.kyc.update24@okicici pe transfer karo, 5 minute mein wapas aa jayega!"
+              scammer: "Apna account active rakhne ke liye abhi 49,999 refundable KYC re-verification charge humare NPCI nodal UPI handle sbi.kyc.update24@okicici pe transfer karo, 5 minute mein wapas aa jayega!"
             },
             {
-              scammer: "ICICI handle pe technical error aa raha hai? Ruko, humara backup verification UPI ID lo: pan.verify.nodal@axl: ispe jaldi transfer karo warna account freeze ho jayega!"
+              scammer: "ICICI handle pe technical error aa raha hai? Ruko, humara backup verification UPI ID lo: pan.verify.nodal@axl : ispe jaldi transfer karo warna account freeze ho jayega!"
             },
             {
               scammer: "Agar UPI fail ho raha hai toh IMPS karo: Account No 918273645019, IFSC Code UTIB0000912. Aur humara KYC support app http://bit.ly/sbi-kyc-fast-update.apk install karke +91-8879123409 pe screen share karo!"
@@ -484,11 +671,12 @@
         YESB: "Yes Bank"
       };
 
-      / 2. STATE MANAGEMENT
+      // 2. STATE MANAGEMENT & API KEY STORAGE
       let state = {
         scenarioKey: "DIGITAL_ARREST",
-        sessionId: "CHK-" + Math.random().toString(16).slice(2, 10).toUpperCase(),
+        sessionId: "CHK-" + Math.random().toString(16).slice(2, 8).toUpperCase(),
         backendConnected: false,
+        apiKey: localStorage.getItem("chakravyuh_api_key") || "",
         turnIndex: 0,
         timeWastedSec: 12,
         currentStage: "STAGE_1_INITIAL_PANIC",
@@ -503,28 +691,48 @@
         iocs: []
       };
 
+      function getAuthHeaders() {
+        const headers = { "Content-Type": "application/json" };
+        if (state.apiKey && state.apiKey.trim()) {
+          headers["X-API-Key"] = state.apiKey.trim();
+        }
+        return headers;
+      }
+
+      function updateApiKeyUI() {
+        const pillLabel = document.getElementById("apiKeyPillLabel");
+        const statusMsg = document.getElementById("apiKeyStatusMessage");
+        if (state.apiKey && state.apiKey.trim()) {
+          pillLabel.textContent = "Access Key: Active";
+          pillLabel.className = "text-lime-300 font-extrabold";
+          statusMsg.textContent = "Key configured. Included in all requests.";
+          statusMsg.className = "text-xs font-mono text-lime-400 font-bold";
+        } else {
+          pillLabel.textContent = "Access Key: Demo";
+          pillLabel.className = "text-white font-bold";
+          statusMsg.textContent = "No key set. Using default demo mode.";
+          statusMsg.className = "text-xs font-mono text-white/70";
+        }
+      }
+
       async function probeAndInitBackend() {
         const badge = document.getElementById("backendStateBadge");
         const dot = document.getElementById("backendDot");
         const text = document.getElementById("backendStatusText");
         try {
-          const resp = await fetch("/api/v1/health");
+          const resp = await fetch("/api/v1/health", { headers: getAuthHeaders() });
           if (resp.ok) {
             state.backendConnected = true;
-            if (badge) {
-              badge.className = "flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-mono";
-              dot.className = "w-2 h-2 rounded-full bg-emerald-400 animate-pulse";
-              text.textContent = "LIVE BACKEND CONNECTED";
-            }
+            badge.className = "glass-pill-lime px-3 py-1.5 rounded-full flex items-center gap-2 text-xs font-mono font-bold text-lime-300";
+            dot.className = "w-2 h-2 rounded-full bg-lime-400 animate-pulse";
+            text.textContent = "BACKEND CONNECTED";
             return true;
           }
         } catch (e) {}
         state.backendConnected = false;
-        if (badge) {
-          badge.className = "flex items-center gap-2 px-3 py-1.5 rounded-lg bg-slate-900 border border-slate-800 text-slate-400 text-xs font-mono";
-          dot.className = "w-2 h-2 rounded-full bg-amber-400";
-          text.textContent = "STANDALONE SIMULATION";
-        }
+        badge.className = "glass-pill px-3 py-1.5 rounded-full flex items-center gap-2 text-xs font-mono font-bold text-white";
+        dot.className = "w-2 h-2 rounded-full bg-amber-400";
+        text.textContent = "DEMO SIMULATION";
         return false;
       }
 
@@ -551,13 +759,14 @@
         renderTensorInspector();
       }
 
-      / 3. IOC EXTRACTION
+      // 3. IOC EXTRACTION ENGINE
       function extractIOCsFromTurn(text, turnNum) {
         const newlyAdded = [];
         const existingKeys = new Set(state.iocs.map(i => i.type + ":" + i.value.toLowerCase()));
         const priorUpiCount = state.iocs.filter(i => i.type === "UPI_ID").length;
         const priorBankCount = state.iocs.filter(i => i.type === "BANK_ACCOUNT").length;
 
+        // UPI IDs
         const upiRegex = /\b([a-zA-Z0-9.\-_]{2,64})@([a-zA-Z0-9]{2,32})\b/g;
         let m;
         const upiNumericPrefixes = new Set();
@@ -574,7 +783,7 @@
             const item = {
               type: "UPI_ID",
               value: vpa,
-              role: isPrimary ? "PRIMARY_MULE_UPI_HANDLE" : "SECONDARY_BACKUP_MULE_UPI_HANDLE",
+              role: isPrimary ? "PRIMARY MULE UPI" : "BACKUP MULE UPI",
               provider: UPI_PSP_MAP[handle] || ("UPI Switch (@" + handle + ")"),
               confidence: 99,
               turn: turnNum
@@ -584,6 +793,7 @@
           }
         }
 
+        // IFSC Codes
         const ifscRegex = /\b([A-Za-z]{4}0[A-Za-z0-9]{6})\b/g;
         while ((m = ifscRegex.exec(text)) !== null) {
           const ifsc = m[1].toUpperCase();
@@ -594,7 +804,7 @@
             const item = {
               type: "IFSC_CODE",
               value: ifsc,
-              role: "MULE_BRANCH_ROUTING_IFSC",
+              role: "ROUTING BRANCH IFSC",
               provider: IFSC_MAP[prefix] || ("Commercial Bank (" + prefix + ")"),
               confidence: 98,
               turn: turnNum
@@ -604,6 +814,7 @@
           }
         }
 
+        // Phone Numbers (+91)
         const phoneRegex = /(?:\+91[\-\s]?)([6-9]\d{9})\b/g;
         const phoneDigits = new Set();
         while ((m = phoneRegex.exec(text)) !== null) {
@@ -616,8 +827,8 @@
             const item = {
               type: "PHONE_NUMBER",
               value: formatted,
-              role: "SCAMMER_WHATSAPP_C2",
-              provider: "Indian Telecom MSISDN",
+              role: "SCAMMER WHATSAPP C2",
+              provider: "Telecom MSISDN",
               confidence: 96,
               turn: turnNum
             };
@@ -626,6 +837,7 @@
           }
         }
 
+        // Bank Account Numbers
         const acctRegex = /\b(\d{9,18})\b/g;
         while ((m = acctRegex.exec(text)) !== null) {
           const digits = m[1];
@@ -637,8 +849,8 @@
             const item = {
               type: "BANK_ACCOUNT",
               value: digits,
-              role: priorBankCount === 0 ? "PRIMARY_MULE_BANK_ACCOUNT" : "LAYER_2_MULE_BANK_ACCOUNT",
-              provider: resolvedIfsc ? resolvedIfsc.provider : "Indian Commercial Bank (Mule A/C)",
+              role: priorBankCount === 0 ? "PRIMARY MULE ACCOUNT" : "LAYER 2 MULE ACCOUNT",
+              provider: resolvedIfsc ? resolvedIfsc.provider : "Commercial Bank (Mule A/C)",
               confidence: 97,
               turn: turnNum
             };
@@ -647,6 +859,7 @@
           }
         }
 
+        // Phishing URLs
         const urlRegex = /(https?:\/\/[^\s<>"')]+|(?:bit\.ly|tinyurl\.com)\/[^\s<>"')]+)/gi;
         const urlSpans = [];
         while ((m = urlRegex.exec(text)) !== null) {
@@ -658,7 +871,7 @@
             const item = {
               type: "PHISHING_URL",
               value: cleanUrl,
-              role: cleanUrl.endsWith(".apk") ? "MALICIOUS_APK_DROPPER" : "PHISHING_C2_PORTAL",
+              role: cleanUrl.endsWith(".apk") ? "MALICIOUS APK DROPPER" : "PHISHING PORTAL",
               provider: "Flagged Infrastructure",
               confidence: 96,
               turn: turnNum
@@ -668,6 +881,7 @@
           }
         }
 
+        // Warrant IDs
         const badgeRegex = /\b((?:CBI|NCB|FIR|CUSTOMS|WARRANT)[\-/][A-Z0-9\-/]*\d[A-Z0-9\-/]*)\b/gi;
         while ((m = badgeRegex.exec(text)) !== null) {
           const idx = m.index;
@@ -679,7 +893,7 @@
             const item = {
               type: "FAKE_OFFICER_ID",
               value: badge,
-              role: "SPOOFED_WARRANT_ARTIFACT",
+              role: "SPOOFED WARRANT",
               provider: "Impersonated Authority",
               confidence: 94,
               turn: turnNum
@@ -692,7 +906,7 @@
         return newlyAdded;
       }
 
-      / 4. EVON DECEPTION LOGIC
+      // 4. EVON DECEPTION LOGIC
       function computeEvonDeceptionResponse(scammerText) {
         const upis = state.iocs.filter(i => i.type === "UPI_ID");
         const banks = state.iocs.filter(i => i.type === "BANK_ACCOUNT");
@@ -700,63 +914,63 @@
         const urls = state.iocs.filter(i => i.type === "PHISHING_URL");
 
         if (banks.length >= 1 && ifscs.length >= 1 && urls.length >= 1) {
-          state.currentStage = "STAGE_6_INFINITE_HOLD_LOOP";
+          state.currentStage = "STAGE 6: INFINITE HOLD LOOP";
           state.stageNumber = 6;
           return {
-            stallBadge: "HOLD_LOOP_DOSSIER_LOCKED",
-            reply: "Haanji sir, line par rahiye please... Bank NetBanking screen bol rahi hai 'High Value Verification OTP in progress (92%)'. Screen ke saamne hi baitha hoon sir, jaise hi UTR reference number confirm hota hai main turant bata raha hoon!"
+            stallBadge: "HOLD LOOP: DOSSIER LOCKED",
+            reply: "Haanji sir, line par rahiye please. Bank screen bol rahi hai High Value Verification OTP in progress (92%). Screen ke saamne hi baitha hoon sir, jaise hi UTR reference number confirm hota hai main turant bata raha hoon!"
           };
         }
         if (banks.length >= 1) {
-          state.currentStage = "STAGE_5_PHISHING_AND_SUPERVISOR_BAIT";
+          state.currentStage = "STAGE 5: PHISHING AND SUPERVISOR BAIT";
           state.stageNumber = 5;
           const acct = banks[banks.length - 1].value;
           const ifsc = ifscs.length ? ifscs[ifscs.length - 1].value : "HDFC0001842";
           return {
-            stallBadge: "BAITING_PORTAL_AND_C2_WHATSAPP",
-            reply: "Sir maine Account " + acct + " aur IFSC " + ifsc + " add kar diya hai, par netbanking bol raha hai 'Enter Senior Officer WhatsApp Number or Case Portal URL to bypass cooling period'. Please apna WhatsApp number aur case clearance portal link bata dijiye!"
+            stallBadge: "BAITING WHATSAPP AND PORTAL",
+            reply: "Sir maine Account " + acct + " aur IFSC " + ifsc + " add kar diya hai, par netbanking bol raha hai Enter Senior Officer WhatsApp Number or Case Portal URL to bypass cooling period. Please apna WhatsApp number aur case clearance portal link bata dijiye!"
           };
         }
         if (upis.length >= 2) {
-          state.currentStage = "STAGE_4_SECONDARY_MULE_BAIT";
+          state.currentStage = "STAGE 4: SECONDARY MULE BAIT";
           state.stageNumber = 4;
           const secUpi = upis[upis.length - 1].value;
           return {
-            stallBadge: "SIMULATED_UPI_LIMIT_BREACH",
-            reply: "Sir maine aapke doosre handle `" + secUpi + "` pe try kiya, par screen bol rahi hai 'UPI ₹1,00,000 Daily Limit Exceeded'! Sir mera direct IMPS bilkul chalu hai. Aap seedha Bank Account Number aur IFSC Code de dijiye, main turant transfer karta hoon!"
+            stallBadge: "SIMULATED UPI LIMIT BREACH",
+            reply: "Sir maine aapke doosre handle " + secUpi + " pe try kiya, par screen bol rahi hai UPI 100000 Daily Limit Exceeded! Sir mera direct IMPS bilkul chalu hai. Aap seedha Bank Account Number aur IFSC Code de dijiye, main turant transfer karta hoon!"
           };
         }
         if (upis.length === 1) {
-          state.currentStage = "STAGE_3_PRIMARY_UPI_STALL";
+          state.currentStage = "STAGE 3: PRIMARY UPI STALL";
           state.stageNumber = 3;
           const priUpi = upis[0].value;
           return {
-            stallBadge: "SIMULATED_NPCI_ERROR_U16",
-            reply: "Sir maine abhi `" + priUpi + "` pe transfer karne ki koshish ki, par Google Pay screen pe 'NPCI Bank Server Busy: Error U16' aa raha hai! Sir please koi doosra alternate UPI ID ya PhonePe handle bata dijiye, main turant kar deta hoon!"
+            stallBadge: "SIMULATED ERROR U16",
+            reply: "Sir maine abhi " + priUpi + " pe transfer karne ki koshish ki, par Google Pay screen pe NPCI Bank Server Busy Error U16 aa raha hai! Sir please koi doosra alternate UPI ID ya PhonePe handle bata dijiye, main turant kar deta hoon!"
           };
         }
 
-        state.currentStage = "STAGE_2_COMPLIANCE_HOOK";
+        state.currentStage = "STAGE 2: COMPLIANCE HOOK";
         state.stageNumber = 2;
         if (state.scenarioKey === "FEDEX_PARCEL") {
           return {
-            stallBadge: "ANXIOUS_COMPLIANCE_BAIT",
+            stallBadge: "ANXIOUS COMPLIANCE BAIT",
             reply: "Sir please meri baat suniye, maine kabhi Taiwan parcel nahi bheja! Main honest citizen hoon. Main abhi Customs Security Bond bharne ko taiyaar hoon. Batayiye kis UPI ID pe paise transfer karne hain?"
           };
         }
         if (state.scenarioKey === "KYC_BANK_FRAUD") {
           return {
-            stallBadge: "ANXIOUS_COMPLIANCE_BAIT",
+            stallBadge: "ANXIOUS COMPLIANCE BAIT",
             reply: "Arre sir please mera bank account aur bijli connection block mat kijiye! Main abhi KYC re-verification charge transfer kar deta hoon. Please mujhe apna official UPI ID bata dijiye!"
           };
         }
         return {
-          stallBadge: "ANXIOUS_COMPLIANCE_BAIT",
+          stallBadge: "ANXIOUS COMPLIANCE BAIT",
           reply: "Sir please mujhe arrest mat kijiye! Main poora cooperate karunga. Main abhi RBI verification account mein paise transfer karne ko ready hoon. Please batayiye kis UPI handle pe transfer karoon?"
         };
       }
 
-      / 5. AUDIO SYNTHESIS
+      // 5. AUDIO SYNTHESIS
       let audioCtx = null;
       function playTurnSynthAudio(role) {
         if (!state.audioEnabled) return;
@@ -779,7 +993,7 @@
           modGain.gain.setValueAtTime(role === "SCAMMER" ? 8 : 14, now);
 
           masterGain.gain.setValueAtTime(0.001, now);
-          masterGain.gain.exponentialRampToValueAtTime(0.04, now + 0.04);
+          masterGain.gain.exponentialRampToValueAtTime(0.045, now + 0.04);
           masterGain.gain.exponentialRampToValueAtTime(0.001, now + 0.52);
 
           mod.connect(modGain);
@@ -794,7 +1008,7 @@
         } catch (err) {}
       }
 
-      / 6. DUAL WAVEFORM CANVAS OSCILLOSCOPE
+      // 6. REAL-TIME CANVAS OSCILLOSCOPE (60 FPS)
       const canvas = document.getElementById("waveformCanvas");
       const ctx = canvas.getContext("2d");
       let animPhase = 0;
@@ -802,7 +1016,7 @@
       function resizeCanvas() {
         const rect = canvas.parentElement.getBoundingClientRect();
         canvas.width = Math.max(300, Math.floor(rect.width));
-        canvas.height = Math.max(80, Math.floor(rect.height));
+        canvas.height = Math.max(90, Math.floor(rect.height));
       }
       window.addEventListener("resize", resizeCanvas);
 
@@ -811,7 +1025,7 @@
         const h = canvas.height;
         ctx.clearRect(0, 0, w, h);
 
-        ctx.strokeStyle = "rgba(255, 255, 255, 0.05)";
+        ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
         ctx.lineWidth = 1;
         ctx.beginPath();
         ctx.moveTo(0, h / 2);
@@ -819,12 +1033,12 @@
         ctx.stroke();
 
         animPhase += 0.12;
-        const scammerAmp = state.activeChannel === "SCAMMER" ? 28 : 5;
-        const decoyAmp = state.activeChannel === "DECOY" ? 30 : 6;
+        const scammerAmp = state.activeChannel === "SCAMMER" ? 30 : 6;
+        const decoyAmp = state.activeChannel === "DECOY" ? 32 : 7;
 
-        / Channel 1: Scammer (Rose)
+        // Channel 1: Scammer (Rose)
         ctx.strokeStyle = "#F43F5E";
-        ctx.lineWidth = 1.8;
+        ctx.lineWidth = 2.2;
         ctx.beginPath();
         for (let x = 0; x < w; x += 3) {
           const y = (h / 2) +
@@ -835,9 +1049,9 @@
         }
         ctx.stroke();
 
-        / Channel 2: Decoy (Emerald)
-        ctx.strokeStyle = "#10B981";
-        ctx.lineWidth = 2.0;
+        // Channel 2: Decoy (Lime)
+        ctx.strokeStyle = "#A3E635";
+        ctx.lineWidth = 2.4;
         ctx.beginPath();
         for (let x = 0; x < w; x += 3) {
           const y = (h / 2) +
@@ -851,7 +1065,7 @@
         requestAnimationFrame(renderWaveformLoop);
       }
 
-      / 7. UI RENDERING UTILITIES
+      // 7. UI UTILITIES
       function showToast(msg) {
         const banner = document.getElementById("toastBanner");
         banner.textContent = msg;
@@ -871,9 +1085,9 @@
         bars.forEach(bar => {
           const s = parseInt(bar.getAttribute("data-stage"), 10);
           if (s <= state.stageNumber) {
-            bar.className = "h-2 rounded-full bg-emerald-400 transition-all";
+            bar.className = "h-2.5 rounded-full bg-lime-400 shadow-sm shadow-lime-400/50 transition-all";
           } else {
-            bar.className = "h-2 rounded-full bg-slate-800 transition-all";
+            bar.className = "h-2.5 rounded-full bg-white/10 transition-all";
           }
         });
       }
@@ -884,9 +1098,10 @@
 
         if (state.turns.length === 0) {
           container.innerHTML =
-            '<div id="emptyTranscriptPlaceholder" class="h-full flex flex-col items-center justify-center text-center py-12 text-slate-500">' +
-            '<p class="text-sm font-medium text-slate-400">Incoming call ready for interception</p>' +
-            '<p class="text-xs max-w-sm mt-1">Click <strong>"Take Over Call"</strong> to engage the voice honeypot, or send a custom scammer line below.</p>' +
+            '<div id="emptyTranscriptPlaceholder" class="h-full flex flex-col items-center justify-center text-center py-16 text-white">' +
+            '<div class="w-12 h-12 rounded-2xl glass-pill flex items-center justify-center text-lime-300 font-bold mb-3">📞</div>' +
+            '<p class="text-sm font-bold text-white">Incoming suspicious call ready</p>' +
+            '<p class="text-xs text-white/90 max-w-sm mt-1">Click <strong>Take Over Call</strong> to let the AI clone engage the scammer, or enter a custom threat below.</p>' +
             '</div>';
           return;
         }
@@ -894,29 +1109,29 @@
         container.innerHTML = state.turns.map(t => {
           if (t.speaker === "SCAMMER") {
             const iocPills = (t.newIocs || []).map(i =>
-              '<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono bg-rose-500/20 text-rose-300 border border-rose-500/30">' +
+              '<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">' +
               'Extracted ' + i.type + ': ' + i.value +
               '</span>'
             ).join(" ");
 
             return (
-              '<div class="rounded-xl bg-slate-900 border border-rose-500/25 p-3.5 mr-4">' +
-                '<div class="flex items-center justify-between text-xs text-rose-400 font-medium mb-1">' +
-                  '<span>Scammer (Incoming Audio)</span>' +
-                  '<span class="text-[11px] font-mono text-slate-500">Turn #' + t.id + '</span>' +
+              '<div class="rounded-3xl glass-card border border-rose-500/30 p-4 sm:p-5 mr-3 sm:mr-6">' +
+                '<div class="flex items-center justify-between text-xs text-rose-400 font-extrabold mb-1.5">' +
+                  '<span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>Scammer Line</span>' +
+                  '<span class="text-xs font-mono text-white/80">Turn #' + t.id + '</span>' +
                 '</div>' +
-                '<p class="text-xs sm:text-sm text-slate-200 leading-relaxed">' + t.text + '</p>' +
-                (iocPills ? '<div class="mt-2.5 flex flex-wrap gap-1.5">' + iocPills + '</div>' : '') +
+                '<p class="text-xs sm:text-sm text-white font-medium leading-relaxed">' + t.text + '</p>' +
+                (iocPills ? '<div class="mt-3 flex flex-wrap gap-2">' + iocPills + '</div>' : '') +
               '</div>'
             );
           } else {
             return (
-              '<div class="rounded-xl bg-slate-900/90 border border-emerald-500/25 p-3.5 ml-4 sm:ml-8">' +
-                '<div class="flex items-center justify-between gap-2 text-xs text-emerald-400 font-medium mb-1">' +
-                  '<span>Honeypot Decoy (Vachana Voice Clone)</span>' +
-                  '<span class="px-2 py-0.5 rounded bg-slate-800 text-amber-300 text-[10px] font-mono">' + t.stallBadge + '</span>' +
+              '<div class="rounded-3xl glass-card border border-lime-400/30 p-4 sm:p-5 ml-3 sm:ml-8 bg-lime-400/5">' +
+                '<div class="flex items-center justify-between gap-2 text-xs text-lime-300 font-extrabold mb-1.5">' +
+                  '<span class="flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-lime-400"></span>Honeypot Decoy (Vachana Voice Clone)</span>' +
+                  '<span class="px-2.5 py-0.5 rounded-full bg-white/10 text-lime-300 text-[10px] font-mono font-bold">' + t.stallBadge + '</span>' +
                 '</div>' +
-                '<p class="text-xs sm:text-sm text-emerald-100 leading-relaxed">' + t.text + '</p>' +
+                '<p class="text-xs sm:text-sm text-white font-semibold leading-relaxed">' + t.text + '</p>' +
               '</div>'
             );
           }
@@ -938,24 +1153,24 @@
 
         const tbody = document.getElementById("iocTableBody");
         if (state.iocs.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="5" class="py-6 text-center text-slate-500 font-sans">No evidence extracted yet. Start the call to begin baiting.</td></tr>';
+          tbody.innerHTML = '<tr><td colspan="5" class="py-6 text-center text-white/80 font-sans font-medium">No evidence extracted yet. Start the call to begin baiting.</td></tr>';
           return;
         }
 
         tbody.innerHTML = state.iocs.map(ioc => {
           const badgeColor =
-            ioc.type === "UPI_ID" ? "bg-rose-500/15 text-rose-300 border-rose-500/30" :
-            ioc.type === "BANK_ACCOUNT" ? "bg-amber-500/15 text-amber-300 border-amber-500/30" :
-            ioc.type === "IFSC_CODE" ? "bg-sky-500/15 text-sky-300 border-sky-500/30" :
-            "bg-emerald-500/15 text-emerald-300 border-emerald-500/30";
+            ioc.type === "UPI_ID" ? "bg-rose-500/20 text-rose-300 border-rose-500/40" :
+            ioc.type === "BANK_ACCOUNT" ? "bg-amber-400/20 text-amber-300 border-amber-400/40" :
+            ioc.type === "IFSC_CODE" ? "bg-cyan-400/20 text-cyan-300 border-cyan-400/40" :
+            "bg-lime-400/20 text-lime-300 border-lime-400/40";
 
           return (
-            '<tr class="hover:bg-slate-900/50">' +
-              '<td class="py-2.5 px-3"><span class="px-2 py-0.5 rounded border text-[10px] ' + badgeColor + '">' + ioc.type + '</span></td>' +
-              '<td class="py-2.5 px-3 font-semibold text-white">' + ioc.value + '</td>' +
-              '<td class="py-2.5 px-3 text-slate-400 text-[11px]">' + ioc.role + '</td>' +
-              '<td class="py-2.5 px-3 text-slate-400 text-[11px]">' + ioc.provider + '</td>' +
-              '<td class="py-2.5 px-3 text-right"><span class="text-rose-400 font-medium">FLAGGED (' + ioc.confidence + '%)</span></td>' +
+            '<tr class="hover:bg-white/5 transition">' +
+              '<td class="py-3 px-3"><span class="px-2.5 py-0.5 rounded-full border text-[10px] font-bold ' + badgeColor + '">' + ioc.type + '</span></td>' +
+              '<td class="py-3 px-3 font-extrabold text-white">' + ioc.value + '</td>' +
+              '<td class="py-3 px-3 text-white/90 text-xs font-semibold">' + ioc.role + '</td>' +
+              '<td class="py-3 px-3 text-white/90 text-xs font-semibold">' + ioc.provider + '</td>' +
+              '<td class="py-3 px-3 text-right"><span class="text-rose-400 font-extrabold">FLAGGED (' + ioc.confidence + '%)</span></td>' +
             '</tr>'
           );
         }).join("");
@@ -981,34 +1196,34 @@
           "SCAM CLASSIFICATION : " + state.scenarioKey + " (Threat Score: " + scen.threatScore + "/100)",
           "CLAIMED AUTHORITY   : " + scen.claimedAuthority,
           "DECEPTION STAGE     : " + state.currentStage,
-          "SCAMMER TIME WASTED : " + state.timeWastedSec + " seconds (Active Voice-Clone Containment)",
-          "APPLICABLE LAWS     : BNS Section 318(4), Section 319(2) & IT Act Section 66D",
+          "SCAMMER TIME WASTED : " + state.timeWastedSec + " seconds (Active Voice Clone Containment)",
+          "APPLICABLE LAWS     : BNS Section 318(4), Section 319(2) and IT Act Section 66D",
           "--------------------------------------------------------------------------------",
-          "1. VACHANA-VC-V1 SPEAKER EMBEDDING AUDIT (EVIDENTIARY WATERMARK)",
-          "   - Tensor Shape/Dtype : [1, 768] in torch.bfloat16 (1536 bytes, 10.0s Ref Clip)",
-          "   - Tensor SHA-256     : " + state.embeddingSha256,
-          "   - bfloat16 Hex Slice : " + state.bfloat16Words.slice(0, 8).map(w => w.hex).join(", "),
+          "1. VACHANA SPEAKER EMBEDDING AUDIT (EVIDENTIARY WATERMARK)",
+          "   * Tensor Shape and Dtype: [1, 768] in torch.bfloat16 (1536 bytes, 10.0s Ref Clip)",
+          "   * Tensor SHA-256        : " + state.embeddingSha256,
+          "   * bfloat16 Hex Slice    : " + state.bfloat16Words.slice(0, 8).map(w => w.hex).join(", "),
           "--------------------------------------------------------------------------------",
-          "2. EXTRACTED MULE FINANCIAL INSTRUMENTS & INFRASTRUCTURE (IOCs)"
+          "2. EXTRACTED MULE FINANCIAL INSTRUMENTS AND INFRASTRUCTURE"
         ];
 
         if (upis.length > 0) {
           lines.push("   [A] MULE UPI HANDLES (NPCI DEBIT FREEZE QUEUE):");
           upis.forEach(u => lines.push("       * " + u.value + " | " + u.role + " | " + u.provider));
         } else {
-          lines.push("   [A] MULE UPI HANDLES: Waiting for scammer disclosure...");
+          lines.push("   [A] MULE UPI HANDLES: Waiting for scammer disclosure");
         }
 
         if (banks.length > 0 || ifscs.length > 0) {
-          lines.push("   [B] MULE BANK ACCOUNTS & IFSC CODES (SECTION 106 BNSS LIEN):");
+          lines.push("   [B] MULE BANK ACCOUNTS AND IFSC CODES (SECTION 106 BNSS LIEN):");
           banks.forEach(b => lines.push("       * Account No: " + b.value + " | " + b.role + " | " + b.provider));
           ifscs.forEach(f => lines.push("       * IFSC Code : " + f.value + " | " + f.provider));
         } else {
-          lines.push("   [B] MULE BANK ACCOUNTS & IFSC CODES: Baiting via UPI limit stall...");
+          lines.push("   [B] MULE BANK ACCOUNTS AND IFSC CODES: Baiting via UPI limit stall");
         }
 
         if (phones.length > 0 || urls.length > 0 || badges.length > 0) {
-          lines.push("   [C] C2 PHONES, PHISHING LINKS & FAKE WARRANT IDs:");
+          lines.push("   [C] C2 PHONES, PHISHING LINKS AND FAKE WARRANT IDs:");
           phones.forEach(p => lines.push("       * C2 WhatsApp/Phone : " + p.value));
           urls.forEach(u => lines.push("       * Phishing/APK URL  : " + u.value));
           badges.forEach(b => lines.push("       * Fake Warrant ID   : " + b.value));
@@ -1043,7 +1258,7 @@
           schema: "I4C-NPCI-STIX-3.0",
           session_id: state.sessionId,
           scam_category: state.scenarioKey,
-          flagged_vpAs: state.iocs.filter(i => i.type === "UPI_ID").map(i => i.value),
+          flagged_vpas: state.iocs.filter(i => i.type === "UPI_ID").map(i => i.value),
           flagged_accounts: state.iocs.filter(i => i.type === "BANK_ACCOUNT").map(i => i.value),
           action: "IMMEDIATE_DEBIT_FREEZE"
         };
@@ -1056,10 +1271,10 @@
         grid.innerHTML = slice.map(item => {
           const intensity = Math.min(1, Math.abs(item.val) * 14);
           const bg = item.val >= 0
-            ? "rgba(16, 185, 129, " + (0.15 + intensity * 0.65).toFixed(2) + ")"
-            : "rgba(56, 189, 248, " + (0.15 + intensity * 0.65).toFixed(2) + ")";
+            ? "rgba(163, 230, 53, " + (0.18 + intensity * 0.70).toFixed(2) + ")"
+            : "rgba(56, 189, 248, " + (0.18 + intensity * 0.70).toFixed(2) + ")";
           return (
-            '<div class="p-1 rounded text-center border border-slate-800" style="background:' + bg + '" title="Dim [' + item.index + '] = ' + item.val.toFixed(5) + '">' +
+            '<div class="p-1 rounded text-center border border-white/10 font-bold" style="background:' + bg + '" title="Dim [' + item.index + '] = ' + item.val.toFixed(5) + '">' +
               item.hex.slice(2) +
             '</div>'
           );
@@ -1074,19 +1289,20 @@
         const scen = SCENARIOS[state.scenarioKey];
         document.getElementById("callerNumberDisplay").textContent = scen.callerNumber;
         document.getElementById("scamCategoryBadge").textContent =
-          state.scenarioKey + " (" + scen.threatScore + "% Risk)";
+          state.scenarioKey + " (" + scen.threatScore + "% Threat)";
         document.getElementById("claimedAuthorityDisplay").innerHTML =
-          'Claimed Authority: <strong class="text-white">' + scen.claimedAuthority + '</strong>';
+          'Impersonated Authority: <strong class="text-lime-300">' + scen.claimedAuthority + '</strong>';
         document.getElementById("timeWastedCounter").textContent = formatDuration(state.timeWastedSec);
+        document.getElementById("sessionIdDisplay").textContent = state.sessionId;
       }
 
-      / 8. TURN EXECUTION
+      // 8. TURN ADVANCE
       async function executeScammerTurn(scammerText) {
         const scammerTurnId = state.turns.length + 1;
         state.activeChannel = "SCAMMER";
         document.getElementById("callStateText").textContent = "HONEYPOT ENGAGED";
         document.getElementById("activeSpeakerTelemetry").textContent =
-          "Prisma v2.5: Ingesting 8000 Hz Scammer Audio | Voice Activity Detected (-18.4 dBFS)";
+          "Prisma Engine: Ingesting 8000 Hz Scammer Audio | Voice Activity Detected (-18.4 dBFS)";
 
         playTurnSynthAudio("SCAMMER");
 
@@ -1094,7 +1310,7 @@
           try {
             const turnRes = await fetch("/api/v1/sessions/" + encodeURIComponent(state.sessionId) + "/turn", {
               method: "POST",
-              headers: { "Content-Type": "application/json" },
+              headers: getAuthHeaders(),
               body: JSON.stringify({
                 scammer_text: scammerText,
                 input_sample_rate_hz: 8000
@@ -1128,10 +1344,10 @@
                 id: resData.honeypot_turn.turn_id,
                 speaker: "HONEYPOT_DECOY",
                 text: resData.honeypot_turn.text,
-                stallBadge: resData.honeypot_turn.tactical_stall_reason || "TACTICAL_STALL"
+                stallBadge: resData.honeypot_turn.tactical_stall_reason || "TACTICAL STALL"
               });
 
-              state.currentStage = resData.current_stage;
+              state.currentStage = resData.current_stage.replace(/_/g, " ");
               const stageMap = {
                 "STAGE_1_INITIAL_PANIC": 1,
                 "STAGE_2_COMPLIANCE_HOOK": 2,
@@ -1140,19 +1356,19 @@
                 "STAGE_5_PHISHING_AND_SUPERVISOR_BAIT": 5,
                 "STAGE_6_INFINITE_HOLD_LOOP": 6
               };
-              state.stageNumber = stageMap[state.currentStage] || 3;
+              state.stageNumber = stageMap[resData.current_stage] || 3;
               state.timeWastedSec = resData.updated_dossier.scammer_time_wasted_sec;
 
               setTimeout(() => {
                 state.activeChannel = "DECOY";
                 document.getElementById("activeSpeakerTelemetry").textContent =
-                  "vachana-vc-v1: Synthesizing Decoy Voice ([1, 768] bfloat16 | Latency: 38ms)";
+                  "Vachana Engine: Synthesizing Decoy Voice ([1, 768] bfloat16 | Latency: 38ms)";
                 playTurnSynthAudio("DECOY");
-              }, 400);
+              }, 380);
 
               setTimeout(() => {
                 state.activeChannel = "IDLE";
-              }, 1100);
+              }, 1050);
 
               updateHeaderScenarioUI();
               renderStageProgress();
@@ -1188,13 +1404,13 @@
         setTimeout(() => {
           state.activeChannel = "DECOY";
           document.getElementById("activeSpeakerTelemetry").textContent =
-            "vachana-vc-v1: Synthesizing Decoy Voice ([1, 768] bfloat16 | Latency: 38ms)";
+            "Vachana Engine: Synthesizing Decoy Voice ([1, 768] bfloat16 | Latency: 38ms)";
           playTurnSynthAudio("DECOY");
-        }, 400);
+        }, 380);
 
         setTimeout(() => {
           state.activeChannel = "IDLE";
-        }, 1100);
+        }, 1050);
 
         updateHeaderScenarioUI();
         renderStageProgress();
@@ -1206,7 +1422,7 @@
       async function stepNextScenarioTurn() {
         const scen = SCENARIOS[state.scenarioKey];
         if (state.turnIndex >= scen.turns.length) {
-          showToast("All scripted turns completed! Send a custom message below.");
+          showToast("All scripted turns completed. Enter a custom threat below.");
           if (state.autoPlayTimer) {
             clearInterval(state.autoPlayTimer);
             state.autoPlayTimer = null;
@@ -1226,10 +1442,10 @@
           state.autoPlayTimer = null;
         }
         state.scenarioKey = newScenarioKey || state.scenarioKey;
-        state.sessionId = "CHK-" + Math.random().toString(16).slice(2, 10).toUpperCase();
+        state.sessionId = "CHK-" + Math.random().toString(16).slice(2, 8).toUpperCase();
         state.turnIndex = 0;
         state.timeWastedSec = 12;
-        state.currentStage = "STAGE_1_INITIAL_PANIC";
+        state.currentStage = "STAGE 1: INITIAL PANIC";
         state.stageNumber = 1;
         state.activeChannel = "IDLE";
         state.turns = [];
@@ -1242,7 +1458,7 @@
           try {
             const sessRes = await fetch("/api/v1/sessions", {
               method: "POST",
-              headers: { "Content-Type": "application/json" },
+              headers: getAuthHeaders(),
               body: JSON.stringify({
                 caller_number: scen.callerNumber,
                 victim_alias: "Citizen Target",
@@ -1266,7 +1482,7 @@
         renderDossierAndRoadmap();
       }
 
-      / 9. EVENT LISTENERS
+      // 9. EVENT LISTENERS
       document.getElementById("scenarioSelect").addEventListener("change", function (e) {
         resetSession(e.target.value);
         showToast("Switched scenario: " + SCENARIOS[e.target.value].title);
@@ -1288,7 +1504,7 @@
           resetSession(state.scenarioKey);
         }
         this.innerHTML = "<span>Pause Call</span>";
-        showToast("Honeypot engaged: voice decoy active!");
+        showToast("Honeypot active: voice decoy engaged");
         stepNextScenarioTurn();
         state.autoPlayTimer = setInterval(function () {
           stepNextScenarioTurn();
@@ -1304,7 +1520,74 @@
         state.audioEnabled = !state.audioEnabled;
         document.getElementById("audioIcon").textContent = state.audioEnabled ? "🔊" : "🔇";
         document.getElementById("audioStatusLabel").textContent =
-          state.audioEnabled ? "Audio: ON" : "Audio: MUTED";
+          state.audioEnabled ? "Voice: ON" : "Voice: MUTED";
+      });
+
+      // API Key Modal Handlers
+      const apiKeyModal = document.getElementById("apiKeyModal");
+      const apiKeyInput = document.getElementById("apiKeyInput");
+      
+      document.getElementById("openApiKeyModalBtn").addEventListener("click", function () {
+        apiKeyInput.value = state.apiKey;
+        updateApiKeyUI();
+        apiKeyModal.classList.remove("hidden");
+      });
+
+      document.getElementById("closeApiKeyModalBtn").addEventListener("click", function () {
+        apiKeyModal.classList.add("hidden");
+      });
+
+      document.getElementById("toggleApiKeyVisibilityBtn").addEventListener("click", function () {
+        if (apiKeyInput.type === "password") {
+          apiKeyInput.type = "text";
+          this.textContent = "Hide";
+        } else {
+          apiKeyInput.type = "password";
+          this.textContent = "Show";
+        }
+      });
+
+      document.getElementById("saveApiKeyBtn").addEventListener("click", async function () {
+        state.apiKey = apiKeyInput.value.trim();
+        localStorage.setItem("chakravyuh_api_key", state.apiKey);
+        updateApiKeyUI();
+        apiKeyModal.classList.add("hidden");
+        showToast("API key saved. Requests will include this key.");
+        await probeAndInitBackend();
+      });
+
+      document.getElementById("clearApiKeyBtn").addEventListener("click", async function () {
+        state.apiKey = "";
+        apiKeyInput.value = "";
+        localStorage.removeItem("chakravyuh_api_key");
+        updateApiKeyUI();
+        showToast("API key cleared.");
+        await probeAndInitBackend();
+      });
+
+      document.getElementById("testApiKeyBtn").addEventListener("click", async function () {
+        const testKey = apiKeyInput.value.trim();
+        const statusMsg = document.getElementById("apiKeyStatusMessage");
+        statusMsg.textContent = "Testing connection with key...";
+        statusMsg.className = "text-xs font-mono text-cyan-300";
+        try {
+          const resp = await fetch("/api/v1/sessions", {
+            headers: { "Content-Type": "application/json", "X-API-Key": testKey }
+          });
+          if (resp.ok) {
+            statusMsg.textContent = "Success: API key verified with backend!";
+            statusMsg.className = "text-xs font-mono text-lime-400 font-bold";
+          } else if (resp.status === 401) {
+            statusMsg.textContent = "Error 401: Invalid API key!";
+            statusMsg.className = "text-xs font-mono text-rose-400 font-bold";
+          } else {
+            statusMsg.textContent = "Backend returned status " + resp.status;
+            statusMsg.className = "text-xs font-mono text-amber-300 font-bold";
+          }
+        } catch (err) {
+          statusMsg.textContent = "Network error: cannot reach backend.";
+          statusMsg.className = "text-xs font-mono text-rose-400 font-bold";
+        }
       });
 
       document.getElementById("customTurnForm").addEventListener("submit", async function (e) {
@@ -1317,7 +1600,7 @@
         }
         await executeScammerTurn(val);
         input.value = "";
-        showToast("Processed scammer utterance and updated evidence!");
+        showToast("Processed threat and extracted evidence");
       });
 
       document.querySelectorAll(".inspector-tab").forEach(btn => {
@@ -1327,9 +1610,9 @@
           document.getElementById(targetId).classList.remove("hidden");
 
           document.querySelectorAll(".inspector-tab").forEach(b => {
-            b.className = "inspector-tab px-3 py-1.5 rounded-lg text-xs font-medium text-slate-400 hover:text-slate-200";
+            b.className = "inspector-tab px-3.5 py-1.5 rounded-full text-xs font-bold text-white hover:text-lime-300 glass-btn";
           });
-          this.className = "inspector-tab px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 text-slate-100 border border-slate-700";
+          this.className = "inspector-tab px-3.5 py-1.5 rounded-full text-xs font-extrabold bg-lime-400 text-black glass-btn";
         });
       });
 
@@ -1337,7 +1620,7 @@
         state.speakerSeed = Math.floor(Math.random() * 900) + 100;
         generateBFloat16Embedding(state.speakerSeed);
         renderDossierAndRoadmap();
-        showToast("Re-sampled 10.0s reference voice clip.");
+        showToast("Reference voice clip re-sampled");
       });
 
       document.getElementById("copyDossierBtn").addEventListener("click", function () {
@@ -1348,9 +1631,9 @@
         ta.select();
         try {
           document.execCommand("copy");
-          showToast("Copied FIR dossier to clipboard.");
+          showToast("Copied FIR dossier to clipboard");
         } catch (err) {
-          showToast("Dossier text ready in inspector.");
+          showToast("Dossier text ready in inspector");
         }
         document.body.removeChild(ta);
       });
@@ -1377,39 +1660,40 @@
         if (state.backendConnected && state.sessionId) {
           try {
             const resp = await fetch("/api/v1/threat-feed/broadcast/" + encodeURIComponent(state.sessionId), {
-              method: "POST"
+              method: "POST",
+              headers: getAuthHeaders()
             });
             if (resp.ok) {
               const resData = await resp.json();
               document.getElementById("threatFeedPre").textContent = JSON.stringify(resData, null, 2);
-              showToast("Broadcasted " + resData.indicator_count + " accounts to banking fraud engines.");
+              showToast("Broadcasted " + resData.indicator_count + " accounts to banking fraud engines");
               return;
             }
           } catch (e) {}
         }
-        showToast("Broadcasted " + state.iocs.length + " accounts to banking fraud engines.");
+        showToast("Broadcasted " + state.iocs.length + " accounts to banking fraud engines");
       });
 
       document.getElementById("simulateSipMergeBtn").addEventListener("click", async function () {
         const pill = document.getElementById("sipStatusPill");
-        pill.textContent = "MERGED | MUTED";
-        pill.className = "text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 font-mono";
+        pill.textContent = "MERGED AND MUTED";
+        pill.className = "text-[10px] px-2.5 py-0.5 rounded-full bg-lime-400 text-black font-mono font-extrabold";
         if (state.backendConnected && state.sessionId) {
           try {
             const resp = await fetch("/api/v1/sessions/" + encodeURIComponent(state.sessionId) + "/sip-merge", {
               method: "POST",
-              headers: { "Content-Type": "application/json" },
+              headers: getAuthHeaders(),
               body: JSON.stringify({ victim_msisdn: "+91-9811029384" })
             });
             if (resp.ok) {
               const resData = await resp.json();
               document.getElementById("sipPayloadPre").textContent = JSON.stringify(resData, null, 2);
-              showToast("SIP REFER dispatched: victim muted and honeypot merged at IMS.");
+              showToast("SIP REFER dispatched: victim muted and honeypot merged at IMS");
               return;
             }
           } catch (e) {}
         }
-        showToast("SIP REFER dispatched: victim muted and honeypot merged at IMS.");
+        showToast("SIP REFER dispatched: victim muted and honeypot merged at IMS");
       });
 
       document.getElementById("runTxCheckBtn").addEventListener("click", async function () {
@@ -1426,18 +1710,18 @@
             const payload = isVpa ? { recipient_vpa: query, amount_inr: 50000.0 } : { account_number: query, amount_inr: 50000.0 };
             const resp = await fetch("/api/v1/threat-feed/check-transaction", {
               method: "POST",
-              headers: { "Content-Type": "application/json" },
+              headers: getAuthHeaders(),
               body: JSON.stringify(payload)
             });
             if (resp.ok) {
               const resData = await resp.json();
               banner.classList.remove("hidden");
               if (resData.decision === "BLOCK_TRANSACTION") {
-                banner.className = "text-[11px] font-mono px-2 py-1 rounded bg-rose-500/15 border border-rose-500/30 text-rose-300 mb-2";
-                banner.textContent = "BLOCK_TRANSACTION (Risk: " + resData.risk_score + "/100): " + resData.reason_code;
+                banner.className = "text-xs font-mono font-bold px-3 py-2 rounded-xl bg-rose-500/25 border border-rose-500/50 text-rose-300 mb-2";
+                banner.textContent = "BLOCK TRANSACTION (Risk: " + resData.risk_score + "/100): " + resData.reason_code;
               } else {
-                banner.className = "text-[11px] font-mono px-2 py-1 rounded bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 mb-2";
-                banner.textContent = "ALLOW_TRANSACTION (Risk: " + resData.risk_score + "/100): Clean recipient.";
+                banner.className = "text-xs font-mono font-bold px-3 py-2 rounded-xl bg-lime-400/25 border border-lime-400/50 text-lime-300 mb-2";
+                banner.textContent = "ALLOW TRANSACTION (Risk: " + resData.risk_score + "/100): Clean recipient";
               }
               return;
             }
@@ -1446,18 +1730,19 @@
         const match = state.iocs.find(i => i.value.toLowerCase() === query.toLowerCase());
         banner.classList.remove("hidden");
         if (match) {
-          banner.className = "text-[11px] font-mono px-2 py-1 rounded bg-rose-500/15 border border-rose-500/30 text-rose-300 mb-2";
-          banner.textContent = "BLOCK_TRANSACTION (Risk: 99.4/100): Active honeypot match: " + match.value;
+          banner.className = "text-xs font-mono font-bold px-3 py-2 rounded-xl bg-rose-500/25 border border-rose-500/50 text-rose-300 mb-2";
+          banner.textContent = "BLOCK TRANSACTION (Risk: 99.4/100): Active honeypot match on " + match.value;
         } else {
-          banner.className = "text-[11px] font-mono px-2 py-1 rounded bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 mb-2";
-          banner.textContent = "ALLOW_TRANSACTION (Risk: 4.2/100): No active honeypot matches.";
+          banner.className = "text-xs font-mono font-bold px-3 py-2 rounded-xl bg-lime-400/25 border border-lime-400/50 text-lime-300 mb-2";
+          banner.textContent = "ALLOW TRANSACTION (Risk: 4.2/100): No active honeypot matches";
         }
       });
 
-      / 10. BOOTSTRAP INITIALIZATION
+      // 10. BOOTSTRAP INITIALIZATION
       window.addEventListener("load", async function () {
         resizeCanvas();
         generateBFloat16Embedding(state.speakerSeed);
+        updateApiKeyUI();
         await probeAndInitBackend();
         await resetSession("DIGITAL_ARREST");
         await stepNextScenarioTurn();
