@@ -10,7 +10,6 @@
 [![Live Demo](https://img.shields.io/badge/Live_Console-GitHub_Pages-lime?style=flat-square)](https://chamanvashishth.github.io/Chakravyuh/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-64748b?style=flat-square)](LICENSE)
 
-Live Web Interface: https://chamanvashishth.github.io/Chakravyuh/
 
 ---
 
