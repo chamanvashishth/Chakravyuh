@@ -7,24 +7,29 @@
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.92%2B-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![DSP](https://img.shields.io/badge/DSP-8_kHz_Butterworth-f59e0b?style=flat-square)](src/chakravyuh/asr/)
 [![Tensor](https://img.shields.io/badge/Embedding-%5B1%2C_768%5D_bfloat16-8b5cf6?style=flat-square)](src/chakravyuh/voice/)
-[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-lime?style=flat-square)](https://chamanvashishth.github.io/Chakravyuh/)
+[![Live Demo](https://img.shields.io/badge/Live_Console-GitHub_Pages-lime?style=flat-square)](https://chamanvashishth.github.io/Chakravyuh/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-64748b?style=flat-square)](LICENSE)
 
 Live Web Interface: https://chamanvashishth.github.io/Chakravyuh/
 
 ---
 
-## What Chakravyuh Is and What It Does
+## Overview: What Chakravyuh Is and What It Does
 
-Chakravyuh is an active cybersecurity defense system that counters telephonic financial extortion, specifically Digital Arrest police impersonation, fake FedEx narcotics parcel seizures, and urgent bank KYC utility disconnection scams.
+Chakravyuh is an active cybersecurity defense system engineered to combat organized telephonic financial extortion in India, specifically:
+- Digital Arrest scams: Impersonation of CBI, ED, or State Police Cyber Cells demanding bail bonds under threat of immediate arrest.
+- Customs Narcotics Freight scams: Impersonation of FedEx or DHL claiming international parcels containing contraband were booked in the victim's name.
+- Urgent Bank KYC & Utility scams: Impersonation of State Bank of India, HDFC, or electricity boards claiming accounts or connections will be severed tonight.
 
-Passive call blockers like Truecaller only flag numbers after hundreds of victims have already been defrauded. Because criminal syndicates rotate VoIP and SIP caller IDs continuously, passive blocking offers zero deterrence, costs scammers nothing, and leaves law enforcement with zero actionable intelligence on receiving bank accounts.
+### Why Passive Defenses Fail
+Caller-ID services like Truecaller and telecom DND filters flag numbers only after hundreds of citizens have already lost money. Because syndicates continuously rotate VoIP and SIP caller IDs, passive blocklists offer zero deterrence, cost scammers nothing, and leave law enforcement with zero actionable intelligence on receiving bank accounts.
 
-Chakravyuh reverses this dynamic:
+### How Chakravyuh Solves This
+Chakravyuh reverses the economic equation:
 
-1. Intercepts the Call: When an extortion call arrives, the user taps "Take Over Call" to hand the audio stream to the autonomous honeypot.
+1. Intercepts the Call: The victim taps "Take Over Call", transferring the live audio stream to the autonomous honeypot.
 2. Clones the Voice: The Vachana engine generates a deterministic [1, 768] bfloat16 speaker embedding from a reference sample and synthesizes an anxious, submissive victim voice.
-3. Stalls the Scammer: The Evon deception state machine engages the scammer in a multi-turn dialogue, feigning payment failures (such as "UPI Server Busy U16" or "Daily Transfer Limit Exceeded") to force the scammer into revealing backup mule accounts.
+3. Stalls the Scammer: The Evon deception state machine engages the scammer in a multi-turn dialogue, feigning payment failures (such as "UPI Server Busy U16" or "Daily Transfer Limit Exceeded") to force the scammer into revealing secondary backup mule accounts.
 4. Extracts Financial Evidence: Captures, validates, and tags all Indicators of Compromise in real time, including mule UPI handles, bank accounts, IFSC codes, phone numbers, fake police badge IDs, and phishing URLs.
 5. Generates Official FIR Dossier: Compiles an Indian Cyber Crime Coordination Centre (I4C / 1930 NCRP) compliant incident report ready for immediate police action and pre-transaction banking account freezes.
 
@@ -104,17 +109,20 @@ A six-stage psychological state machine engineered to exploit the greed and urge
 
 ---
 
-## Command Center Interface
+## Tactical Command Center Console
 
-The web interface is built using a dark glassmorphism aesthetic inspired by frosted translucent stadium pills and 3D glossy indicators:
+The Chakravyuh web console is a dark glassmorphic cybersecurity operations interface:
 
-- Frosted Glass Stadium Pills: High-clarity frosted surfaces with backdrop-filter blur, translucent borders, and specular top highlights.
-- 3D Glossy Jelly Badges: Ruby Red "X" badge representing intercepted scam threats and Electric Lime Check badge representing active decoy countermeasures.
-- Dual-Channel 60 FPS Oscilloscope: Real-time HTML5 canvas rendering scammer input frequency alongside synthesized decoy responses.
-- Ghost Watermark Typography & Ambient Blooms: Layered depth with radiant lime and rose blooms that shine and refract through the glass panels.
-- Live Telemetry: Tracks time wasted, active deception stage, speaker embedding activations, and financial indicators.
+- Chakravyuh Rotating Defense Labyrinth: Concentric rotating radar visualizer showing active PSTN Ingress, Evon Deception Labyrinth, Adversary Isolation, and Core Honeypot Lock.
+- Showcase Stadium Pills:
+  - Threat Intercept: Ruby glass stadium pill with 3D Glossy Red "X" Jelly Badge displaying live incoming scammer dialogue.
+  - Autonomous Counter-Measure: Electric lime glass stadium pill with 3D Glossy Green Check Jelly Badge displaying synthesized decoy replies with live audio pulses.
+- 60 FPS Dual-Trace Oscilloscope: HTML5 canvas rendering incoming scammer telephonic audio vs. synthesized decoy frequencies.
+- Real-Time Financial IOC Matrix: Live ledger of extracted mule VPAs, bank accounts, IFSC settlement branches, and phishing URLs with one-click copy and pre-transaction screening.
+- Integrated Audio Synthesizer: Web Audio API acoustic synthesis providing audible feedback for call turns.
+- Discreet Configuration: Zero exposed API key bars in the navigation header; settings are accessible via a discreet footer gear icon.
 
-Live online demo: https://chamanvashishth.github.io/Chakravyuh/
+Live online deployment: https://chamanvashishth.github.io/Chakravyuh/
 
 ---
 
@@ -127,7 +135,7 @@ Live online demo: https://chamanvashishth.github.io/Chakravyuh/
 ### 1. Installation
 ```bash
 git clone https://github.com/chamanvashishth/Chakravyuh.git
-cd Chakravyuh/chakravyuh
+cd Chakravyuh
 
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
@@ -141,7 +149,7 @@ python run_tests.py
 # or using Makefile:
 make test
 ```
-All 26 unit, integration, security, and audio DSP tests pass with zero external network dependencies.
+All 26 unit, integration, security, and audio DSP tests execute and pass in under 2 seconds with zero external network dependencies.
 
 ### 3. Launch Local Honeypot Server
 ```bash
@@ -149,14 +157,13 @@ python -m uvicorn chakravyuh.main:app --host 127.0.0.1 --port 8000 --reload
 # or using Makefile:
 make run
 ```
-Open **`http://127.0.0.1:8000/`** in your browser. The Command Center connects automatically to the local backend.
+Open **`http://127.0.0.1:8000/`** in your browser. The Command Center automatically connects to the local backend.
 
 ---
 
-## API Authentication & Configuration
+## Configuration & Environment Variables
 
-### Authentication
-Chakravyuh operates in open development mode by default. To enforce API authentication in production:
+Chakravyuh runs in open development mode by default. To enforce authentication in production:
 
 1. Set the environment variable:
    ```bash
@@ -167,7 +174,7 @@ Chakravyuh operates in open development mode by default. To enforce API authenti
    export CHAKRAVYUH_API_KEY="your-secret-token"
    ```
 2. Mutating endpoints (`/api/v1/sessions`, `/api/v1/sessions/{id}/turn`, `/api/v1/threat-feed/*`) will require the `X-API-Key` HTTP header.
-3. In the web interface, click the settings gear in the bottom dock to save your token. It is stored in browser localStorage and passed automatically.
+3. In the web interface, click the settings gear in the bottom dock to save your token. It is stored in browser localStorage and dispatched automatically.
 
 ### Environment Variables
 
@@ -270,7 +277,7 @@ Every call engagement compiles a formal complaint for law enforcement and bankin
 
 ---
 
-## Project Structure
+## Repository Structure
 
 ```text
 chakravyuh/
@@ -281,7 +288,8 @@ chakravyuh/
 │   ├── index.html                 # Live Command Center WebApp
 │   ├── architecture.md            # Detailed technical specification
 │   ├── qa-report.md               # 26/26 automated test audit report
-│   └── security-audit.md          # Threat model & security controls
+│   ├── security-audit.md          # Threat model & security controls
+│   └── .nojekyll                  # GitHub Pages Jekyll bypass
 ├── src/
 │   └── chakravyuh/
 │       ├── main.py                # FastAPI entrypoint
@@ -299,6 +307,8 @@ chakravyuh/
 │       └── voice/                 # Vachana [1, 768] bfloat16 clone engine
 ├── tests/                         # 26 automated unit and integration tests
 ├── .gitignore
+├── .nojekyll                      # Root GitHub Pages Jekyll bypass
+├── index.html                     # Root entrypoint for branch hosting
 ├── Makefile
 ├── pyproject.toml
 ├── README.md
