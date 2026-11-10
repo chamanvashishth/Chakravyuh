@@ -1,135 +1,137 @@
-# Chakravyuh (चक्रव्यूह)
+# Chakravyuh
 
-## Active Voice-Clone Honeypot and Counter-Deception System for Telephonic Fraud
+Active Voice Clone Defense and Telephonic Honeypot
 
 [![Tests](https://img.shields.io/badge/Tests-26%2F26%20PASSING-10b981?style=flat-square&logo=pytest&logoColor=white)](tests/)
 [![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12%20%7C%203.14-38bdf8?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.92%2B-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 [![DSP](https://img.shields.io/badge/DSP-8_kHz_Butterworth-f59e0b?style=flat-square)](src/chakravyuh/asr/)
 [![Tensor](https://img.shields.io/badge/Embedding-%5B1%2C_768%5D_bfloat16-8b5cf6?style=flat-square)](src/chakravyuh/voice/)
-[![Live Demo](https://img.shields.io/badge/Live_Console-GitHub_Pages-lime?style=flat-square)](https://chamanvashishth.github.io/Chakravyuh/)
+[![Live Console](https://img.shields.io/badge/Live_Console-GitHub_Pages-lime?style=flat-square)](https://chamanvashishth.github.io/Chakravyuh/)
 [![License](https://img.shields.io/badge/License-Apache_2.0-64748b?style=flat-square)](LICENSE)
 
+---
+
+## What Chakravyuh Is
+
+Chakravyuh is an automated voice honeypot built to defend against telephone extortion.
+
+Most defenses rely on caller ID blocklists. Blocklists fail because scammers change phone numbers continuously. Chakravyuh takes the opposite approach. When an extortion call arrives you hand the call over to the system. An acoustic model clones your voice from a short reference clip. An automated agent answers the caller with an anxious persona. The agent pretends payment attempts failed and asks for alternative accounts. As the scammer speaks the extractor captures payment handles bank accounts and routing codes. Once the call ends the system writes a complete incident report for police and banking networks.
 
 ---
 
-## Overview: What Chakravyuh Is and What It Does
+## How It Works
 
-Chakravyuh is an active cybersecurity defense system engineered to combat organized telephonic financial extortion in India, specifically:
-- Digital Arrest scams: Impersonation of CBI, ED, or State Police Cyber Cells demanding bail bonds under threat of immediate arrest.
-- Customs Narcotics Freight scams: Impersonation of FedEx or DHL claiming international parcels containing contraband were booked in the victim's name.
-- Urgent Bank KYC & Utility scams: Impersonation of State Bank of India, HDFC, or electricity boards claiming accounts or connections will be severed tonight.
+1. Call Handover
+You transfer an incoming extortion call to the honeypot gateway.
 
-### Why Passive Defenses Fail
-Caller-ID services like Truecaller and telecom DND filters flag numbers only after hundreds of citizens have already lost money. Because syndicates continuously rotate VoIP and SIP caller IDs, passive blocklists offer zero deterrence, cost scammers nothing, and leave law enforcement with zero actionable intelligence on receiving bank accounts.
+2. Voice Cloning
+The Vachana engine turns a ten second reference clip into a 768 dimension bfloat16 tensor and generates realistic telephone audio.
 
-### How Chakravyuh Solves This
-Chakravyuh reverses the economic equation:
+3. Tactical Stall
+The Evon deception engine cycles through panic compliance payment errors and hold loops. The scammer stays on the line waiting for funds.
 
-1. Intercepts the Call: The victim taps "Take Over Call", transferring the live audio stream to the autonomous honeypot.
-2. Clones the Voice: The Vachana engine generates a deterministic [1, 768] bfloat16 speaker embedding from a reference sample and synthesizes an anxious, submissive victim voice.
-3. Stalls the Scammer: The Evon deception state machine engages the scammer in a multi-turn dialogue, feigning payment failures (such as "UPI Server Busy U16" or "Daily Transfer Limit Exceeded") to force the scammer into revealing secondary backup mule accounts.
-4. Extracts Financial Evidence: Captures, validates, and tags all Indicators of Compromise in real time, including mule UPI handles, bank accounts, IFSC codes, phone numbers, fake police badge IDs, and phishing URLs.
-5. Generates Official FIR Dossier: Compiles an Indian Cyber Crime Coordination Centre (I4C / 1930 NCRP) compliant incident report ready for immediate police action and pre-transaction banking account freezes.
+4. Evidence Extraction
+The intelligence engine captures payment handles bank account numbers IFSC codes and malicious links from the dialogue.
+
+5. Incident Report
+The dossier generator creates structured complaints aligned with the Indian Cyber Crime Coordination Centre and the 1930 helpline.
 
 ---
 
-## Operational Architecture
+## System Architecture
 
 ```text
-[ INCOMING CALL ] -> +91 98204-71829 (Spoofed CBI / Customs Authority)
-       │
-       ▼
-[ PRISMA v2.5 ]   -> 8000 Hz Telephonic DSP (300-3400 Hz Butterworth Bandpass)
-       │             Scam Classification & Voice Activity Detection
-       ▼
-[ 1-CLICK TAKEOVER ] Autonomous Honeypot Activation
-       │
-       ├─────────────────────────────────────────┐
-       ▼                                         ▼
-[ VACHANA-VC-v1 ]                         [ EVON v3.3 DECEPTION ]
-Deterministic [1, 768] torch.bfloat16     Stage 1: Frightened Compliance
-Speaker Embedding from 10s voice sample   Stage 2: Verification Agreement
-Synthesizes Anxious Decoy Audio           Stage 3: "UPI Server Busy" (Mule Bait #1)
-                                          Stage 4: "Daily Limit Exceeded" (Mule Bait #2)
-                                          Stage 5: "Need Web Portal" (Phishing Link Bait)
-                                          Stage 6: Infinite Hold Loop (Bank Clerk Sync)
-       │                                         │
-       └────────────────────┬────────────────────┘
-                            │
-                            ▼
-[ IOC FORENSIC ENGINE ]
-  ├── Primary VPA    : rbi.verification.cell@okaxis (Axis Bank)
-  ├── Secondary VPA  : mumbaicrime.deposit99@ybl    (YES Bank)
-  ├── Mule Bank A/C  : 50100482917364              (HDFC Bank - IFSC HDFC0001842)
-  ├── Phishing APK   : http://cbi-rbi-verify-court.in/clearance.apk
-  └── Scammer Phone  : +91-9820471829
-                            │
-       ┌────────────────────┴────────────────────┐
-       ▼                                         ▼
-[ I4C FIR DOSSIER ]                       [ NPCI THREAT ENGINE ]
-Auto-generated structured JSON            Pre-Transaction API: BLOCK_TRANSACTION
-Form 1930 / NCRP Evidentiary Report       Signed STIX-3.0 Broadcast to Banks
+[ Incoming Call ] -> +91 98204 71829
+       |
+       v
+[ Prisma Audio Filter ] -> 8000 Hz Bandpass Filter (300 to 3400 Hz)
+       |                   Scam Classification and Voice Activity Detection
+       v
+[ Honeypot Handover ] -> Autonomous Agent Takes Over
+       |
+       +-----------------------------------------+
+       |                                         |
+       v                                         v
+[ Vachana Voice Engine ]                  [ Evon Deception Engine ]
+Converts 10s voice clip                   Stage 1: Frightened Compliance
+Generates 768 dim bfloat16 tensor         Stage 2: Payment Agreement
+Synthesizes Anxious Decoy Audio           Stage 3: UPI Server Busy Error
+                                          Stage 4: Daily Limit Exceeded Error
+                                          Stage 5: Need Web Portal Link
+                                          Stage 6: Infinite Hold Loop
+       |                                         |
+       +--------------------+--------------------+
+                            |
+                            v
+[ Financial Intelligence Extractor ]
+  Primary VPA    : rbi.verification.cell@okaxis
+  Secondary VPA  : mumbaicrime.deposit99@ybl
+  Bank Account   : 50100482917364 (HDFC Bank IFSC HDFC0001842)
+  Phishing APK   : http://cbi-rbi-verify-court.in/clearance.apk
+  Phone Number   : +91 98204 71829
+                            |
+       +--------------------+--------------------+
+       |                                         |
+       v                                         v
+[ Incident Dossier Compiler ]             [ Banking Threat Engine ]
+Auto generated incident JSON              Transaction Screening: BLOCK TRANSACTION
+Official 1930 Helpline Report             STIX 3.0 Broadcast Feed to Banks
 ```
 
 ---
 
-## Core Subsystems
+## Core Components
 
-### 1. Vachana Voice Clone Engine (vachana-vc-v1)
-- Representation: Strict [1, 768] tensor in torch.bfloat16 precision (1536 bytes memory footprint).
-- Calibration: Normalizes a 10.0-second user reference clip at 16 kHz with reflection padding and energy gating.
-- Synthesis: Generates 8000 Hz telephonic mono audio with subtle anxiety micro-tremors and IEEE-754 round-to-nearest-even conversion.
-- Non-Repudiation: Computes a SHA-256 cryptographic watermark on every synthesized turn, binding the embedding vector, transcript, and audio header so decoy turns cannot be misattributed to human victims.
+### 1. Vachana Voice Clone Engine
+- Generates a 768 dimension bfloat16 tensor requiring 1536 bytes of memory.
+- Uses a ten second reference clip at 16 kHz with reflection padding.
+- Synthesizes 8000 Hz telephonic mono audio with subtle anxiety tremors.
+- Stamps every synthesized voice packet with a SHA256 watermark to distinguish honeypot audio from human statements.
 
-### 2. Prisma Telephonic Audio Pipeline (Prisma v2.5)
-- Standard: 8000 Hz mono audio processing optimized for cellular and PSTN networks.
-- Filtering: 4th-order Butterworth bandpass filter spanning 300 Hz to 3400 Hz, with out-of-band rejection (>15x attenuation outside voice band).
-- Numerical Resilience: Zero-division protection, NaN/Inf sanitization, and extreme clipping immunity (>10.0 amplitude values clamped cleanly).
-- Classifier: Classifies calls into Digital Arrest, Customs Narcotics Parcel, or Bank KYC extortion.
+### 2. Prisma Telephonic Audio Pipeline
+- Processes 8000 Hz mono audio standard on mobile and landline networks.
+- Uses a fourth order Butterworth bandpass filter from 300 Hz to 3400 Hz.
+- Clamps extreme amplitudes and shields the pipeline from NaN values.
+- Flags Digital Arrest extortion fake parcel seizures and urgent bank account threats.
 
-### 3. Evon Tactical Deception Engine (Evon v3.3)
-A six-stage psychological state machine engineered to exploit the greed and urgency of extortionists:
-1. Stage 1 (Initial Panic): Feigns deep submission and distress ("Sir please arrest mat kijiye, main kya karoon bataiye...").
-2. Stage 2 (Compliance Hook): Agrees to transfer funds to verify innocence or clear warrants.
-3. Stage 3 (Primary UPI Stall): Claims Google Pay returned error "Bank Server Busy U16". Extracts secondary backup UPI handle.
-4. Stage 4 (Secondary Mule Bait): Claims secondary UPI failed with "Daily Limit Exceeded". Requests direct bank account and IFSC details for RTGS transfer.
-5. Stage 5 (Phishing & Supervisor Bait): Requests official case verification links or senior officer direct numbers. Extracts malicious APK links and WhatsApp C2 numbers.
-6. Stage 6 (Infinite Hold Loop): Keeps the scammer waiting indefinitely ("Sir bank server timeout bol raha hai, 2 minute line par rahiye...") while accounts are flagged.
+### 3. Evon Tactical Deception Engine
+A six stage state machine that exploits the urgency of extortionists:
+1. Stage 1 Panic: Feigns submission and asks what to do.
+2. Stage 2 Agreement: Agrees to transfer money to clear charges.
+3. Stage 3 Primary UPI Stall: Reports a server busy error to extract a backup handle.
+4. Stage 4 Secondary Mule Bait: Reports a daily limit error to extract a bank account and IFSC code.
+5. Stage 5 Phishing Bait: Asks for a verification portal to extract malicious links.
+6. Stage 6 Infinite Hold Loop: Keeps the scammer waiting on the line while accounts are flagged.
 
-### 4. Financial IOC Extractor & I4C Dossier Compiler
-- Patterns: Captures Indian VPAs (@okaxis, @okhdfcbank, @paytm, @ybl, etc.), 9 to 18 digit bank account numbers, 11-character RBI IFSC codes, phone numbers, and phishing URLs.
-- Deduplication: Deduplicates targets and calculates confidence scores (0.90 to 0.99).
-- Dossier: Compiles formal incident records formatted for the Indian Cyber Crime Coordination Centre (I4C) and 1930 NCRP reporting portal.
+### 4. Financial Intelligence Extractor
+- Extracts Indian VPAs bank account numbers IFSC codes phone numbers and web links.
+- Deduplicates indicators and assigns confidence scores from 0.90 to 0.99.
+- Outputs incident records formatted for the Indian Cyber Crime Coordination Centre.
 
-### 5. Phase 2 SIP Bridge & Phase 3 NPCI Threat Engine
-- SIP Bridge: Simulates RFC 3515 SIP REFER call handover using ITU-T G.711 mu-law (PCMU/8000) audio transcoding with >0.99 waveform correlation.
-- NPCI Threat Engine: Screens payment handles pre-transaction and returns BLOCK_TRANSACTION decisions on flagged mule accounts, broadcasting HMAC-SHA256 authenticated STIX-3.0 feeds.
+### 5. Telecom Bridge and Banking Feed
+- Simulates telephone call handover using RFC 3515 SIP REFER with G.711 mu law audio.
+- Screens payment handles in real time and returns block decisions for flagged accounts.
 
 ---
 
-## Tactical Command Center Console
+## Web Console
 
-The Chakravyuh web console is a dark glassmorphic cybersecurity operations interface:
-
-- Chakravyuh Rotating Defense Labyrinth: Concentric rotating radar visualizer showing active PSTN Ingress, Evon Deception Labyrinth, Adversary Isolation, and Core Honeypot Lock.
-- Showcase Stadium Pills:
-  - Threat Intercept: Ruby glass stadium pill with 3D Glossy Red "X" Jelly Badge displaying live incoming scammer dialogue.
-  - Autonomous Counter-Measure: Electric lime glass stadium pill with 3D Glossy Green Check Jelly Badge displaying synthesized decoy replies with live audio pulses.
-- 60 FPS Dual-Trace Oscilloscope: HTML5 canvas rendering incoming scammer telephonic audio vs. synthesized decoy frequencies.
-- Real-Time Financial IOC Matrix: Live ledger of extracted mule VPAs, bank accounts, IFSC settlement branches, and phishing URLs with one-click copy and pre-transaction screening.
-- Integrated Audio Synthesizer: Web Audio API acoustic synthesis providing audible feedback for call turns.
-- Discreet Configuration: Zero exposed API key bars in the navigation header; settings are accessible via a discreet footer gear icon.
-
-Live online deployment: https://chamanvashishth.github.io/Chakravyuh/
+The browser console provides an interactive control center:
+- Rotating Chakravyuh defense radar showing active call stages
+- Dual trace 60 FPS oscilloscope displaying scammer and decoy audio
+- High contrast stadium cards with status badges
+- Live financial evidence ledger with one click copy
+- Instant incident report preview and text file export
+- Discreet configuration modal for custom backend tokens
 
 ---
 
 ## Quickstart
 
 ### Prerequisites
-- Python 3.11, 3.12, or 3.14
-- Operating System: Windows, macOS, or Linux
+- Python 3.11 or newer
+- Windows macOS or Linux
 
 ### 1. Installation
 ```bash
@@ -142,89 +144,84 @@ source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 2. Run Automated Test Suite (26/26 Passing)
+### 2. Run Test Suite
 ```bash
 python run_tests.py
-# or using Makefile:
-make test
 ```
-All 26 unit, integration, security, and audio DSP tests execute and pass in under 2 seconds with zero external network dependencies.
+All 26 unit integration security and audio DSP tests pass locally with zero network calls.
 
-### 3. Launch Local Honeypot Server
+### 3. Launch Local Server
 ```bash
 python -m uvicorn chakravyuh.main:app --host 127.0.0.1 --port 8000 --reload
-# or using Makefile:
-make run
 ```
-Open **`http://127.0.0.1:8000/`** in your browser. The Command Center automatically connects to the local backend.
+Open http://127.0.0.1:8000 in your browser. The console connects directly to the local backend.
 
 ---
 
-## Configuration & Environment Variables
+## Configuration
 
-Chakravyuh runs in open development mode by default. To enforce authentication in production:
+Chakravyuh runs in development mode without authentication. To enable authentication in production set an environment variable:
 
-1. Set the environment variable:
-   ```bash
-   # On Windows PowerShell:
-   $env:CHAKRAVYUH_API_KEY = "your-secret-token"
+```bash
+# Windows PowerShell
+$env:CHAKRAVYUH_API_KEY = "your-token"
 
-   # On Linux / macOS:
-   export CHAKRAVYUH_API_KEY="your-secret-token"
-   ```
-2. Mutating endpoints (`/api/v1/sessions`, `/api/v1/sessions/{id}/turn`, `/api/v1/threat-feed/*`) will require the `X-API-Key` HTTP header.
-3. In the web interface, click the settings gear in the bottom dock to save your token. It is stored in browser localStorage and dispatched automatically.
+# Linux and macOS
+export CHAKRAVYUH_API_KEY="your-token"
+```
+
+When set endpoints require the X-API-Key header. You can also save this key inside the web console settings modal.
 
 ### Environment Variables
 
 | Variable | Default | Purpose |
 | :--- | :--- | :--- |
-| `CHAKRAVYUH_ALLOWED_ORIGINS` | `http://127.0.0.1:8000,http://localhost:8000` | Comma-separated CORS origin allowlist |
-| `CHAKRAVYUH_ALLOW_ALL_ORIGINS` | `false` | Set true only for isolated local testing |
-| `CHAKRAVYUH_API_KEY` | None (Optional) | Enforces X-API-Key authentication when set |
-| `CHAKRAVYUH_DB_PATH` | `./data/chakravyuh_honeypot.db` | Persistent SQLite database location |
-| `CHAKRAVYUH_HOST` | `127.0.0.1` | Server binding address |
-| `CHAKRAVYUH_PORT` | `8000` | Server HTTP port |
+| `CHAKRAVYUH_ALLOWED_ORIGINS` | `http://127.0.0.1:8000,http://localhost:8000` | Allowed web origins |
+| `CHAKRAVYUH_ALLOW_ALL_ORIGINS` | `false` | Disable origin restrictions |
+| `CHAKRAVYUH_API_KEY` | None | API authentication token |
+| `CHAKRAVYUH_DB_PATH` | `./data/chakravyuh_honeypot.db` | SQLite database file path |
+| `CHAKRAVYUH_HOST` | `127.0.0.1` | Network binding address |
+| `CHAKRAVYUH_PORT` | `8000` | Server port |
 
 ---
 
-## API Endpoints Summary
+## API Endpoints
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
-| `GET` | `/api/v1/health` | System status, model registry, and roadmap modules |
-| `GET` | `/api/v1/scenarios` | Pre-configured scam scenarios (Digital Arrest, FedEx, KYC) |
-| `POST` | `/api/v1/sessions` | Create a new honeypot call engagement session |
-| `POST` | `/api/v1/sessions/{id}/turn` | Ingest scammer dialogue and return synthesized decoy reply |
-| `GET` | `/api/v1/sessions/{id}/dossier` | Retrieve structured I4C / 1930 NCRP incident complaint |
-| `POST` | `/api/v1/sessions/{id}/sip-merge` | Simulate RFC 3515 SIP REFER telecom call handover |
-| `POST` | `/api/v1/threat-feed/check-transaction` | Pre-transaction screening against flagged mule accounts |
-| `POST` | `/api/v1/threat-feed/broadcast/{id}` | Broadcast STIX-3.0 threat intelligence bundle |
-| `WS` | `/ws/call/{id}` | Full-duplex real-time telephonic audio streaming |
+| `GET` | `/api/v1/health` | System status and model registry |
+| `GET` | `/api/v1/scenarios` | Preconfigured scam scenarios |
+| `POST` | `/api/v1/sessions` | Create a new call session |
+| `POST` | `/api/v1/sessions/{id}/turn` | Process dialogue and return decoy reply |
+| `GET` | `/api/v1/sessions/{id}/dossier` | Return formal incident complaint |
+| `POST` | `/api/v1/sessions/{id}/sip-merge` | Simulate SIP REFER telephone handover |
+| `POST` | `/api/v1/threat-feed/check-transaction` | Screen account against flagged mules |
+| `POST` | `/api/v1/threat-feed/broadcast/{id}` | Broadcast threat intelligence feed |
+| `WS` | `/ws/call/{id}` | Real time telephone audio stream |
 
 ---
 
-## Sample I4C Incident Dossier
+## Sample Incident Dossier
 
-Every call engagement compiles a formal complaint for law enforcement and banking networks:
+Every call engagement compiles an incident complaint for law enforcement and banks:
 
 ```json
 {
   "dossier_id": "DOS-I4C-CHK-88F4A2",
   "incident_metadata": {
-    "jurisdiction": "NCRP-1930 / I4C National Cybercrime Portal",
-    "scam_category": "DIGITAL ARREST (98.4%)",
-    "suspect_caller_id": "+91-9820471829",
-    "claimed_authority": "CBI Cyber Crime Cell Mumbai / RBI Anti-Money Laundering Unit",
+    "jurisdiction": "NCRP 1930 National Cybercrime Portal",
+    "scam_category": "DIGITAL ARREST 98.4%",
+    "suspect_caller_id": "+91 98204 71829",
+    "claimed_authority": "CBI Cyber Crime Cell Mumbai and RBI Anti Money Laundering Unit",
     "time_wasted_sec": 240,
-    "handover_mode": "AUTOMATED_HONEYPOT_TAKEOVER"
+    "handover_mode": "AUTOMATED HONEYPOT TAKEOVER"
   },
   "extracted_iocs": [
     {
       "type": "UPI_VPA",
       "value": "cbi.escrow.mumbai@okaxis",
       "role": "Mule Payment Handle",
-      "provider": "OKAXIS (Axis Bank)",
+      "provider": "Axis Bank",
       "confidence": 0.96
     },
     {
@@ -254,56 +251,56 @@ Every call engagement compiles a formal complaint for law enforcement and bankin
     "tensor_shape": [1, 768],
     "tensor_dtype": "torch.bfloat16",
     "watermark_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-    "codec": "ITU-T G.711 PCMU (8000 Hz)"
+    "codec": "ITU-T G.711 PCMU 8000 Hz"
   },
   "recommended_actions": [
-    "FREEZE_MULE_ACCOUNTS",
-    "BLOCK_UPI_HANDLES_ACROSS_PSPS",
-    "INITIATE_1930_NCRP_FREEZE"
+    "FREEZE MULE ACCOUNTS",
+    "BLOCK UPI HANDLES ACROSS PSPS",
+    "INITIATE 1930 NCRP FREEZE"
   ]
 }
 ```
 
 ---
 
-## Security and Privacy Guardrails
+## Security Guardrails
 
-- Ephemeral Voice Data: The 10-second reference clip is transformed into a non-reversible [1, 768] bfloat16 tensor. Raw audio is not persisted.
-- Cryptographic Watermarking: Every synthesized voice frame embeds a SHA-256 watermark binding the embedding tensor and transcript to prevent misattribution.
-- Defanged Malicious Links: URLs extracted from scammers are defanged (such as `hxxp://...`) in reports and interfaces to prevent accidental clicks.
-- SQL Injection Protection: All database queries use parameterized SQL bindings exclusively.
-- HMAC Verification: Threat intelligence broadcasts use RFC 2104 HMAC-SHA256 signatures validated in constant time.
+- Ephemeral voice data: The reference clip is converted into a 768 dimension bfloat16 tensor. Raw audio is never saved.
+- Cryptographic watermarking: Every synthesized turn contains a SHA256 signature to prevent misattribution.
+- Defanged links: Malicious URLs are rendered safely without clickable triggers.
+- Parameterized SQL: Database queries use parameterized bindings to prevent injection.
+- HMAC verification: Threat intelligence feeds require HMAC-SHA256 signatures validated in constant time.
 
 ---
 
-## Repository Structure
+## Repository Layout
 
 ```text
 chakravyuh/
 ├── .github/
 │   └── workflows/
-│       └── ci.yml                 # Automated 26-test CI & GitHub Pages deploy
+│       └── ci.yml                 # Automated 26 test CI and GitHub Pages deploy
 ├── docs/
-│   ├── index.html                 # Live Command Center WebApp
+│   ├── index.html                 # Live Command Center console
 │   ├── architecture.md            # Detailed technical specification
-│   ├── qa-report.md               # 26/26 automated test audit report
-│   ├── security-audit.md          # Threat model & security controls
+│   ├── qa-report.md               # 26 test verification report
+│   ├── security-audit.md          # Threat model and security controls
 │   └── .nojekyll                  # GitHub Pages Jekyll bypass
 ├── src/
 │   └── chakravyuh/
 │       ├── main.py                # FastAPI entrypoint
-│       ├── config.py              # Configuration & settings
-│       ├── api/                   # REST routes & WebSocket gateway
+│       ├── config.py              # Configuration and settings
+│       ├── api/                   # REST routes and WebSocket gateway
 │       ├── asr/                   # Prisma 8kHz Butterworth ASR
-│       ├── deception/             # Evon 6-stage Hinglish deception engine
-│       ├── dossier/               # I4C / 1930 NCRP FIR report generator
+│       ├── deception/             # Evon 6 stage deception engine
+│       ├── dossier/               # Incident report compiler
 │       ├── intelligence/          # Financial IOC extractor
-│       ├── models/                # Schemas & data contracts
+│       ├── models/                # Schemas and data contracts
 │       ├── static/                # Modern glassmorphism UI
 │       ├── storage/               # SQLite WAL persistence
-│       ├── telecom/               # G.711 mu-law & SIP bridge
+│       ├── telecom/               # G.711 mu law and SIP bridge
 │       ├── threat_intel/          # NPCI STIX 3.0 fraud engine
-│       └── voice/                 # Vachana [1, 768] bfloat16 clone engine
+│       └── voice/                 # Vachana 768 dim clone engine
 ├── tests/                         # 26 automated unit and integration tests
 ├── .gitignore
 ├── .nojekyll                      # Root GitHub Pages Jekyll bypass
@@ -319,4 +316,4 @@ chakravyuh/
 
 ## License
 
-Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for details.
+Licensed under the Apache License Version 2.0. See [LICENSE](LICENSE) for details.
